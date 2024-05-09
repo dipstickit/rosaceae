@@ -1,0 +1,17 @@
+.com-button {
+  all: unset;
+  align-items: center;
+  background-color: var(--ctablack);
+  border: 1px solid;
+  border-color: var(--ctablack);
+  border-radius: 2px;
+  box-sizing: border-box;
+  display: flex;
+  gap: 10px;
+  height: 54px;
+  justify-content: center;
+  padding: 10px 20px;
+  position: relative;
+  width: 160px;
+  cursor: pointer;
+}
