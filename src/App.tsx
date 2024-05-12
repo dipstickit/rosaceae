@@ -1,13 +1,11 @@
-import "./App.scss";
-import NavbarIcons from "./components/navbar/navbar-icon/navbar-icon";
-import NavbarItem from "./components/navbar/navbar-item/navbar-item";
-
+import Routes from "./router/Routes";
+import { BrowserRouter as Router } from "react-router-dom";
 function App() {
   return (
-    <>
-      {/* <NavbarItem /> */}
-      {/* <NavbarIcons/> */}
-    </>
+    <Router>
+      {" "}
+      <Routes />{" "}
+    </Router>
   );
 }
 
