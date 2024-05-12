@@ -1,17 +1,23 @@
 export default {
   mode: "jit",
   content: [
-    "./src/**/**/*.{js, ts, jsx, tsx, html, mdx}",
-    "./src/**/*. {js,ts,jsx, tsx, html, mdx}",
+    "./src/**/**/*.{js,ts,jsx,tsx,html,mdx}",
+    "./src/**/*.{js,ts,jsx,tsx,html,mdx}",
   ],
   darkMode: "class",
   theme: {
-    screens: {
-      md: { max: "1050px" },
-      sm: { max: "550px" },
-    },
+    screens: { md: { max: "1050px" }, sm: { max: "550px" } },
     extend: {
       colors: {
+        white: { A700: "#ffffff", A700_cc: "#ffffffcc", A700_33: "#ffffff33" },
+        blue: {
+          100: "#cde7ff",
+          400: "#33a0ff",
+          600: "#2e90e5",
+          A700: "#2d60ff",
+          A200_02: "#4078ec",
+          A400: "#2f80ed",
+        },
         cyan: {
           50: "#e2fff2",
         },
@@ -35,13 +41,13 @@ export default {
           700: "#515151",
           800: "#333b69",
           900: "#151d48",
-          "100_02": "#d9d9d9",
           "100_01": "#cecccc",
+          "100_02": "#d9d9d9",
           "900_02": "#2c2c2c",
           "700_01": "#415165",
           "50_02": "#edf2f6",
           "700_03": "#464e5f",
-          "400_62": "#7a91b0b2",
+          "400_b2": "#7a91b0b2",
           "50_01": "#eef0f2",
           "900_05": "#222b45",
           "700_02": "#444a6d",
@@ -64,19 +70,6 @@ export default {
           "900_7f": "#0000007f",
           "900_89": "#00000089",
           "900_dd": "#000000dd",
-        },
-        white: {
-          A700_cc: "#ffffffcc",
-          A700: "#ffffff",
-          A700_33: "#ffffff33",
-        },
-        blue: {
-          100: "#cde7ff",
-          400: "#33a0ff",
-          600: "#2e90e5",
-          A700: "#2d60ff",
-          A200_02: "#4078ec",
-          A400: "#2f80ed",
         },
         indigo: {
           50: "#e6eff5",
@@ -102,7 +95,7 @@ export default {
           700: "#605f5f",
           800: "#4a4a4a",
           900: "#191919",
-          "900_06": "#lelele",
+          "900_06": "#1e1e1e",
           "50_08": "#f9f9f9",
           "50_07": "#f9fafb",
           "50_03": "#fafbfc",
@@ -129,7 +122,7 @@ export default {
           "900_59": "#22262a59",
           "100_05": "#f1f3f4",
           "50_06": "#fcfcfc",
-          "900_02": "#lalala",
+          "900_02": "#1a1a1a",
           "600_02": "#787878",
           "300_05": "#e2e2e2",
           "300_04": "#dedede2",
@@ -186,7 +179,7 @@ export default {
         md: "4px 8px 12px 0px #4e638d0f",
         lg: "0px 8px 34px 0px #0000000f",
         xl: "0px 2px 25px 0px #00000011",
-        "2x1": "2px 4px 4px 0px #4e638d1e",
+        "2xl": "2px 4px 4px 0px #4e638d1e",
       },
       fontFamily: {
         oldstandardtt: "Old Standard TT",
@@ -213,5 +206,5 @@ export default {
       textShadow: { ts: "0px 5px 13px #ffffff66" },
     },
   },
-  plugins : [require("@tailwindcss/forms")]
+  plugins: [require("@tailwindcss/forms")],
 };

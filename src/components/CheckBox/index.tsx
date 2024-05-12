@@ -1,4 +1,4 @@
-import React, { ChangeEventHandler, Children, forwardRef } from "react";
+import React from "react";
 
 const variants = {
   primary: " ",
@@ -53,7 +53,7 @@ const CheckBox = React.forwardRef<HTMLInputElement, CheckboxProps>(
           <input
             id={id}
             className={`${size && sizes[size] ? sizes[size] : ""} 
-            ${(variant && variants[variant]) ? variants[variant] : ""}
+            ${variant && variants[variant] ? variants[variant] : ""}
             `}
             ref={ref}
             type="checkbox"
@@ -69,4 +69,4 @@ const CheckBox = React.forwardRef<HTMLInputElement, CheckboxProps>(
   }
 );
 
-export default CheckBox;
+export { CheckBox };
