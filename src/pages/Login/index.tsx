@@ -6,7 +6,7 @@ export default function LoginPage() {
   return (
     <>
       <Helmet>
-        <title>Nguyen Huu Phuoc K16 HCM's Application4</title>
+        <title>Rosaceae</title>
         <meta
           name="description"
           content="Web site created using create-react-app"
@@ -61,7 +61,7 @@ export default function LoginPage() {
                   Mật khẩu
                 </Heading>
                 <Input
-                  size="xl"
+                  size="2xl"
                   name="iconfontawesome"
                   suffix={
                     <Img
@@ -70,6 +70,7 @@ export default function LoginPage() {
                       className="h-[32px] w-[32px]"
                     />
                   }
+                  placeholder={`********`}
                   className="gap-[35px] self-stretch rounded-[40px] border-2 border-solid border-black-900 sm:pr-5"
                 />
               </div>

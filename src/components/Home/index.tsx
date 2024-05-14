@@ -7,7 +7,7 @@ interface Props {
   messagetext?: string;
 }
 
-export default function HomePviOiNYNAColumn({
+export default function Home({
   userimage = "images/img_woman_having_be.png",
   messagetext,
   ...props

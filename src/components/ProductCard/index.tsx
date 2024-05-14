@@ -6,7 +6,6 @@ interface Props {
 export default function ProductCard({ ...props }: Props) {
   return (
     <div {...props} className={`${props.className} flex flex-col w-full`}>
-     
       <Img
         src="images/img_rectangle_6003.png"
         alt="trang_điểm"
@@ -49,4 +48,3 @@ export default function ProductCard({ ...props }: Props) {
 //     </div>
 //   );
 // }
-
