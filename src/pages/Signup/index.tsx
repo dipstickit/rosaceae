@@ -6,7 +6,7 @@ export default function LoginPage() {
   return (
     <>
       <Helmet>
-        <title>Nguyen Huu Phuoc K16 HCM's Application4</title>
+        <title>Rosaceae</title>
         <meta
           name="description"
           content="Web site created using create-react-app"

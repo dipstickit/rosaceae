@@ -57,7 +57,7 @@ export default function MakeupServicePagePage() {
   return (
     <>
       <Helmet>
-        <title>Nguyen Huu Phuoc K16 HCM's Application4</title>
+        <title>Rosaceae</title>
         <meta
           name="description"
           content="Web site created using create-react-app"

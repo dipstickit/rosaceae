@@ -2,7 +2,7 @@ import { Helmet } from "react-helmet";
 import { Text, Img, Heading, CheckBox } from "../../components";
 import Footer from "../../components/Footer";
 import Header from "../../components/Header";
-import HomePviOiNYNAColumn from "../../components/HomePviOiNYNAColumn";
+import Home from "../../components/Home";
 
 const data = [
   { userimage: "images/img_woman_having_be.png" },
@@ -14,7 +14,7 @@ export default function HomepvioinynaPage() {
   return (
     <>
       <Helmet>
-        <title>Nguyen Huu Phuoc K16 HCM's Application4</title>
+        <title>Rosaceae</title>
         <meta
           name="description"
           content="Web site created using create-react-app"
@@ -270,7 +270,7 @@ export default function HomepvioinynaPage() {
               </div>
               <div className="gap-[27px] ml-[5px] flex md:ml-0 md:flex-col">
                 {data.map((d, index) => (
-                  <HomePviOiNYNAColumn
+                  <Home
                     {...d}
                     key={"listwomanhaving3" + index}
                   />
