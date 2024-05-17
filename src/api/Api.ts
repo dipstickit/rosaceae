@@ -17,5 +17,14 @@ export const UserApi = {
                 'Content-Type': 'application/json'
             }
         })
+    },
+
+    ForgotPassword: (e: string) => {
+        return instance.post('/api/v1/auth/forgot-password', { email: e }, {
+            headers: {
+                crossDomain: true,
+                'Content-Type': 'application/json'
+            }
+        })
     }
 }
