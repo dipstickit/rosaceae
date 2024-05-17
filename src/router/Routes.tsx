@@ -12,6 +12,7 @@ import SpaPage from "../pages/Spa";
 import SpaDetailPage from "../pages/SpaDetail";
 import SpafeedbackPage from "../pages/Spafeedback";
 import BookingServiceDetailPage from "../pages/BookingServiceDetail";
+import CartPage from "../pages/Cart";
 
 const RosaceaeRoutes = () => {
   const element = useRoutes([
@@ -28,6 +29,8 @@ const RosaceaeRoutes = () => {
     { path: "spadetail", element: <SpaDetailPage /> },
     { path: "spafeedback", element: <SpafeedbackPage /> },
     { path: "booking", element: <BookingServiceDetailPage /> },
+    { path: "cart", element: <CartPage /> },
+
 
   ]);
   return element;

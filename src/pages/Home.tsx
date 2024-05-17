@@ -108,6 +108,14 @@ const Home = () => {
           Booking
         </Link>
       </li>
+      <li style={{ marginBottom: "10px" }}>
+        <Link
+          to="/cart"
+          style={{ color: "#87CEFA", textDecoration: "none" }}
+        >
+          Cart
+        </Link>
+      </li>
       <ul style={{ listStyle: "none", padding: "0" }}></ul>
     </div>
   );
