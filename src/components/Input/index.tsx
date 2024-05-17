@@ -68,15 +68,13 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
       <>
         {" "}
         <label
-          className={`${className} flex items-center justify-center cursor-text  ${
-            (shape && shapes[shape]) || ""
-          } ${
-            variants[variant]?.[
-              color as keyof (typeof variants)[typeof variant]
+          className={`${className} flex items-center justify-center cursor-text  ${(shape && shapes[shape]) || ""
+            } ${variants[variant]?.[
+            color as keyof (typeof variants)[typeof variant]
             ] ||
             variants[variant] ||
             ""
-          } ${sizes[size] || ""}`}
+            } ${sizes[size] || ""}`}
         >
           {" "}
           {!!label && label} {!!prefix && prefix}{" "}
