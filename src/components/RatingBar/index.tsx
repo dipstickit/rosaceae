@@ -11,6 +11,7 @@ type RatingBarType = React.DetailedHTMLProps<
     isEditable: boolean;
     value: number;
     size: number;
+    ratingCount?: number;
   }>;
 const RatingBar = ({
   children,
@@ -19,11 +20,11 @@ const RatingBar = ({
   color = "grey",
   activeColor = "red",
   isEditable = false,
+  ratingCount = 0, // Default value for the new prop
   ...restProps
 }: RatingBarType) => {
   return (
     <>
-      {" "}
       <ReactStars
         edit={isEditable}
         classNames={className}
@@ -33,8 +34,8 @@ const RatingBar = ({
         activeColor={activeColor}
         {...restProps}
         key={restProps.value || 1}
-      />{" "}
-      {children}{" "}
+      />
+      {children}
     </>
   );
 };

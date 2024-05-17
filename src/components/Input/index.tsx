@@ -1,4 +1,5 @@
 import React from "react";
+
 const shapes = { round: "rounded-[16px]" } as const;
 const variants = {
   outline: {
@@ -20,12 +21,13 @@ const sizes = {
   md: "h-[60px] pl-6 pr-[35px] text-lg",
   xs: "h-[49px] pl-5 pr-[35px] text-[15px]",
 } as const;
+
 type InputProps = Omit<
   React.DetailedHTMLProps<
     React.InputHTMLAttributes<HTMLInputElement>,
     HTMLInputElement
   >,
-  "size" | "prefix" | "type" | "onChange"
+  "size" | "prefix" | "type" | "onChange" | "value"
 > &
   Partial<{
     className: string;
@@ -41,6 +43,7 @@ type InputProps = Omit<
     size: keyof typeof sizes;
     color: string;
   }>;
+
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
   (
     {
@@ -62,11 +65,10 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
     ref
   ) => {
     const handleChange: React.ChangeEventHandler<HTMLInputElement> = (e) => {
-      if (onChange) onChange(e?.target?.value);
+      if (onChange) onChange(e.target.value);
     };
     return (
       <>
-        {" "}
         <label
           className={`${className} flex items-center justify-center cursor-text  ${
             (shape && shapes[shape]) || ""
@@ -78,8 +80,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
             ""
           } ${sizes[size] || ""}`}
         >
-          {" "}
-          {!!label && label} {!!prefix && prefix}{" "}
+          {!!label && label} {!!prefix && prefix}
           <input
             ref={ref}
             type={type}
@@ -87,11 +88,12 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
             onChange={handleChange}
             placeholder={placeholder}
             {...restProps}
-          />{" "}
-          {!!suffix && suffix}{" "}
-        </label>{" "}
+          />
+          {!!suffix && suffix}
+        </label>
       </>
     );
   }
 );
+
 export { Input };
