@@ -94,7 +94,7 @@ const Home = () => {
       </li>
       <li style={{ marginBottom: "10px" }}>
         <Link
-          to="/spafeeback"
+          to="/spafeedback"
           style={{ color: "#87CEFA", textDecoration: "none" }}
         >
           SpaFeeback
