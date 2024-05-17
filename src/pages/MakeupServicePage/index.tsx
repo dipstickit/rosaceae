@@ -2,7 +2,7 @@ import { Helmet } from "react-helmet";
 import { Img, Button, Heading, Text } from "../../components";
 import Footer from "../../components/Footer";
 import Header2 from "../../components/Header2";
-import ProductCard from "../../components/ProductCard";
+import ProductCard from "../../components/Card/ProductCard";
 
 interface ProductData {
   trangim: string;
@@ -22,36 +22,6 @@ const data: ProductData[] = [
     trangimbasic: "Trang điểm cô dâu",
   },
 ];
-const data1 = [
-  { nailsbasicone: "images/img_rectangle_6009.png", nailsbasic: "Nails basic" },
-  {
-    nailsbasicone: "images/img_rectangle_6010.png",
-    nailsbasic: "Nails kiểu hàn",
-  },
-  {
-    nailsbasicone: "images/img_rectangle_6011.png",
-    nailsbasic: "Nails thiết kế ",
-  },
-];
-const data2 = [
-  { nimibasic: "images/img_rectangle_6012.png", nimibasic1: "Nối mi basic" },
-  { nimibasic: "images/img_rectangle_6013.png", nimibasic1: "Nối mi angle" },
-  {
-    nimibasic: "images/img_rectangle_6014.png",
-    nimibasic1: "Nối mi thiết kế ",
-  },
-];
-const data3 = [
-  {
-    image: "images/img_rectangle_6006.png",
-    giudngsinh: "Gội đầu dưỡng sinh 45 phút",
-  },
-  {
-    image: "images/img_rectangle_6007.png",
-    giudngsinh: "Gội đầu dưỡng sinh 60 phút",
-  },
-  { image: "images/img_rectangle_6008.png", giudngsinh: "Gội đầu chuyên sâu " },
-];
 
 export default function MakeupServicePagePage() {
   return (
@@ -63,7 +33,7 @@ export default function MakeupServicePagePage() {
           content="Web site created using create-react-app"
         />
       </Helmet>
-      <Header2 />
+      <Header2  className="ml-[12rem]"/>
       <div className="max-w-[1353px] mt-[46px] mx-auto flex w-full flex-col items-center md:p-5">
         <div className="h-[637px] relative self-stretch">
           <Text

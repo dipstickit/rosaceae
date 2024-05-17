@@ -1,4 +1,4 @@
-import { Heading, Img } from "./..";
+import { Heading, Img } from "./../..";
 interface Props {
   className?: string;
 }

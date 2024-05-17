@@ -10,7 +10,7 @@ const data = [
   { userimage: "images/img_woman_cosmetolo.png" },
 ];
 
-export default function HomepvioinynaPage() {
+export default function HomePage() {
   return (
     <>
       <Helmet>

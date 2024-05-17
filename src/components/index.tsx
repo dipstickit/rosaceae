@@ -13,9 +13,6 @@ import { Slider } from "./Slider";
 import Header from "./Header";
 import Footer from "./Footer";
 import Sidebar1 from "./Sidebar1";
-import Sidebar2 from "./Sidebar2";
-import Sidebar3 from "./Sidebar3";
-import Sidebar4 from "./Sidebar4";
 import DashboardDesignRowbagOne from "./DashboardDesignRowbagOne";
 import Header2 from "./Header2";
 
@@ -35,9 +32,6 @@ export {
   Header,
   Footer,
   Sidebar1,
-  Sidebar2,
-  Sidebar3,
-  Sidebar4,
   DashboardDesignRowbagOne,
   Header2
 };

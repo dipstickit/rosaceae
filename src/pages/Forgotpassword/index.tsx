@@ -12,7 +12,7 @@ export default function ForgotPasswordPage() {
           content="Web site created using create-react-app"
         />
       </Helmet>
-      <Header className="ml-[12rem]"/>
+      <Header className="ml-[12rem]" />
       <div className="flex w-full items-center justify-between gap-5 bg-white-A700 pb-[5px] pl-[139px] pt-[110px] md:flex-col md:pl-5 md:pt-5">
         <div className="flex w-[36%] flex-col items-start md:w-full">
           <Heading
@@ -28,10 +28,9 @@ export default function ForgotPasswordPage() {
             className="mt-[27px] flex !font-opensans tracking-[2.40px] !text-blue_gray-800_01"
           >
             <span className="text-blue_gray-800_01">
-            Đừng lo lắng, điều này xảy ra với tất cả chúng ta.
-            Nhập email của bạn dưới đây để khôi phục mật khẩu của bạn
+              Đừng lo lắng, điều này xảy ra với tất cả chúng ta. Nhập email của
+              bạn dưới đây để khôi phục mật khẩu của bạn
             </span>
-            
           </Text>
           <div className="mt-[61px] flex flex-col gap-[43px] self-stretch">
             <div className="flex flex-col gap-[35px]">
@@ -63,6 +62,23 @@ export default function ForgotPasswordPage() {
             </a>
           </div>
           <div className="relative mr-[185px] mt-12 h-[43px] w-[51%] self-end md:mr-0">
+            <div className="absolute bottom-0 left-[0.00px] top-0 my-auto h-[43px] w-[82%] bg-white-A700" />
+            <Text
+              size="7xl"
+              as="p"
+              className="absolute bottom-0 left-0 right-0 top-0 m-auto h-max w-max !font-opensans !font-normal tracking-[2.00px] !text-blue_gray-800_01 flex items-center"
+            >
+              <div className="flex items-center">
+                <span className="text-blue_gray-800_01">
+                  Nếu bạn đã có tài khoản,   
+                </span> 
+                <a href="#" className="text-blue_gray-800_01 underline ml-1">
+                  đăng nhập tại đây
+                </a>
+              </div>
+            </Text>
+          </div>
+          <div className="relative mr-[185px] mt-[8px] h-[43px] w-[51%] self-end md:mr-0">
             <div className="absolute bottom-0 left-[0.00px] top-0 my-auto h-[43px] w-[82%] bg-white-A700" />
             <Text
               size="7xl"

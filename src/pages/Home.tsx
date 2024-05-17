@@ -68,6 +68,46 @@ const Home = () => {
           ForgotPassword
         </Link>
       </li>
+      <li style={{ marginBottom: "10px" }}>
+        <Link
+          to="/frame2593"
+          style={{ color: "#87CEFA", textDecoration: "none" }}
+        >
+          Frame2593
+        </Link>
+      </li>
+      <li style={{ marginBottom: "10px" }}>
+        <Link
+          to="/spa"
+          style={{ color: "#87CEFA", textDecoration: "none" }}
+        >
+          Spa
+        </Link>
+      </li>
+      <li style={{ marginBottom: "10px" }}>
+        <Link
+          to="/spadetail"
+          style={{ color: "#87CEFA", textDecoration: "none" }}
+        >
+          Spadetail
+        </Link>
+      </li>
+      <li style={{ marginBottom: "10px" }}>
+        <Link
+          to="/spafeeback"
+          style={{ color: "#87CEFA", textDecoration: "none" }}
+        >
+          SpaFeeback
+        </Link>
+      </li>
+      <li style={{ marginBottom: "10px" }}>
+        <Link
+          to="/booking"
+          style={{ color: "#87CEFA", textDecoration: "none" }}
+        >
+          Booking
+        </Link>
+      </li>
       <ul style={{ listStyle: "none", padding: "0" }}></ul>
     </div>
   );
