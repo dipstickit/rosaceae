@@ -1,5 +1,4 @@
 import { useRoutes } from "react-router-dom";
-import Home from "../pages/Home";
 import NotFound from "../pages/NotFound";
 import Thumnail from "../pages/Thumnail";
 import Signup from "../pages/Signup";

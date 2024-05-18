@@ -9,8 +9,8 @@ import { AuthData } from "../types/authData.type";
 import { ResponseData } from "../types/responseData.type";
 
 const instance: AxiosInstance = axios.create({
-    baseURL: "http://localhost:8000/",
-    withCredentials: true,
+    baseURL: "http://localhost:8080/",
+    withCredentials: false
 });
 
 
