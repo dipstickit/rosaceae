@@ -42,7 +42,7 @@ export default function Header2({ ...props }: Props) {
             </Link>
           </li>
           <li>
-            <Link to="#">
+            <Link to="/booking">
               <Heading as="p" className="text-sm font-bold">
                 Đặt Lịch
               </Heading>
@@ -79,14 +79,14 @@ export default function Header2({ ...props }: Props) {
         </ul>
         <div className="w-[23%] flex items-center justify-between gap-5 md:w-full">
           <div className="gap-[30px] flex items-center">
-            <Link to="#">
+            <Link to="/search">
               <Img
                 src="images/img_search_gray_900_06.svg"
                 alt="search"
                 className="w-[28px] h-[28px]"
               />
             </Link>
-            <Link to="#">
+            <Link to="/cart">
               <Img
                 src="images/img_bi_bag_dash.svg"
                 alt="bibagdash"

@@ -1,8 +1,16 @@
 import { Helmet } from "react-helmet";
 import { Img, Text, Button, Heading, Input } from "../../components";
 import Header from "../../components/Header";
+import { UserApi } from "../../api/Api";
+import { useState } from "react";
 
 export default function ForgotPasswordPage() {
+  const [email, setEmail] = useState<string>('')
+
+  const forgotPassword = () => {
+    UserApi.ForgotPassword(email).then(res => alert(res.data)).catch(e => console.error(e))
+  }
+
   return (
     <>
       <Helmet>
@@ -25,12 +33,13 @@ export default function ForgotPasswordPage() {
           <Text
             size="9xl"
             as="p"
-            className="mt-[27px] flex !font-opensans tracking-[2.40px] !text-blue_gray-800_01"
+            className="mt-[27px] flex tracking-[2.40px] !text-blue_gray-800_01"
           >
             <span className="text-blue_gray-800_01">
-              Đừng lo lắng, điều này xảy ra với tất cả chúng ta. Nhập email của
-              bạn dưới đây để khôi phục mật khẩu của bạn
+              Đừng lo lắng, điều này xảy ra với tất cả chúng ta.
+              Nhập email của bạn dưới đây để khôi phục mật khẩu của bạn
             </span>
+
           </Text>
           <div className="mt-[61px] flex flex-col gap-[43px] self-stretch">
             <div className="flex flex-col gap-[35px]">
@@ -38,28 +47,28 @@ export default function ForgotPasswordPage() {
                 <Heading
                   size="4xl"
                   as="h2"
-                  className="!font-nunito !font-semibold tracking-[2.80px] !text-blue_gray-800_01"
+                  className="!font-opensans !font-semibold tracking-[2.80px] !text-blue_gray-800_01"
                 >
                   Email
                 </Heading>
-                <Input
-                  size="2xl"
+                <input
+                  // size="2xl"
                   type="email"
                   name="email"
                   placeholder={`example@gmail.com`}
                   className="self-stretch rounded-[40px] border-2 border-solid border-black-900 font-nunito tracking-[2.40px] !text-black-900 sm:px-5"
+                  onChange={(e) => setEmail(e.target.value)}
                 />
               </div>
             </div>
-            <a href="https://www.facebook.com/jayd1pi" target="_blank">
-              <Button
-                color="black_900"
-                size="11xl"
-                className="w-full rounded-[40px] font-nunito font-extrabold tracking-[2.80px] sm:px-5"
-              >
-                Gửi
-              </Button>
-            </a>
+            <Button
+              color="black_900"
+              size="11xl"
+              className="w-full rounded-[40px] font-nunito font-extrabold tracking-[2.80px] sm:px-5"
+              onClick={forgotPassword}
+            >
+              Gửi
+            </Button>
           </div>
           <div className="relative mr-[185px] mt-12 h-[43px] w-[51%] self-end md:mr-0">
             <div className="absolute bottom-0 left-[0.00px] top-0 my-auto h-[43px] w-[82%] bg-white-A700" />
@@ -83,7 +92,7 @@ export default function ForgotPasswordPage() {
             <Text
               size="7xl"
               as="p"
-              className="absolute bottom-0 left-0 right-0 top-0 m-auto h-max w-max !font-nunito !font-normal tracking-[2.00px] !text-blue_gray-800_01"
+              className="absolute bottom-0 left-0 right-0 top-0 m-auto h-max w-max !font-opensans !font-normal tracking-[2.00px] !text-blue_gray-800_01"
             >
               Hoặc đăng ký bằng
             </Text>
