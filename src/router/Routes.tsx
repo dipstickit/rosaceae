@@ -16,7 +16,7 @@ import CartPage from "../pages/Cart";
 
 const RosaceaeRoutes = () => {
   const element = useRoutes([
-    { path: "/", element: <Home /> },
+    { path: "/", element: <HomePage /> },
     { path: "*", element: <NotFound /> },
     { path: "thumnail", element: <Thumnail /> },
     { path: "signup", element: <Signup /> },
