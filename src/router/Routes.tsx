@@ -1,5 +1,4 @@
 import { useRoutes } from "react-router-dom";
-import Home from "../pages/Home";
 import NotFound from "../pages/NotFound";
 import Thumnail from "../pages/Thumnail";
 import Signup from "../pages/Signup";
@@ -16,8 +15,8 @@ import CartPage from "../pages/Cart";
 
 const RosaceaeRoutes = () => {
   const element = useRoutes([
-    { path: "/", element: <Home /> },
-    { path: "*", element: <NotFound /> },
+    { path: "/", element: <HomePage /> },
+    { path: "*", element: <NotFound /> }, 
     { path: "thumnail", element: <Thumnail /> },
     { path: "signup", element: <Signup /> },
     { path: "login", element: <Login /> },
