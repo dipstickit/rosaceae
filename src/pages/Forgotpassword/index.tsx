@@ -25,9 +25,9 @@ export default function ForgotPasswordPage() {
           <Text
             size="9xl"
             as="p"
-            className="mt-[27px] flex !font-opensans tracking-[2.40px] !text-blue_gray-800_01"
+            className="mt-[27px] flex tracking-[2.40px] !text-blue_gray-800_01"
           >
-            <span className="text-blue_gray-800_01">
+            <span className="text-blue_gray-800_01 !font-opensans">
               Đừng lo lắng, điều này xảy ra với tất cả chúng ta. Nhập email của
               bạn dưới đây để khôi phục mật khẩu của bạn
             </span>
@@ -38,7 +38,7 @@ export default function ForgotPasswordPage() {
                 <Heading
                   size="4xl"
                   as="h2"
-                  className="!font-nunito !font-semibold tracking-[2.80px] !text-blue_gray-800_01"
+                  className="!font-opensans !font-semibold tracking-[2.80px] !text-blue_gray-800_01"
                 >
                   Email
                 </Heading>
@@ -47,7 +47,7 @@ export default function ForgotPasswordPage() {
                   type="email"
                   name="email"
                   placeholder={`example@gmail.com`}
-                  className="self-stretch rounded-[40px] border-2 border-solid border-black-900 font-nunito tracking-[2.40px] !text-black-900 sm:px-5"
+                  className="self-stretch rounded-[40px] border-2 border-solid border-black-900 font-opensans tracking-[2.40px] !text-black-900 sm:px-5"
                 />
               </div>
             </div>
@@ -55,7 +55,7 @@ export default function ForgotPasswordPage() {
               <Button
                 color="black_900"
                 size="11xl"
-                className="w-full rounded-[40px] font-nunito font-extrabold tracking-[2.80px] sm:px-5"
+                className="w-full rounded-[40px] font-opensans font-extrabold tracking-[2.80px] sm:px-5"
               >
                 Gửi
               </Button>
@@ -83,7 +83,7 @@ export default function ForgotPasswordPage() {
             <Text
               size="7xl"
               as="p"
-              className="absolute bottom-0 left-0 right-0 top-0 m-auto h-max w-max !font-nunito !font-normal tracking-[2.00px] !text-blue_gray-800_01"
+              className="absolute bottom-0 left-0 right-0 top-0 m-auto h-max w-max !font-opensans !font-normal tracking-[2.00px] !text-blue_gray-800_01"
             >
               Hoặc đăng ký bằng
             </Text>

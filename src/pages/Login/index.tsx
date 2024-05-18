@@ -12,7 +12,7 @@ export default function LoginPage() {
           content="Web site created using create-react-app"
         />
       </Helmet>
-      <Header className="ml-[12rem]"/>
+      <Header className="ml-[12rem]" />
       <div className="flex w-full items-center justify-between gap-5 bg-white-A700 pb-[5px] pl-[139px] pt-[110px] md:flex-col md:pl-5 md:pt-5">
         <div className="flex w-[36%] flex-col items-start md:w-full">
           <Heading
@@ -28,7 +28,7 @@ export default function LoginPage() {
             className="mt-[27px] flex !font-opensans tracking-[2.40px] !text-blue_gray-800_01"
           >
             <span className="text-blue_gray-800_01">
-              Nếu bạn chưa có tài khoản,{" "}
+              Nếu bạn chưa có tài khoản,
             </span>
             <a href="#" className="text-blue_gray-800_01 underline">
               đăng ký tại đây
@@ -40,7 +40,7 @@ export default function LoginPage() {
                 <Heading
                   size="4xl"
                   as="h2"
-                  className="!font-nunito !font-semibold tracking-[2.80px] !text-blue_gray-800_01"
+                  className="!font-opensans !font-semibold tracking-[2.80px] !text-blue_gray-800_01"
                 >
                   Tên đăng nhập
                 </Heading>
@@ -56,7 +56,7 @@ export default function LoginPage() {
                 <Heading
                   size="4xl"
                   as="h3"
-                  className="!font-nunito !font-semibold tracking-[2.80px] !text-blue_gray-800_01"
+                  className="!font-opensans !font-semibold tracking-[2.80px] !text-blue_gray-800_01"
                 >
                   Mật khẩu
                 </Heading>
@@ -83,21 +83,18 @@ export default function LoginPage() {
                     <Text
                       size="7xl"
                       as="p"
-                      className="!font-nunito !font-normal tracking-[2.00px] !text-blue_gray-800_01"
+                      className="!font-opensans !font-normal tracking-[2.00px] !text-blue_gray-800_01"
                     >
                       Remember me
                     </Text>
                   </div>
                 </div>
                 <div className="flex pb-[9px] pr-2.5 pt-2.5 sm:p-5">
-                  <a
-                    href="https://www.facebook.com/jayd1pi"
-                    target="_blank"
-                  >
+                  <a href="https://www.facebook.com/dipstickit" target="_blank">
                     <Heading
                       size="2xl"
                       as="h4"
-                      className="!font-nunito !font-semibold tracking-[2.00px]"
+                      className="!font-opensans !font-semibold tracking-[2.00px]"
                     >
                       Quên mật khẩu?
                     </Heading>
@@ -105,7 +102,7 @@ export default function LoginPage() {
                 </div>
               </div>
             </div>
-            <a href="https://www.facebook.com/jayd1pi" target="_blank">
+            <a href="https://www.facebook.com/dipstickit" target="_blank">
               <Button
                 color="black_900"
                 size="11xl"
@@ -155,8 +152,6 @@ export default function LoginPage() {
           className="h-[965px] w-[57%] object-cover md:w-full"
         />
       </div>
-
-     
     </>
   );
 }

@@ -40,7 +40,7 @@ export default function LoginPage() {
                 <Heading
                   size="4xl"
                   as="h2"
-                  className="!font-nunito !font-semibold tracking-[2.80px] !text-blue_gray-800_01"
+                  className="!font-opensans !font-semibold tracking-[2.80px] !text-blue_gray-800_01"
                 >
                   Tên đăng nhập
                 </Heading>
@@ -49,14 +49,14 @@ export default function LoginPage() {
                   type="email"
                   name="email"
                   placeholder={`example@gmail.com`}
-                  className="self-stretch rounded-[40px] border-2 border-solid border-black-900 font-nunito tracking-[2.40px] !text-black-900 sm:px-5"
+                  className="self-stretch rounded-[40px] border-2 border-solid border-black-900 font-opensans tracking-[2.40px] !text-black-900 sm:px-5"
                 />
               </div>
               <div className="flex flex-col items-start gap-[15px]">
                 <Heading
                   size="4xl"
                   as="h3"
-                  className="!font-nunito !font-semibold tracking-[2.80px] !text-blue_gray-800_01"
+                  className="!font-opensans !font-semibold tracking-[2.80px] !text-blue_gray-800_01"
                 >
                   Mật khẩu
                 </Heading>
@@ -79,7 +79,7 @@ export default function LoginPage() {
                 <Heading
                   size="4xl"
                   as="h3"
-                  className="!font-nunito !font-semibold tracking-[2.80px] !text-blue_gray-800_01"
+                  className="!font-opensans !font-semibold tracking-[2.80px] !text-blue_gray-800_01"
                 >
                   Nhập lại mật khẩu
                 </Heading>
@@ -107,7 +107,7 @@ export default function LoginPage() {
                     <Text
                       size="7xl"
                       as="p"
-                      className="!font-nunito !font-normal tracking-[2.00px] !text-blue_gray-800_01"
+                      className="!font-opensans !font-normal tracking-[2.00px] !text-blue_gray-800_01"
                     >
                       Remember me
                     </Text>
@@ -118,7 +118,7 @@ export default function LoginPage() {
                     <Heading
                       size="2xl"
                       as="h4"
-                      className="!font-nunito !font-semibold tracking-[2.00px]"
+                      className="!font-opensans !font-semibold tracking-[2.00px]"
                     >
                       Quên mật khẩu?
                     </Heading>
@@ -130,7 +130,7 @@ export default function LoginPage() {
               <Button
                 color="black_900"
                 size="11xl"
-                className="w-full rounded-[40px] font-nunito font-extrabold tracking-[2.80px] sm:px-5"
+                className="w-full rounded-[40px] font-opensans font-extrabold tracking-[2.80px] sm:px-5"
               >
                 Đăng nhập
               </Button>
@@ -141,7 +141,7 @@ export default function LoginPage() {
             <Text
               size="7xl"
               as="p"
-              className="absolute bottom-0 left-0 right-0 top-0 m-auto h-max w-max !font-nunito !font-normal tracking-[2.00px] !text-blue_gray-800_01"
+              className="absolute bottom-0 left-0 right-0 top-0 m-auto h-max w-max !font-opensans !font-normal tracking-[2.00px] !text-blue_gray-800_01"
             >
               Hoặc đăng nhập bằng
             </Text>
