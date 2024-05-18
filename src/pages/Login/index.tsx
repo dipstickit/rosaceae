@@ -109,13 +109,6 @@ export default function LoginPage() {
                 <input
                   type="password"
                   name="password"
-                  // suffix={
-                  //   <Img
-                  //     src="images/img_icon_font_awesome_free_solid_e_eyeslash.svg"
-                  //     alt="icon/font awesome free/solid/e/eye-slash"
-                  //     className="h-[32px] w-[32px]"
-                  //   />
-                  // }
                   onChange={e => { formik.handleChange(e); handleInput(e) }}
                   onBlur={formik.handleBlur}
                   placeholder={`********`}
