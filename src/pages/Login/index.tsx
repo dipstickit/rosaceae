@@ -78,7 +78,7 @@ export default function LoginPage() {
             className="mt-[27px] flex !font-opensans tracking-[2.40px] !text-blue_gray-800_01"
           >
             <span className="text-blue_gray-800_01">
-              Nếu bạn chưa có tài khoản,{" "}
+              Nếu bạn chưa có tài khoản,
             </span>
             <a href="signup" className="text-blue_gray-800_01 underline">
               đăng ký tại đây
@@ -90,7 +90,7 @@ export default function LoginPage() {
                 <Heading
                   size="4xl"
                   as="h2"
-                  className="!font-nunito !font-semibold tracking-[2.80px] !text-blue_gray-800_01"
+                  className="!font-opensans !font-semibold tracking-[2.80px] !text-blue_gray-800_01"
                 >
                   Tên đăng nhập
                 </Heading>
@@ -110,20 +110,13 @@ export default function LoginPage() {
                 <Heading
                   size="4xl"
                   as="h3"
-                  className="!font-nunito !font-semibold tracking-[2.80px] !text-blue_gray-800_01"
+                  className="!font-opensans !font-semibold tracking-[2.80px] !text-blue_gray-800_01"
                 >
                   Mật khẩu
                 </Heading>
                 <input
                   type="password"
                   name="password"
-                  // suffix={
-                  //   <Img
-                  //     src="images/img_icon_font_awesome_free_solid_e_eyeslash.svg"
-                  //     alt="icon/font awesome free/solid/e/eye-slash"
-                  //     className="h-[32px] w-[32px]"
-                  //   />
-                  // }
                   onChange={e => { formik.handleChange(e); handleInput(e) }}
                   onBlur={formik.handleBlur}
                   placeholder={`********`}
@@ -142,7 +135,7 @@ export default function LoginPage() {
                     <Text
                       size="7xl"
                       as="p"
-                      className="!font-nunito !font-normal tracking-[2.00px] !text-blue_gray-800_01"
+                      className="!font-opensans !font-normal tracking-[2.00px] !text-blue_gray-800_01"
                     >
                       Remember me
                     </Text>
@@ -156,7 +149,7 @@ export default function LoginPage() {
                     <Heading
                       size="2xl"
                       as="h4"
-                      className="!font-nunito !font-semibold tracking-[2.00px]"
+                      className="!font-opensans !font-semibold tracking-[2.00px]"
                     >
                       Quên mật khẩu?
                     </Heading>

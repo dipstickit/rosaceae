@@ -33,7 +33,7 @@ export default function ForgotPasswordPage() {
           <Text
             size="9xl"
             as="p"
-            className="mt-[27px] flex !font-opensans tracking-[2.40px] !text-blue_gray-800_01"
+            className="mt-[27px] flex tracking-[2.40px] !text-blue_gray-800_01"
           >
             <span className="text-blue_gray-800_01">
               Đừng lo lắng, điều này xảy ra với tất cả chúng ta.
@@ -47,7 +47,7 @@ export default function ForgotPasswordPage() {
                 <Heading
                   size="4xl"
                   as="h2"
-                  className="!font-nunito !font-semibold tracking-[2.80px] !text-blue_gray-800_01"
+                  className="!font-opensans !font-semibold tracking-[2.80px] !text-blue_gray-800_01"
                 >
                   Email
                 </Heading>
@@ -92,7 +92,7 @@ export default function ForgotPasswordPage() {
             <Text
               size="7xl"
               as="p"
-              className="absolute bottom-0 left-0 right-0 top-0 m-auto h-max w-max !font-nunito !font-normal tracking-[2.00px] !text-blue_gray-800_01"
+              className="absolute bottom-0 left-0 right-0 top-0 m-auto h-max w-max !font-opensans !font-normal tracking-[2.00px] !text-blue_gray-800_01"
             >
               Hoặc đăng ký bằng
             </Text>

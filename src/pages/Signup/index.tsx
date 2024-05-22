@@ -88,6 +88,26 @@ export default function SignUpPage() {
                 <Heading
                   size="4xl"
                   as="h2"
+                  className="!font-opensans !font-semibold tracking-[2.80px] !text-blue_gray-800_01"
+                >
+                  Name
+                </Heading>
+                <input
+                  // size="2xl"
+                  type="text"
+                  name="name"
+                  className="self-stretch rounded-[40px] border-2 border-solid border-black-900 font-nunito tracking-[2.40px] !text-black-900 sm:px-5"
+                  onChange={e => { formik.handleChange(e); handleInput(e) }}
+                  onBlur={formik.handleBlur}
+                />
+                {formik.touched.name && formik.errors.name && (
+                  <div className='flex-1 flex items-center mt-2 text-red-500 italic text-sm'>{formik.errors.name}</div>
+                )}
+              </div>
+              <div className="flex flex-col items-start gap-3.5">
+                <Heading
+                  size="4xl"
+                  as="h2"
                   className="!font-nunito !font-semibold tracking-[2.80px] !text-blue_gray-800_01"
                 >
                   Name
@@ -169,7 +189,7 @@ export default function SignUpPage() {
                 <Heading
                   size="4xl"
                   as="h3"
-                  className="!font-nunito !font-semibold tracking-[2.80px] !text-blue_gray-800_01"
+                  className="!font-opensans !font-semibold tracking-[2.80px] !text-blue_gray-800_01"
                 >
                   Mật khẩu
                 </Heading>
@@ -197,7 +217,7 @@ export default function SignUpPage() {
                 <Heading
                   size="4xl"
                   as="h3"
-                  className="!font-nunito !font-semibold tracking-[2.80px] !text-blue_gray-800_01"
+                  className="!font-opensans !font-semibold tracking-[2.80px] !text-blue_gray-800_01"
                 >
                   Nhập lại mật khẩu
                 </Heading>
@@ -230,7 +250,7 @@ export default function SignUpPage() {
                     <Text
                       size="7xl"
                       as="p"
-                      className="!font-nunito !font-normal tracking-[2.00px] !text-blue_gray-800_01"
+                      className="!font-opensans !font-normal tracking-[2.00px] !text-blue_gray-800_01"
                     >
                       Remember me
                     </Text>
@@ -241,7 +261,7 @@ export default function SignUpPage() {
                     <Heading
                       size="2xl"
                       as="h4"
-                      className="!font-nunito !font-semibold tracking-[2.00px]"
+                      className="!font-opensans !font-semibold tracking-[2.00px]"
                     >
                       Quên mật khẩu?
                     </Heading>
@@ -263,7 +283,7 @@ export default function SignUpPage() {
             <Text
               size="7xl"
               as="p"
-              className="absolute bottom-0 left-0 right-0 top-0 m-auto h-max w-max !font-nunito !font-normal tracking-[2.00px] !text-blue_gray-800_01"
+              className="absolute bottom-0 left-0 right-0 top-0 m-auto h-max w-max !font-opensans !font-normal tracking-[2.00px] !text-blue_gray-800_01"
             >
               Hoặc đăng nhập bằng
             </Text>

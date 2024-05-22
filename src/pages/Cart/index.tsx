@@ -34,7 +34,7 @@ export default function CartPage() {
       table4ColumnHelper.accessor("dchv4", {
         cell: (info) => (
           <div className="flex items-center">
-            ];
+            ;
             <Img
               src="images/img_close_red_300_02.svg"
               alt="close"
@@ -159,39 +159,39 @@ export default function CartPage() {
                 alt="percent"
                 className="w-[24px] h-[24px] self-start md:w-full"
               />
-              <Text as="p" className="!font-prompt4 text-black-900">
+              <Text as="p" className="!font-prompt4 text-gray-900_04">
                 Giảm giá tức thì 10% với Thẻ ghi nợ của Ngân hàng Liên bang khi
                 chi tiêu tối thiểu là 500.000vnd.
               </Text>
             </div>
           </div>
-          <div className="px-[31px] gap-[29px] pb-[205px] w-[30%] flex flex-col items-start justify-center rounded-sm border border-solid border-blue_gray-100_06 bg-white-A700 pt-8 md:w-full md:pb-5 sm:p-5">
-            <Text size="9xl" as="p" className="!font-alata4">
+          <div className="px-[31px] gap-[29px] pb-[205px] w-[30%] flex flex-col items-start justify-center rounded-sm border border-solid border-blue_gray-100_06 bg-white-A700 pt-8 md:w-full md:pb-5 sm:p-5 ">
+            <Text size="9xl" as="p" className="!font-alata4 text-gray-900_04">
               Tóm tắt theo thứ tự
             </Text>
             <div className="gap-[30px] flex flex-col items-start self-stretch">
               <div className="flex flex-col gap-6 self-stretch">
                 <div className="flex flex-wrap justify-between gap-5">
-                  <Text as="p" className="!font-alata4">
+                  <Text as="p" className="!font-alata4 text-gray-900_04">
                     Giá
                   </Text>
-                  <Text as="p" className="!font-alata4">
+                  <Text as="p" className="!font-alata4 text-gray-900_04">
                     449.000vnd
                   </Text>
                 </div>
                 <div className="flex flex-wrap justify-between gap-5">
-                  <Text as="p" className="!font-alata4">
+                  <Text as="p" className="!font-alata4 text-gray-900_04">
                     Số lượng
                   </Text>
-                  <Text as="p" className="!font-alata4">
+                  <Text as="p" className="!font-alata4 text-gray-900_04">
                     2
                   </Text>
                 </div>
                 <div className="flex flex-wrap justify-between gap-5">
-                  <Text as="p" className="!font-alata4">
+                  <Text as="p" className="!font-alata4 text-gray-900_04">
                     Áp dụng mã giảm giá
                   </Text>
-                  <Text as="p" className="!font-alata4">
+                  <Text as="p" className="!font-alata4 text-gray-900_04">
                     0vnd
                   </Text>
                 </div>
@@ -199,7 +199,10 @@ export default function CartPage() {
               <div className="w-[66%] h-px bg-blue_gray-100_06" />
               <div className="gap-[23px] flex flex-col self-stretch">
                 <div className="pr-[140px] flex flex-wrap items-center justify-between gap-5 md:pr-5">
-                  <Text as="p" className="self-end !font-alata4">
+                  <Text
+                    as="p"
+                    className="self-end !font-alata4 text-gray-900_04"
+                  >
                     Tổng
                   </Text>
                   <Text
@@ -210,12 +213,12 @@ export default function CartPage() {
                   </Text>
                 </div>
                 <div className="flex flex-wrap items-center justify-between gap-5">
-                  <Text as="p" className="!font-alata4">
+                  <Text as="p" className="!font-alata4 text-gray-900_04">
                     Dự kiến thực hiện
                   </Text>
                   <Text
                     as="p"
-                    className="tracking-[0.10px] self-end !font-alata4"
+                    className="tracking-[0.10px] self-end !font-alata4 text-gray-900_04"
                   >
                     26 Tháng 2, 2024
                   </Text>
