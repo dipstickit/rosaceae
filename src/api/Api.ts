@@ -26,5 +26,14 @@ export const UserApi = {
                 'Content-Type': 'application/json'
             }
         })
+    },
+
+    EmailVerify: (token: string) => {
+        return instance.post('/api/v1/auth/email-verify', { token: token }, {
+            headers: {
+                crossDomain: true,
+                'Content-Type': 'application/json'
+            }
+        })
     }
 }

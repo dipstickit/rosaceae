@@ -8,6 +8,7 @@ import { ChangeEvent, useState } from "react";
 import { setAccessToken } from "../../store/authActions";
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from "react-router-dom";
+import { setUserInfo } from "../../store/userActions";
 
 export default function LoginPage() {
   const dispatch = useDispatch();
@@ -38,10 +39,17 @@ export default function LoginPage() {
   const login = async () => {
     const result: any = await userHandler.Login(Object.entries(formik.errors).length, loginInfo)
     console.log(result.data)
-    if (result.data.status === 0) {
+    if (result.data.status === 200) {
       const token: string = result.data.access_token
+      const userInfo: UserInfo = result.data.userInfo
       dispatch(setAccessToken(token));
+      dispatch(setUserInfo(userInfo))
+      localStorage.setItem("access-token", token)
+      localStorage.setItem("user-info", JSON.stringify(userInfo))
       navigate('/')
+    }
+    if (result.data.status === 400) {
+      alert(result.data.msg)
     }
   }
 

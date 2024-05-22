@@ -60,7 +60,7 @@ export default function SignUpPage() {
           content="Web site created using create-react-app"
         />
       </Helmet>
-      <Header className="ml-[12rem]" />
+      <Header className="" />
       <div className="flex w-full items-center justify-between gap-5 bg-white-A700 pb-[5px] pl-[139px] pt-[110px] md:flex-col md:pl-5 md:pt-5 mb-[5px]">
         <div className="flex w-[36%] flex-col items-start md:w-full">
           <Heading
