@@ -84,7 +84,7 @@ export default function SignUpPage() {
           </Text>
           <div className="mt-[61px] flex flex-col gap-[43px] self-stretch">
             <div className="flex flex-col gap-[35px]">
-              <div className="flex flex-col items-start gap-3.5">
+              {/* <div className="flex flex-col items-start gap-3.5">
                 <Heading
                   size="4xl"
                   as="h2"
@@ -103,7 +103,7 @@ export default function SignUpPage() {
                 {formik.touched.name && formik.errors.name && (
                   <div className='flex-1 flex items-center mt-2 text-red-500 italic text-sm'>{formik.errors.name}</div>
                 )}
-              </div>
+              </div> */}
               <div className="flex flex-col items-start gap-3.5">
                 <Heading
                   size="4xl"
