@@ -6,7 +6,7 @@ interface Props {
   className?: string;
 }
 export default function Sidebar1({ ...props }: Props) {
-  const [collapsed, setCollapsed] = React.useState(false);
+  const [collapsed] = React.useState(false);
   //use this function to collapse/expand the sidebar
   //function collapseSidebar() {
   //    setCollapsed(!collapsed)  //}

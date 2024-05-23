@@ -4,15 +4,15 @@ import Header from "../../components/Header";
 import { loginValidateSchema } from "../../validates/ValidateSchema";
 import { useFormik } from "formik";
 import { userHandler } from "../../usecases/HandleLogin";
-import { ChangeEvent, useState } from "react";
+import { useState } from "react";
 import { setAccessToken } from "../../store/authActions";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch,  } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 export default function LoginPage() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [loginInfo, setLoginInfo] = useState<LoginInfo>({
+  const [loginInfo] = useState<LoginInfo>({
     email: "",
     password: "",
   });

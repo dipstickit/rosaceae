@@ -9,9 +9,12 @@ import {
 type ReactTableProps<D> = {
   data: D[];
   columns: ColumnDef<D, string>[];
-  headerProps?: Record<string, never>;
-  bodyProps?: Record<string, never>;
-  rowDataProps?: { className: string };
+  // headerProps?: Record<string, never>;
+  // bodyProps?: Record<string, never>;
+  // rowDataProps?: { className: string };
+  headerProps?: React.HTMLAttributes<HTMLTableSectionElement>;
+  bodyProps?: React.HTMLAttributes<HTMLTableSectionElement>;
+  rowDataProps?: React.HTMLAttributes<HTMLTableRowElement>;
   size?: keyof typeof sizes;
   [x: string]: any;
 };
@@ -20,24 +23,6 @@ const sizes = {
   xs: "p-[11px]",
   sm: "p-5",
 } as const;
-
-// const ReactTable = <D extends unknown>({
-//     columns,
-//     data = [],
-//     headerProps = {},
-//     bodyProps = {},
-//     className = "",
-//     rowDataProps = { className: "" },
-//     size,
-//     ...restConfig
-//   }: ReactTableProps<D>) => {
-//     const table = useReactTable({
-//       columns,
-//       data,
-//       getCoreRowModel: getCoreRowModel(),
-//       getSortedRowModel: getSortedRowModel(),
-//       ...restConfig,
-//     });
 
 const ReactTable = <D,>({
   columns,

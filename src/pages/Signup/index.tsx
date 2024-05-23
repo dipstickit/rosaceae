@@ -1,5 +1,5 @@
 import { Helmet } from "react-helmet";
-import { Img, Text, Button, Heading, Input } from "../../components";
+import { Img, Text, Button, Heading } from "../../components";
 import Header from "../../components/Header";
 import { useState, ChangeEvent } from "react";
 import { useFormik } from "formik";
@@ -27,7 +27,7 @@ export default function SignUpPage() {
       confirmPassword: ''
     },
     validationSchema: registerValidateSchema,
-    onSubmit: (values, { resetForm }) => {
+    onSubmit: (values,) => {
       console.log(values);
     }
   });
