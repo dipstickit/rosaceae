@@ -26,7 +26,7 @@ export default function HomePage() {
           <Heading
             size="15xl"
             as="h1"
-            className="!font-comfortaa8 !text-white-A700 ml-[2rem]"
+            className="!font-comfortaa8 mx-auto !text-white-A700"
           >
             Tái tạo bề mặt da bằng laser
           </Heading>
