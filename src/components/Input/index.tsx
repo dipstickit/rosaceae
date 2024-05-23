@@ -42,6 +42,7 @@ type InputProps = Omit<
     variant: keyof typeof variants;
     size: keyof typeof sizes;
     color: string;
+    value:string;
   }>;
 
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
@@ -56,6 +57,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
       prefix,
       suffix,
       onChange,
+      value,
       shape,
       variant = "fill",
       size = "xs",
@@ -83,6 +85,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
             ref={ref}
             type={type}
             name={name}
+            value={value}
             onChange={handleChange}
             placeholder={placeholder}
             {...restProps}
