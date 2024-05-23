@@ -1,5 +1,5 @@
 import { Helmet } from "react-helmet";
-import { Img, Text, Button, Heading, Input } from "../../components";
+import { Img, Text, Button, Heading } from "../../components";
 import Header from "../../components/Header";
 import { UserApi } from "../../api/Api";
 import { useState } from "react";
