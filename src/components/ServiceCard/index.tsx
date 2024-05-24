@@ -8,7 +8,7 @@ interface Props {
   buttontext?: string;
   titletext?: string;
 }
-export default function Frame2593Stackxem({
+export default function ServiceCard({
   userimage = "",
   buttontext = "",
   titletext = "",

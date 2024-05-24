@@ -1,7 +1,7 @@
 import { Helmet } from "react-helmet";
 import { Img, Button, Heading, Text } from "../../components";
 import Footer from "../../components/Footer";
-import Header2 from "../../components/Header2";
+import Header from "../../components/Header";
 import ProductCard from "../../components/Card/ProductCard";
 
 interface ProductData {
@@ -33,7 +33,7 @@ export default function MakeupServicePagePage() {
           content="Web site created using create-react-app"
         />
       </Helmet>
-      <Header2  className="ml-[12rem]"/>
+      <Header  className="ml-[12rem]"/>
       <div className="max-w-[1353px] mt-[46px] mx-auto flex w-full flex-col items-center md:p-5">
         <div className="h-[637px] relative self-stretch">
           <Text
