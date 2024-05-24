@@ -42,7 +42,7 @@ type InputProps = Omit<
     variant: keyof typeof variants;
     size: keyof typeof sizes;
     color: string;
-    value:string;
+    value: string;
   }>;
 
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
@@ -71,16 +71,18 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
     };
     return (
       <>
-        <label
-          className={`${className} flex items-center justify-center cursor-text  ${(shape && shapes[shape]) || ""
-            } ${variants[variant]?.[
-            color as keyof (typeof variants)[typeof variant]
+        <div
+          className={`${className} flex items-center justify-center cursor-text  ${
+            (shape && shapes[shape]) || ""
+          } ${
+            variants[variant]?.[
+              color as keyof (typeof variants)[typeof variant]
             ] ||
             variants[variant] ||
             ""
-            } ${sizes[size] || ""}`}
+          } ${sizes[size] || ""}`}
         >
-          {!!label && label} {!!prefix && prefix}
+          {!!prefix && prefix}
           <input
             ref={ref}
             type={type}
@@ -91,7 +93,12 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
             {...restProps}
           />
           {!!suffix && suffix}
-        </label>
+        </div>
+        {!!label && (
+          <label htmlFor={name} className="sr-only">
+            {label}
+          </label>
+        )}
       </>
     );
   }

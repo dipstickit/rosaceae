@@ -17,6 +17,10 @@ import AddressPage from "../pages/Address";
 import PaymentPage from "../pages/Payment";
 import AboutUsPage from "../pages/AboutUs";
 import ContactPage from "../pages/Contact";
+import SettingPageOnePage from "../pages/SettingPageOne";
+import SettingPageTwoPage from "../pages/SettingPageTwo";
+import SettingPageThreePage from "../pages/SettingPageThree";
+import NotificationsupdatepasswordPage from "../pages/Notificationsupdatepassword";
 
 const RosaceaeRoutes = () => {
   const element = useRoutes([
@@ -39,6 +43,11 @@ const RosaceaeRoutes = () => {
     { path: "payment", element: <PaymentPage /> },
     { path: "aboutus", element: <AboutUsPage /> },
     { path: "contact", element: <ContactPage /> },
+    { path: "noti", element: <NotificationsupdatepasswordPage /> },
+    { path: "settingpageOne", element: <SettingPageOnePage /> },
+    { path: "settingpage2", element: <SettingPageTwoPage /> },
+    { path: "settingpage3", element: <SettingPageThreePage /> },
+
 
   ]);
   return element;
