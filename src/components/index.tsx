@@ -12,9 +12,8 @@ import { RatingBar } from "./RatingBar";
 import { Slider } from "./Slider";
 import Header from "./Header";
 import Footer from "./Footer";
-import Sidebar1 from "./Sidebar1";
+import Sidebar from "./Sidebar";
 import DashboardDesignRowbagOne from "./DashboardDesignRowbagOne";
-import Header2 from "./Header2";
 
 export {
   Img,
@@ -31,7 +30,6 @@ export {
   Slider,
   Header,
   Footer,
-  Sidebar1,
+  Sidebar,
   DashboardDesignRowbagOne,
-  Header2
 };
