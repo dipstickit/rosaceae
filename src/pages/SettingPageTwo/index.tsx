@@ -4,6 +4,7 @@ import HeaderAdmin from "../../components/HeaderAdmin";
 import Sidebar from "../../components/Sidebar";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
+import { Link } from "react-router-dom";
 
 const validationSchema = Yup.object({
   price: Yup.string().required("Tiền tệ không được để trống"),
@@ -31,13 +32,15 @@ export default function SettingPageTwoPage() {
                 <div className="self-stretch">
                   <div className="flex flex-col items-start">
                     <div className="w-[49%] ml-4 flex flex-wrap justify-between gap-5 md:ml-0 md:w-full">
-                      <Text
-                        size="3xl"
-                        as="p"
-                        className="self-end !font-medium !text-indigo-300_03"
-                      >
-                        Chỉnh sửa thông tin cá nhân
-                      </Text>
+                      <Link to="/settingpageOne">
+                        <Text
+                          size="3xl"
+                          as="p"
+                          className="self-end !font-medium !text-indigo-300_03"
+                        >
+                          Chỉnh sửa thông tin cá nhân
+                        </Text>
+                      </Link>
                       <Text
                         size="3xl"
                         as="p"
@@ -45,13 +48,15 @@ export default function SettingPageTwoPage() {
                       >
                         Preferences
                       </Text>
-                      <Text
-                        size="3xl"
-                        as="p"
-                        className="self-start !font-medium !text-indigo-300_03"
-                      >
-                        Bảo mật
-                      </Text>
+                      <Link to="/settingpage3">
+                        <Text
+                          size="3xl"
+                          as="p"
+                          className="self-start !font-medium !text-indigo-300_03"
+                        >
+                          Bảo mật
+                        </Text>
+                      </Link>
                     </div>
                     <div className="rounded-tr-[1px] rounded-tl-[1px] w-[10%] h-[3px] self-center bg-indigo-A700 mr-[518px]" />
                     <div className="h-px w-full self-stretch bg-blue_gray-50" />

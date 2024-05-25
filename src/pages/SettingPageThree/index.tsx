@@ -4,6 +4,7 @@ import HeaderAdmin from "../../components/HeaderAdmin";
 import Sidebar from "../../components/Sidebar";
 import { Formik, ErrorMessage, Form } from "formik";
 import * as Yup from "yup";
+import { Link } from "react-router-dom";
 
 const validationSchema = Yup.object().shape({
   currentPassword: Yup.string().required("Mật khẩu hiện tại là bắt buộc"),
@@ -32,20 +33,23 @@ export default function SettingPageThreePage() {
                 <div className="flex flex-col">
                   <div className="w-[49%] ml-4 flex items-start justify-between gap-5 md:ml-0 md:w-full sm:flex-col">
                     <div className="w-[71%] flex flex-wrap items-start justify-between gap-5 sm:w-full">
-                      <Text
-                        size="3xl"
-                        as="p"
-                        className="mt-[5px] !font-medium !text-indigo-300_03"
-                      >
-                        Chỉnh sửa thông tin cá nhân
-                      </Text>
-                      <Text
-                        size="3xl"
-                        as="p"
-                        className="!font-medium !text-indigo-300_03"
-                      >
-                        Preferences
-                      </Text>
+                      <Link to="/settingpageOne">
+                        <Text
+                          size="3xl"
+                          as="p"
+                          className="self-end !font-medium !text-indigo-300_03"
+                        >
+                          Chỉnh sửa thông tin cá nhân
+                        </Text>
+                      </Link>
+                      <Link to="/settingpage2">
+                        <Text
+                          as="p"
+                          className="!font-medium !text-indigo-300_03"
+                        >
+                          Preferences
+                        </Text>
+                      </Link>
                     </div>
                     <Text
                       size="3xl"
@@ -124,7 +128,7 @@ export default function SettingPageThreePage() {
                               name="newPassword"
                               type="password"
                               placeholder="**********"
-                              onChange={props.handleChange('newPassword')}
+                              onChange={props.handleChange("newPassword")}
                               onBlur={props.handleBlur}
                               value={props.values.newPassword}
                               className="!rounded-[15px] self-stretch border border-solid border-teal-50 sm:pr-5"

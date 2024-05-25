@@ -4,6 +4,7 @@ import HeaderAdmin from "../../components/HeaderAdmin";
 import Sidebar from "../../components/Sidebar";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
+import { Link } from "react-router-dom";
 
 const dropDownOptions = [
   { label: "Option1", value: "option1" },
@@ -45,20 +46,29 @@ export default function SettingPageOnePage() {
                   <div className="flex flex-col items-start">
                     <div className="ml-[15px] w-[52%] flex flex-wrap justify-between gap-5 md:ml-0 md:w-full">
                       <Text
+                        size="3xl"
                         as="p"
-                        className="self-end !font-medium !text-indigo-A700"
+                        className="self-end !font-medium !text-indigo-300_03"
                       >
                         Chỉnh sửa thông tin cá nhân
                       </Text>
-                      <Text as="p" className="!font-medium !text-indigo-300_03">
-                        Preferences
-                      </Text>
-                      <Text
-                        as="p"
-                        className="self-start !font-medium !text-indigo-300_03"
-                      >
-                        Bảo mật
-                      </Text>
+                      <Link to="/settingpage2">
+                        <Text
+                          as="p"
+                          className="!font-medium !text-indigo-300_03"
+                        >
+                          Preferences
+                        </Text>
+                      </Link>
+                      <Link to="/settingpage3">
+                        <Text
+                          size="3xl"
+                          as="p"
+                          className="self-start !font-medium !text-indigo-300_03"
+                        >
+                          Bảo mật
+                        </Text>
+                      </Link>
                     </div>
                     <div className="z-[1] rounded-tr-[1px] rounded-tl-[1px] ml-[60px] mt-[5px] w-[12%] h-[2px] relative bg-indigo-A700 md:ml-0" />
                     <div className="h-px w-full self-stretch bg-blue_gray-50" />
