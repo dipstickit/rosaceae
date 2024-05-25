@@ -95,7 +95,7 @@ export default function LoginPage() {
                   type="email"
                   name="email"
                   placeholder={`example@gmail.com`}
-                  onChange={formik.handleChange}
+                  onChange={formik.handleChange("email")}
                   onBlur={formik.handleBlur}
                   className="self-stretch rounded-[40px] border-2 border-solid border-black-900 font-nunito tracking-[2.40px] !text-black-900 sm:px-5"
                 />
@@ -126,7 +126,7 @@ export default function LoginPage() {
                   type="password"
                   name="password"
                   placeholder={`********`}
-                  onChange={formik.handleChange}
+                  onChange={formik.handleChange("password")}
                   onBlur={formik.handleBlur}
                   className="self-stretch rounded-[40px] border-2 border-solid border-black-900 font-nunito tracking-[2.40px] !text-black-900 sm:px-5"
                 />
