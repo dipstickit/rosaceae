@@ -53,12 +53,12 @@ export default function Header({ ...props }: Props) {
             </Link>
           </li>
           <li>
-            <Link to="/thong-tin">
+            <Link to="/aboutus">
               <Heading as="p">Thông Tin</Heading>
             </Link>
           </li>
           <li>
-            <Link to="/lien-he">
+            <Link to="/contact">
               <Heading as="p">Liên Hệ</Heading>
             </Link>
           </li>

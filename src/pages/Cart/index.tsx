@@ -32,7 +32,7 @@ export default function CartPage() {
         />
       </Helmet>
       <div className="flex w-full flex-col bg-white-A700">
-        <Header className="ml-[12rem]" />
+        <Header />
         <div className="max-w-[1846px] mt-[20px] mx-auto flex w-full items-start gap-12 md:flex-col md:p-5">
           <Item className="flex-1 mt-10" data={cartData} />
           <OrderBill />

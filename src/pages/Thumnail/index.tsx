@@ -10,7 +10,7 @@ export default function ThumnailPage() {
           content="Web site created using create-react-app"
         />
       </Helmet>
-      <Header className="ml-[12rem]" />
+      <Header />
       <div className="w-full bg-white-A700 pt-[107px] md:pt-5">
         <Img
           src="images/img_rectangle_1.png"

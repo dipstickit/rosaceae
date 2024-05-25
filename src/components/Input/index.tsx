@@ -38,6 +38,7 @@ type InputProps = Omit<
     prefix: React.ReactNode;
     suffix: React.ReactNode;
     onChange: (value: string) => void;
+    onBlur: (value: string) => void;
     shape: keyof typeof shapes;
     variant: keyof typeof variants;
     size: keyof typeof sizes;
@@ -57,6 +58,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
       prefix,
       suffix,
       onChange,
+      onBlur,
       value,
       shape,
       variant = "fill",
@@ -84,12 +86,13 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
         >
           {!!prefix && prefix}
           <input
-            ref={ref}
-            type={type}
             name={name}
+            type={type}
             value={value}
+            onBlur={onBlur}
             onChange={handleChange}
             placeholder={placeholder}
+            ref={ref}
             {...restProps}
           />
           {!!suffix && suffix}

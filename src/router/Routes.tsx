@@ -6,7 +6,7 @@ import Login from "../pages/Login";
 import HomePage from "../pages/HomePage";
 import MakeupServicePage from "../pages/MakeupServicePage";
 import ForgotPasswordPage from "../pages/Forgotpassword";
-import ServicePage from "../pages/Frame2593";
+import ServicePage from "../pages/ServiceP";
 import SpaPage from "../pages/Spa";
 import SpaDetailPage from "../pages/SpaDetail";
 import SpafeedbackPage from "../pages/Spafeedback";
@@ -21,6 +21,8 @@ import SettingPageOnePage from "../pages/SettingPageOne";
 import SettingPageTwoPage from "../pages/SettingPageTwo";
 import SettingPageThreePage from "../pages/SettingPageThree";
 import NotificationsupdatepasswordPage from "../pages/Notificationsupdatepassword";
+import DashboardDesignPage from "../pages/DashboardDesign";
+import ReportrevenuePage from "../pages/Reportrevenue";
 
 const RosaceaeRoutes = () => {
   const element = useRoutes([
@@ -32,7 +34,7 @@ const RosaceaeRoutes = () => {
     { path: "home", element: <HomePage /> },
     { path: "makeupservicepage", element: <MakeupServicePage /> },
     { path: "forgotpassword", element: <ForgotPasswordPage /> },
-    { path: "frame2593", element: <ServicePage /> },
+    { path: "service", element: <ServicePage /> },
     { path: "spa", element: <SpaPage /> },
     { path: "spadetail", element: <SpaDetailPage /> },
     { path: "spafeedback", element: <SpafeedbackPage /> },
@@ -43,10 +45,14 @@ const RosaceaeRoutes = () => {
     { path: "payment", element: <PaymentPage /> },
     { path: "aboutus", element: <AboutUsPage /> },
     { path: "contact", element: <ContactPage /> },
-    { path: "noti", element: <NotificationsupdatepasswordPage /> },
+    // { path: "noti", element: <NotificationsupdatepasswordPage /> },
     { path: "settingpageOne", element: <SettingPageOnePage /> },
     { path: "settingpage2", element: <SettingPageTwoPage /> },
     { path: "settingpage3", element: <SettingPageThreePage /> },
+    { path: "dashboard", element: <DashboardDesignPage /> },
+    { path: "reportave", element: <ReportrevenuePage /> },
+
+
 
 
   ]);

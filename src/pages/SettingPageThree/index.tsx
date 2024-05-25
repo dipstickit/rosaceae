@@ -2,7 +2,7 @@ import { Helmet } from "react-helmet";
 import { Button, Input, Text, Img, Switch } from "../../components";
 import HeaderAdmin from "../../components/HeaderAdmin";
 import Sidebar from "../../components/Sidebar";
-import { Formik, Form, Field, ErrorMessage } from "formik";
+import { Formik, ErrorMessage, Form } from "formik";
 import * as Yup from "yup";
 
 const validationSchema = Yup.object().shape({
@@ -87,50 +87,64 @@ export default function SettingPageThreePage() {
                         actions.setSubmitting(false);
                       }}
                     >
-                      <Form className="flex flex-col self-stretch md:flex-col">
-                        <div className="w-[49%] mt-3.5 flex flex-col items-start gap-2.5 md:w-full">
-                          <Text size="3xl" as="p" className="!text-gray-900_01">
-                            Mật khẩu hiện tại
-                          </Text>
-                          <Field
-                            name="currentPassword"
-                            type="password"
-                            component={Input}
-                            placeholder="**********"
-                            className="!rounded-[15px] self-stretch border border-solid border-teal-50 sm:pr-5"
-                          />
-                          <ErrorMessage
-                            name="currentPassword"
-                            component="div"
-                            className="text-red-500"
-                          />
-                        </div>
-                        <div className="mt-[21px] w-[49%] flex flex-col items-start gap-2.5 md:w-full">
-                          <Text size="3xl" as="p" className="!text-gray-900_01">
-                            Mật khẩu mới
-                          </Text>
-                          <Field
-                            name="newPassword"
-                            type="password"
-                            as={Input}
-                            placeholder="**********"
-                            className="!rounded-[15px] self-stretch border border-solid border-teal-50 sm:pr-5"
-                          />
-                          <ErrorMessage
-                            name="newPassword"
-                            component="div"
-                            className="text-red-500"
-                          />
-                        </div>
-                        <Button
-                          type="submit"
-                          color="indigo_A700"
-                          size="4xl"
-                          className="rounded-[15px] min-w-[190px] mt-[30px] self-end font-medium sm:px-5"
-                        >
-                          Lưu
-                        </Button>
-                      </Form>
+                      {(props) => (
+                        <Form className="flex flex-col self-stretch md:flex-col">
+                          <div className="w-[49%] mt-3.5 flex flex-col items-start gap-2.5 md:w-full">
+                            <Text
+                              size="3xl"
+                              as="p"
+                              className="!text-gray-900_01"
+                            >
+                              Mật khẩu hiện tại
+                            </Text>
+                            <Input
+                              name="currentPassword"
+                              type="password"
+                              placeholder="**********"
+                              onChange={props.handleChange}
+                              onBlur={props.handleBlur}
+                              value={props.values.currentPassword}
+                              className="!rounded-[15px] self-stretch border border-solid border-teal-50 sm:pr-5"
+                            />
+                            <ErrorMessage
+                              name="currentPassword"
+                              component="div"
+                              className="text-red-500"
+                            />
+                          </div>
+                          <div className="mt-[21px] w-[49%] flex flex-col items-start gap-2.5 md:w-full">
+                            <Text
+                              size="3xl"
+                              as="p"
+                              className="!text-gray-900_01"
+                            >
+                              Mật khẩu mới
+                            </Text>
+                            <Input
+                              name="newPassword"
+                              type="password"
+                              placeholder="**********"
+                              onChange={props.handleChange('newPassword')}
+                              onBlur={props.handleBlur}
+                              value={props.values.newPassword}
+                              className="!rounded-[15px] self-stretch border border-solid border-teal-50 sm:pr-5"
+                            />
+                            <ErrorMessage
+                              name="newPassword"
+                              component="div"
+                              className="text-red-500"
+                            />
+                          </div>
+                          <Button
+                            type="submit"
+                            color="indigo_A700"
+                            size="4xl"
+                            className="rounded-[15px] min-w-[190px] mt-[30px] self-end font-medium sm:px-5"
+                          >
+                            Lưu
+                          </Button>
+                        </Form>
+                      )}
                     </Formik>
                   </div>
                 </div>
