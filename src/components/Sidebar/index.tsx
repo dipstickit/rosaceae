@@ -2,6 +2,7 @@ import React from "react";
 import { MenuItem, Menu, Sidebar, sidebarClasses } from "react-pro-sidebar";
 import { Img } from "../Img";
 import { Heading } from "../Heading";
+import { Link } from "react-router-dom";
 interface Props {
   className?: string;
 }
@@ -48,17 +49,19 @@ export default function Sidebar1({ ...props }: Props) {
         rootStyles={{ ["&>ul"]: { gap: "0.37px" } }}
         className="flex w-full flex-col self-stretch"
       >
-        <MenuItem
-          icon={
-            <Img
-              src="images/img_home.svg"
-              alt="home"
-              className="w-[25px] h-[25px]"
-            />
-          }
-        >
-          Dashboard
-        </MenuItem>
+        <Link to="/dashboard">
+          <MenuItem
+            icon={
+              <Img
+                src="images/img_home.svg"
+                alt="home"
+                className="w-[25px] h-[25px]"
+              />
+            }
+          >
+            Dashboard
+          </MenuItem>
+        </Link>
         <MenuItem
           icon={
             <Img
@@ -114,17 +117,19 @@ export default function Sidebar1({ ...props }: Props) {
         >
           Nội dung
         </MenuItem>
-        <MenuItem
-          icon={
-            <Img
-              src="images/img_mdi_cog_outline.svg"
-              alt="mdicogoutline"
-              className="w-[32px] h-[32px]"
-            />
-          }
-        >
-          Cài đặt
-        </MenuItem>
+        <Link to="/settingpageOne">
+          <MenuItem
+            icon={
+              <Img
+                src="images/img_mdi_cog_outline.svg"
+                alt="mdicogoutline"
+                className="w-[32px] h-[32px]"
+              />
+            }
+          >
+            Cài đặt
+          </MenuItem>
+        </Link>
         <MenuItem
           icon={
             <Img
