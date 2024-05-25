@@ -44,7 +44,7 @@ const SpaPage: React.FC = () => {
           content="Web site created using create-react-app"
         />
       </Helmet>
-      <Header className="ml-[12rem]"/>
+      <Header/>
       <div className="flex w-full flex-col items-center bg-white-A700">
         <div className="max-w-[1331px] gap-[33px] mt-[19px] mx-auto flex w-full flex-col items-center md:p-5">
           <div className="gap-[46px] flex flex-col self-stretch">

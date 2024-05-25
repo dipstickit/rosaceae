@@ -15,7 +15,7 @@ export default function ProfilePage() {
           content="Web site created using create-react-app"
         />
       </Helmet>
-      <Header className="ml-[12rem]" />
+      <Header />
       <div className="flex w-full flex-col items-center bg-white-A700">
         <div className="max-w-[1200px] px-[21px] mt-[30px] mx-auto w-full md:px-5 sm:px-5">
           <div className="flex flex-col items-center">

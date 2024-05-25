@@ -39,7 +39,7 @@ export default function ServicePage() {
       </Helmet>
       <div className="w-full bg-white-A700">
         <div>
-          <Header className="ml-[12rem]" />
+          <Header />
         </div>
         <div className="flex flex-col items-end">
           <div className="mr-[47px] mt-[89px] w-[91%] flex flex-col md:mr-0 md:w-full md:p-5">

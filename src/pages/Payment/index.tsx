@@ -27,7 +27,7 @@ export default function PaymentPage() {
         <meta name="description" content="Web site created using create-react-app" />
       </Helmet>
       <div className="w-full">
-        <Header className="w-full" />
+        <Header />
       </div>
       <div className="pt-[19px] flex w-full flex-col items-center bg-white-A700">
         <div className="max-w-[1782px] mt-[95px] mx-auto flex w-full items-start justify-between gap-5 md:flex-col md:p-5">

@@ -1,5 +1,6 @@
 import React from "react";
 import { Button, Input, Img, Text } from "../..";
+import { Link } from "react-router-dom";
 
 interface Props {
   className?: string;
@@ -78,9 +79,11 @@ const OrderBill: React.FC<Props> = ({
             suffix={<Img src="images/img_trailing_icon.svg" alt="trailing icon" className="h-[24px] w-[24px]" />}
           />
         </div>
+        <Link to="/address" className="w-full block">
         <Button color="black_900" shape="round" className="w-full">
           Tiến hành thanh toán
         </Button>
+        </Link>
       </div>
     </div>
   );

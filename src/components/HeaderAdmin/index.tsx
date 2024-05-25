@@ -7,7 +7,7 @@ interface Props {
   name?: string;
 }
 export default function HeaderAdmin({
-  avatar = "images/img_rectangle_1393.png",
+  avatar = "images/img_image_1.png",
   name = "Musfiq",
   ...props
 }: Props) {
