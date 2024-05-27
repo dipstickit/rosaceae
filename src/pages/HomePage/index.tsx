@@ -21,12 +21,12 @@ export default function HomePage() {
         />
       </Helmet>
       <div className="flex w-full flex-col bg-white-A700">
-        <Header className="ml-[12rem]" />
+        <Header />
         <div className="bg-[url(/public/images/img_group_1.png)] pb-[212px] pt-[146px] mt-[38px] h-[500px] flex items-center bg-cover bg-no-repeat px-14 md:h-auto md:p-5">
           <Heading
             size="15xl"
             as="h1"
-            className="!font-comfortaa8 !text-white-A700 ml-[2rem]"
+            className="!font-comfortaa8 mx-auto !text-white-A700"
           >
             Tái tạo bề mặt da bằng laser
           </Heading>

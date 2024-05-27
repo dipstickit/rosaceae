@@ -1,25 +1,27 @@
 import { Helmet } from "react-helmet";
 import { Img, Button, Heading, Text } from "../../components";
 import Footer from "../../components/Footer";
-import Header2 from "../../components/Header2";
+import Header from "../../components/Header";
 import ProductCard from "../../components/Card/ProductCard";
+import { Link } from "react-router-dom";
 
 interface ProductData {
-  trangim: string;
-  trangimbasic: string;
+  img: string;
+  title: string;
 }
 const data: ProductData[] = [
   {
-    trangim: "images/img_rectangle_6003.png",
-    trangimbasic: "Trang điểm basic",
+    img: "images/img_rectangle_6003.png",
+    title: "Trang điểm basic",
   },
   {
-    trangim: "images/img_rectangle_6004.png",
-    trangimbasic: "Trang điểm douyin",
+    img: "images/img_rectangle_6004.png",
+    title: "Trang điểm douyin",
+
   },
   {
-    trangim: "images/img_rectangle_6005.png",
-    trangimbasic: "Trang điểm cô dâu",
+    img: "images/img_rectangle_6005.png",
+    title: "Trang điểm cô dâu",
   },
 ];
 
@@ -33,7 +35,7 @@ export default function MakeupServicePagePage() {
           content="Web site created using create-react-app"
         />
       </Helmet>
-      <Header2  className="ml-[12rem]"/>
+      <Header/>
       <div className="max-w-[1353px] mt-[46px] mx-auto flex w-full flex-col items-center md:p-5">
         <div className="h-[637px] relative self-stretch">
           <Text
@@ -83,12 +85,14 @@ export default function MakeupServicePagePage() {
                 Trang điểm hàng ngày
               </Heading>
             </div>
+            <Link to="/service">
             <Button
               shape="round"
               className="min-w-[210px] mb-2.5 self-end !rounded-sm border border-solid border-gray-900_06 font-montserrat13 sm:px-5"
             >
               Khám phá tất cả
             </Button>
+            </Link>
           </div>
           <div className="gap-[130px] w-[96%] flex md:w-full md:flex-col">
             {data.map((item, index) => (
@@ -152,7 +156,7 @@ export default function MakeupServicePagePage() {
                 <ProductCard
                   key={"makeupservice17" + index}
                   className="gap-[34px] items-center md:w-full"
-                  {...item} // Spread the item object as props
+                  {...item}
                 />
               ))}
             </div>

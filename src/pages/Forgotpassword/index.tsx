@@ -1,5 +1,5 @@
 import { Helmet } from "react-helmet";
-import { Img, Text, Button, Heading, Input } from "../../components";
+import { Img, Text, Button, Heading } from "../../components";
 import Header from "../../components/Header";
 import { UserApi } from "../../api/Api";
 import { useState } from "react";
@@ -20,7 +20,7 @@ export default function ForgotPasswordPage() {
           content="Web site created using create-react-app"
         />
       </Helmet>
-      <Header className="ml-[12rem]" />
+      <Header />
       <div className="flex w-full items-center justify-between gap-5 bg-white-A700 pb-[5px] pl-[139px] pt-[110px] md:flex-col md:pl-5 md:pt-5">
         <div className="flex w-[36%] flex-col items-start md:w-full">
           <Heading

@@ -1,7 +1,7 @@
 import { Helmet } from "react-helmet";
 import { Heading, Img } from "../../components";
 import Footer from "../../components/Footer";
-import Frame2593Stackxem from "../../components/Frame2593Stackxem";
+import ServiceCard from "../../components/ServiceCard";
 import Header from "../../components/Header";
 
 interface Props {
@@ -27,7 +27,7 @@ const data: Props[] = [
     titletext: "Mèo beauty  - Nguyễn Thị Minh Khai, Q1",
   },
 ];
-export default function Frame2593Page() {
+export default function ServicePage() {
   return (
     <>
       <Helmet>
@@ -39,7 +39,7 @@ export default function Frame2593Page() {
       </Helmet>
       <div className="w-full bg-white-A700">
         <div>
-          <Header className="ml-[12rem]" />
+          <Header />
         </div>
         <div className="flex flex-col items-end">
           <div className="mr-[47px] mt-[89px] w-[91%] flex flex-col md:mr-0 md:w-full md:p-5">
@@ -59,7 +59,7 @@ export default function Frame2593Page() {
             </div>
             <div className="gap-[53px] w-[88%] mt-11 flex flex-col md:w-full mb-[10rem]">
               {data.map((item, index) => (
-                <Frame2593Stackxem
+                <ServiceCard
                   userimage={item.userimage}
                   buttontext={item.buttontext}
                   titletext={item.titletext}

@@ -17,7 +17,7 @@ export default function Header({ ...props }: Props) {
       <Img
         src="images/img_header_logo.png"
         alt="headerlogo"
-        className="h-[45px] w-[54px] object-contain"
+        className="h-[45px] w-[54px] object-contain ml-[12rem]"
       />
       </Link>
       <div className="mx-auto flex w-full max-w-[1079px] items-center justify-between gap-5 md:flex-col">
@@ -53,12 +53,12 @@ export default function Header({ ...props }: Props) {
             </Link>
           </li>
           <li>
-            <Link to="/thong-tin">
+            <Link to="/aboutus">
               <Heading as="p">Thông Tin</Heading>
             </Link>
           </li>
           <li>
-            <Link to="/lien-he">
+            <Link to="/contact">
               <Heading as="p">Liên Hệ</Heading>
             </Link>
           </li>

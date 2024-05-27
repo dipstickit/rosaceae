@@ -202,6 +202,17 @@ export default {
         volkhov: "Volkhov",
         sura: "Sura",
         roboto: "Roboto",
+        applesystem:"-apple-system",
+        BlinkMacSystemFont:"BlinkMacSystemFont",
+        SegoeUI:"Segoe UI",
+        Helvetica:"Helvetica",
+        Arial:"Arial",
+        sansserif:"sans-serif",
+        AppleColorEmoji:"Apple Color Emoji",
+        SegoeUIEmoji:"Segoe UI Emoji"
+
+
+
       },
       textShadow: { ts: "0px 5px 13px #ffffff66" },
     },
