@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { Button } from "../Button";
 import { Heading } from "../Heading";
 import { Img } from "../Img";
@@ -8,7 +9,7 @@ interface Props {
   buttontext?: string;
   titletext?: string;
 }
-export default function Frame2593Stackxem({
+export default function ServiceCard({
   userimage = "",
   buttontext = "",
   titletext = "",
@@ -29,6 +30,7 @@ export default function Frame2593Stackxem({
           alt="image"
           className="h-[273px] w-[46%] rounded-[51px] object-cover sm:w-full"
         />
+        <Link to="/spa">
         <Button
           color="blue_gray_100_02"
           size="12xl"
@@ -36,6 +38,7 @@ export default function Frame2593Stackxem({
         >
           {buttontext}
         </Button>
+        </Link>
       </div>
     </div>
   );

@@ -2,9 +2,7 @@ import { Helmet } from "react-helmet";
 import { Text, Img, Heading, CheckBox } from "../../components";
 import Footer from "../../components/Footer";
 import Header from "../../components/Header";
-import Header2 from "../../components/Header2";
 import Home from "../../components/Home";
-import { useSelector } from "react-redux";
 
 const data = [
   { userimage: "images/img_woman_having_be.png" },
@@ -13,15 +11,6 @@ const data = [
 ];
 
 export default function HomePage() {
-  let accessToken = useSelector((state: any) => state.auth.accessToken)
-  const userInformation = useSelector((state: any) => state.userInfo.userInfo)
-  // accessToken = accessToken === null ? accessToken : localStorage.getItem('access-token')
-  console.log(userInformation)
-  if (accessToken === null) {
-    if (localStorage.getItem('access-token') !== null)
-      accessToken = localStorage.getItem('access-token')
-  }
-
   return (
     <>
       <Helmet>
@@ -32,14 +21,12 @@ export default function HomePage() {
         />
       </Helmet>
       <div className="flex w-full flex-col bg-white-A700">
-        {
-          accessToken !== null && userInformation !== null ? <Header2 className="ml-[12rem]" userName={userInformation.accountName} /> : <Header className="ml-[12rem]" />
-        }
+        <Header className="ml-[12rem]" />
         <div className="bg-[url(/public/images/img_group_1.png)] pb-[212px] pt-[146px] mt-[38px] h-[500px] flex items-center bg-cover bg-no-repeat px-14 md:h-auto md:p-5">
           <Heading
             size="15xl"
             as="h1"
-            className="!font-comfortaa8 !text-white-A700 ml-[2rem]"
+            className="!font-comfortaa8 mx-auto !text-white-A700"
           >
             Tái tạo bề mặt da bằng laser
           </Heading>

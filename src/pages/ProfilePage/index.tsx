@@ -1,164 +1,142 @@
+import React from "react";
 import { Helmet } from "react-helmet";
-import { Text, Img, Heading, CheckBox, Button } from "../../components";
-import Header2 from "../../components/Header2";
-import { useSelector, useDispatch } from "react-redux";
+import { Text, Img, Heading } from "../../components";
+import Footer from "../../components/Footer";
+import Header from "../../components/Header";
+import ProfileSection from "../../components/ProfileSection";
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { profileEditValidateSchema } from "../../validates/ValidateSchema";
-import { useEffect, useState, ChangeEvent } from "react";
-import { useFormik } from "formik";
 
 export default function ProfilePage() {
-    let accessToken = useSelector((state: any) => state.auth.accessToken)
-    let userInformation: UserInfo = useSelector((state: any) => state.userInfo.userInfo)
-    const navigate = useNavigate();
-    const dispatch = useDispatch();
-    const [userInfo, setUserInfo] = useState<UserInfo>({
-        accountName: '',
-        email: '',
-        phone: '',
-        address: ''
-    })
-
-    const formik = useFormik({
-        initialValues: {
-            accountName: '',
-            email: '',
-            phone: '',
-            address: ''
-        },
-        validationSchema: profileEditValidateSchema,
-        onSubmit: (values, { resetForm }) => {
-            console.log(values);
-        }
-    });
-    useEffect(() => {
-        console.log(userInformation)
-        if (accessToken === null) {
-            if (localStorage.getItem('access-token') !== null) {
-                accessToken = localStorage.getItem('access-token')
-                userInformation = JSON.parse(localStorage.getItem('user-info')!)
-                console.log(userInformation)
-            }
-            else {
-                navigate('/login')
-            }
-        }
-    }, [])
-
-    const handleInput = (e: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
-        setUserInfo({
-            ...userInfo,
-            [e.target.name]: e.target.value.trim()
-        })
+  let accessToken = useSelector((state: any) => state.auth.accessToken)
+  let userInformation = useSelector((state: any) => state.userInfo.userInfo)
+  const navigate = useNavigate()
+  console.log(userInformation)
+  if (accessToken === null) {
+    if (localStorage.getItem('access-token') !== null) {
+      accessToken = localStorage.getItem('access-token')
+      userInformation = JSON.parse(localStorage.getItem('user-info')!)
     }
-
-    // accessToken = accessToken === null ? accessToken : localStorage.getItem('access-token')
-
-    return (
-        <>
-            <Helmet>
-                <title>Rosaceae</title>
-                <meta
-                    name="description"
-                    content="Web site created using create-react-app"
-                />
-            </Helmet>
-            <div className="flex w-full flex-col bg-white-A700">
-                <Header2 className="ml-[12rem]" userName={userInformation.accountName} />
+    else {
+      navigate("/login")
+    }
+  }
+  return (
+    <>
+      <Helmet>
+        <title>Rosaceae</title>
+        <meta
+          name="description"
+          content="Web site created using create-react-app"
+        />
+      </Helmet>
+      <Header />
+      <div className="flex w-full flex-col items-center bg-white-A700">
+        <div className="max-w-[1200px] px-[21px] mt-[30px] mx-auto w-full md:px-5 sm:px-5">
+          <div className="flex flex-col items-center">
+            <div className="gap-2 w-1/5 flex flex-col items-center md:w-full">
+              <Img
+                src="images/img_profile_circle_svgrepo_com.svg"
+                alt="profile"
+                className="h-48 w-48 rounded-full"
+              />
+              <Heading
+                size="2xl"
+                as="h1"
+                className="!font-manrope !font-semibold !text-gray-900"
+              >
+                {userInformation.accountName}
+              </Heading>
+              <Text
+                size="xl"
+                as="p"
+                className="!font-manrope !font-medium !text-gray-600"
+              >
+                Email: {userInformation.email}
+              </Text>
             </div>
-            <div className="mt-[61px] flex flex-col gap-[43px] self-stretch">
-                <div className="flex flex-col gap-[35px]">
-                    <div className="flex flex-col items-start gap-3.5">
-                        <Heading
-                            size="4xl"
-                            as="h2"
-                            className="!font-opensans !font-semibold tracking-[2.80px] !text-blue_gray-800_01"
-                        >
-                            Username
-                        </Heading>
-                        <input
-                            name="accountName"
-                            type="text"
-                            value={userInformation.accountName}
-                            className="self-stretch rounded-[40px] px-2 py-3 border-2 border-solid border-black-900 font-nunito tracking-[2.40px] !text-black-900 sm:px-5"
-                            onChange={e => { formik.handleChange(e); handleInput(e) }}
-                            onBlur={formik.handleBlur}
-                        />
-                        {formik.touched.accountName && formik.errors.accountName && (
-                            <div className='flex-1 flex items-center mt-2 text-red-500 italic text-sm'>{formik.errors.accountName}</div>
-                        )}
-                    </div>
-                    <div className="flex flex-col items-start gap-3.5">
-                        <Heading
-                            size="4xl"
-                            as="h2"
-                            className="!font-opensans !font-semibold tracking-[2.80px] !text-blue_gray-800_01"
-                        >
-                            Email
-                        </Heading>
-                        <input
-                            name="email"
-                            type="text"
-                            value={userInformation.email}
-                            className="self-stretch rounded-[40px] px-2 py-3 border-2 border-solid border-black-900 font-nunito tracking-[2.40px] !text-black-900 sm:px-5"
-                            onChange={e => { formik.handleChange(e); handleInput(e) }}
-                            onBlur={formik.handleBlur}
-                        />
-                        {formik.touched.email && formik.errors.email && (
-                            <div className='flex-1 flex items-center mt-2 text-red-500 italic text-sm'>{formik.errors.email}</div>
-                        )}
-                    </div>
-                    <div className="flex flex-col items-start gap-3.5">
-                        <Heading
-                            size="4xl"
-                            as="h2"
-                            className="!font-opensans !font-semibold tracking-[2.80px] !text-blue_gray-800_01"
-                        >
-                            Phone
-                        </Heading>
-                        <input
-                            name="phone"
-                            type="text"
-                            value={userInformation.phone}
-                            className="self-stretch rounded-[40px] px-2 py-3 border-2 border-solid border-black-900 font-nunito tracking-[2.40px] !text-black-900 sm:px-5"
-                            onChange={e => { formik.handleChange(e); handleInput(e) }}
-                            onBlur={formik.handleBlur}
-                        />
-                        {formik.touched.phone && formik.errors.phone && (
-                            <div className='flex-1 flex items-center mt-2 text-red-500 italic text-sm'>{formik.errors.phone}</div>
-                        )}
-                    </div>
-                    <div className="flex flex-col items-start gap-3.5">
-                        <Heading
-                            size="4xl"
-                            as="h2"
-                            className="!font-opensans !font-semibold tracking-[2.80px] !text-blue_gray-800_01"
-                        >
-                            Address
-                        </Heading>
-                        <input
-                            name="address"
-                            type="text"
-                            value={userInformation.address}
-                            className="self-stretch rounded-[40px] px-2 py-3 border-2 border-solid border-black-900 font-nunito tracking-[2.40px] !text-black-900 sm:px-5"
-                            onChange={e => { formik.handleChange(e); handleInput(e) }}
-                            onBlur={formik.handleBlur}
-                        />
-                        {formik.touched.address && formik.errors.address && (
-                            <div className='flex-1 flex items-center mt-2 text-red-500 italic text-sm'>{formik.errors.address}</div>
-                        )}
-                    </div>
+            <div className="flex items-center mt-8 w-1/2 gap-6 md:w-full md:flex-row md:justify-center">
+              <div className="flex-1 rounded-lg flex items-center gap-6 border border-gray-300 bg-white p-6 shadow-md">
+                <div className="flex items-center justify-center bg-gray-200 rounded-full w-12 h-12">
+                  <Img
+                    src="images/img_thumbs_up.svg"
+                    alt="silver"
+                    className="h-6 w-6"
+                  />
                 </div>
-                <Button
-                    color="black_900"
-                    size="11xl"
-                    className="w-full rounded-[40px] font-nunito font-extrabold tracking-[2.80px] sm:px-5"
-                    onClick={() => console.log(userInfo)}
+                <Heading
+                  size="md"
+                  as="h2"
+                  className="text-lg font-semibold text-gray-900"
                 >
-                    Save
-                </Button>
+                  Silver
+                </Heading>
+              </div>
+              <div className="flex-1 rounded-lg flex items-start gap-4 border border-gray-300 bg-white p-6 shadow-md">
+                <div className="flex items-center gap-2 bg-gray-200 rounded-full p-3 ">
+                  <Text
+                    size="xl"
+                    as="p"
+                    className="w-6 h-6 flex items-center justify-center bg-black text-gray-950 rounded-full"
+                  >
+                    0
+                  </Text>
+                  <Img
+                    src="images/img_arrow_up.svg"
+                    alt="arrowup"
+                    className="h-6 w-6"
+                  />
+                </div>
+                <div className="flex flex-col items-start">
+                  <Heading
+                    size="xs"
+                    as="h3"
+                    className="text-base font-semibold text-gray-900"
+                  >
+                    Ưu đãi
+                  </Heading>
+                  <Text size="md" as="p" className="text-gray-600">
+                    Dùng ngay
+                  </Text>
+                </div>
+              </div>
             </div>
-        </>
-    )
-
+            <div className="my-8 self-stretch">
+              <div className="gap-4 flex flex-col">
+                <ProfileSection
+                  icon="images/img_lock_black_900.svg"
+                  title="Lịch sử mua hàng"
+                />
+                <ProfileSection
+                  icon="images/img_icon_terms_privacy.svg"
+                  title="Quản lý địa chỉ"
+                />
+                <ProfileSection
+                  icon="images/img_icon_terms_privacy.svg"
+                  title="Lịch sử mua hàng"
+                />
+                <ProfileSection
+                  icon="images/img_thumbs_up_gray_300_05.svg"
+                  title="Lịch sử đặt lịch"
+                />
+                <ProfileSection
+                  icon="images/img_user_black_900.svg"
+                  title="Cài đặt"
+                />
+                <ProfileSection
+                  icon="images/img_inbox.svg"
+                  title="Về chúng tôi"
+                />
+                <ProfileSection
+                  icon="images/img_group_248.svg"
+                  title="Điều khoản sử dụng"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <Footer />
+    </>
+  );
 }

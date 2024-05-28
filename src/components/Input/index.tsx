@@ -38,10 +38,12 @@ type InputProps = Omit<
     prefix: React.ReactNode;
     suffix: React.ReactNode;
     onChange: (value: string) => void;
+    onBlur: (value: string) => void;
     shape: keyof typeof shapes;
     variant: keyof typeof variants;
     size: keyof typeof sizes;
     color: string;
+    value: string;
   }>;
 
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
@@ -56,6 +58,8 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
       prefix,
       suffix,
       onChange,
+      onBlur,
+      value,
       shape,
       variant = "fill",
       size = "xs",
@@ -69,26 +73,35 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
     };
     return (
       <>
-        <label
-          className={`${className} flex items-center justify-center cursor-text  ${(shape && shapes[shape]) || ""
-            } ${variants[variant]?.[
-            color as keyof (typeof variants)[typeof variant]
+        <div
+          className={`${className} flex items-center justify-center cursor-text  ${
+            (shape && shapes[shape]) || ""
+          } ${
+            variants[variant]?.[
+              color as keyof (typeof variants)[typeof variant]
             ] ||
             variants[variant] ||
             ""
-            } ${sizes[size] || ""}`}
+          } ${sizes[size] || ""}`}
         >
-          {!!label && label} {!!prefix && prefix}
+          {!!prefix && prefix}
           <input
-            ref={ref}
-            type={type}
             name={name}
+            type={type}
+            value={value}
+            onBlur={onBlur}
             onChange={handleChange}
             placeholder={placeholder}
+            ref={ref}
             {...restProps}
           />
           {!!suffix && suffix}
-        </label>
+        </div>
+        {!!label && (
+          <label htmlFor={name} className="sr-only">
+            {label}
+          </label>
+        )}
       </>
     );
   }

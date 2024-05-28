@@ -2,26 +2,22 @@ import React from "react";
 import { MenuItem, Menu, Sidebar, sidebarClasses } from "react-pro-sidebar";
 import { Img } from "../Img";
 import { Heading } from "../Heading";
+import { Link } from "react-router-dom";
 interface Props {
   className?: string;
 }
 export default function Sidebar1({ ...props }: Props) {
-  const [collapsed, setCollapsed] = React.useState(false);
-  //use this function to collapse/expand the sidebar
-  //function collapseSidebar() {
-  //    setCollapsed(!collapsed)  //}
-
+  const [collapsed] = React.useState(false);
   return (
     <Sidebar
       {...props}
-      width="347px !important"
+      width="300px !important"
       collapsedWidth="80px !important"
       collapsed={collapsed}
       rootStyles={{ [`.${sidebarClasses.container}`]: { gap: 90 } }}
       className={`${props.className} flex flex-col h-screen pt-[49px] gap-[90px] top-0 md:gap-[67px] md:pt-5 md:p-5 sm:gap-[45px] bg-white-A700 !sticky overflow-auto md:hidden`}
     >
       <div className="w-[76%] ml-12 flex gap-5 md:ml-0">
-        {" "}
         <Img
           src="images/img_logo.png"
           alt="logo"
@@ -32,8 +28,7 @@ export default function Sidebar1({ ...props }: Props) {
           as="h3"
           className="sm:text-[26px] md:text-[28px] self-start text-3xl font-semibold !text-blue_gray-900"
         >
-          {" "}
-          Rosaceae{" "}
+          Rosaceae
         </Heading>
       </div>
       <Menu
@@ -54,17 +49,19 @@ export default function Sidebar1({ ...props }: Props) {
         rootStyles={{ ["&>ul"]: { gap: "0.37px" } }}
         className="flex w-full flex-col self-stretch"
       >
-        <MenuItem
-          icon={
-            <Img
-              src="images/img_home.svg"
-              alt="home"
-              className="w-[25px] h-[25px]"
-            />
-          }
-        >
-          Dashboard
-        </MenuItem>{" "}
+        <Link to="/dashboard">
+          <MenuItem
+            icon={
+              <Img
+                src="images/img_home.svg"
+                alt="home"
+                className="w-[25px] h-[25px]"
+              />
+            }
+          >
+            Dashboard
+          </MenuItem>
+        </Link>
         <MenuItem
           icon={
             <Img
@@ -74,8 +71,7 @@ export default function Sidebar1({ ...props }: Props) {
             />
           }
         >
-          {" "}
-          Bảng xếp hạng{" "}
+          Bảng xếp hạng
         </MenuItem>
         <MenuItem
           icon={
@@ -86,7 +82,7 @@ export default function Sidebar1({ ...props }: Props) {
             />
           }
         >
-          Đơn đặt dịch vụ{" "}
+          Đơn đặt dịch vụ
         </MenuItem>
         <MenuItem
           icon={
@@ -97,8 +93,7 @@ export default function Sidebar1({ ...props }: Props) {
             />
           }
         >
-          {" "}
-          Dịch vụ{" "}
+          Dịch vụ
         </MenuItem>
         <MenuItem
           icon={
@@ -109,8 +104,7 @@ export default function Sidebar1({ ...props }: Props) {
             />
           }
         >
-          {" "}
-          Báo cáo doanh thu{" "}
+          Báo cáo doanh thu
         </MenuItem>
         <MenuItem
           icon={
@@ -121,21 +115,21 @@ export default function Sidebar1({ ...props }: Props) {
             />
           }
         >
-          {" "}
-          Nội dung{" "}
+          Nội dung
         </MenuItem>
-        <MenuItem
-          icon={
-            <Img
-              src="images/img_mdi_cog_outline.svg"
-              alt="mdicogoutline"
-              className="w-[32px] h-[32px]"
-            />
-          }
-        >
-          {" "}
-          Cài đặt{" "}
-        </MenuItem>{" "}
+        <Link to="/settingpageOne">
+          <MenuItem
+            icon={
+              <Img
+                src="images/img_mdi_cog_outline.svg"
+                alt="mdicogoutline"
+                className="w-[32px] h-[32px]"
+              />
+            }
+          >
+            Cài đặt
+          </MenuItem>
+        </Link>
         <MenuItem
           icon={
             <Img
@@ -145,10 +139,9 @@ export default function Sidebar1({ ...props }: Props) {
             />
           }
         >
-          {" "}
-          Đăng xuất{" "}
+          Đăng xuất
         </MenuItem>
-      </Menu>{" "}
+      </Menu>
     </Sidebar>
   );
 }

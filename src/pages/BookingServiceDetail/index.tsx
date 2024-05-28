@@ -37,7 +37,7 @@ export default function BookingServiceDetailPage() {
         />
       </Helmet>
       <div className="w-full bg-white-A700">
-        <Header className="ml-[12rem]" />
+        <Header />
         <div className="flex flex-col items-center">
           <div className="container-xs mt-[133px] md:p-5">
             <div className="flex flex-col">

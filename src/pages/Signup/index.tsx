@@ -1,5 +1,5 @@
 import { Helmet } from "react-helmet";
-import { Img, Text, Button, Heading, Input } from "../../components";
+import { Img, Text, Button, Heading } from "../../components";
 import Header from "../../components/Header";
 import { useState, ChangeEvent } from "react";
 import { useFormik } from "formik";
@@ -27,7 +27,7 @@ export default function SignUpPage() {
       confirmPassword: ''
     },
     validationSchema: registerValidateSchema,
-    onSubmit: (values, { resetForm }) => {
+    onSubmit: (values,) => {
       console.log(values);
     }
   });
@@ -60,7 +60,7 @@ export default function SignUpPage() {
           content="Web site created using create-react-app"
         />
       </Helmet>
-      <Header className="" />
+      <Header />
       <div className="flex w-full items-center justify-between gap-5 bg-white-A700 pb-[5px] pl-[139px] pt-[110px] md:flex-col md:pl-5 md:pt-5 mb-[5px]">
         <div className="flex w-[36%] flex-col items-start md:w-full">
           <Heading
@@ -84,7 +84,7 @@ export default function SignUpPage() {
           </Text>
           <div className="mt-[61px] flex flex-col gap-[43px] self-stretch">
             <div className="flex flex-col gap-[35px]">
-              <div className="flex flex-col items-start gap-3.5">
+              {/* <div className="flex flex-col items-start gap-3.5">
                 <Heading
                   size="4xl"
                   as="h2"
@@ -103,7 +103,7 @@ export default function SignUpPage() {
                 {formik.touched.name && formik.errors.name && (
                   <div className='flex-1 flex items-center mt-2 text-red-500 italic text-sm'>{formik.errors.name}</div>
                 )}
-              </div>
+              </div> */}
               <div className="flex flex-col items-start gap-3.5">
                 <Heading
                   size="4xl"

@@ -68,7 +68,7 @@ export default function SpaDetailPage() {
         />
       </Helmet>
       <div className="w-full bg-white-A700">
-        <Header className="ml-[12rem]" />
+        <Header  />
         <div className="sm:gap-[39px] md:gap-[59px] gap-[79px] flex flex-col">
           <div className="!bg-gray-100_08 py-4 flex justify-center items-center px-5 font-bold">
             <div className="text-blue-400 pr-2">Trang chủ /</div>

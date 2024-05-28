@@ -42,7 +42,7 @@ export default function SpafeedbackPage() {
           content="Web site created using create-react-app"
         />
       </Helmet>
-      <Header className="ml-[12rem]" />
+      <Header />
       <div className="bg-gray-100_08 py-4 flex justify-center items-center px-5 font-bold">
         <Link to="/spadetail" className="text-black pr-2">
           Trang chủ /
