@@ -41,7 +41,13 @@ export default function LoginPage() {
     console.log(result.data)
     if (result.data.status === 200) {
       const token: string = result.data.access_token
-      const userInfo: UserInfo = result.data.userInfo
+      const data = result.data.userInfo
+      const userInfo: UserInfo = {
+        accountName: data.accountName,
+        email: data.email,
+        phone: data.phone,
+        address: data.address
+      }
       dispatch(setAccessToken(token));
       dispatch(setUserInfo(userInfo))
       localStorage.setItem("access-token", token)

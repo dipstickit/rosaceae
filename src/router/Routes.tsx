@@ -13,6 +13,7 @@ import SpafeedbackPage from "../pages/Spafeedback";
 import BookingServiceDetailPage from "../pages/BookingServiceDetail";
 import CartPage from "../pages/Cart";
 import EmailVerifyPage from "../pages/Verify";
+import ProfilePage from "../pages/ProfilePage";
 
 const RosaceaeRoutes = () => {
   const element = useRoutes([
@@ -30,7 +31,8 @@ const RosaceaeRoutes = () => {
     { path: "spafeedback", element: <SpafeedbackPage /> },
     { path: "booking", element: <BookingServiceDetailPage /> },
     { path: "cart", element: <CartPage /> },
-    { path: "verify", element: <EmailVerifyPage /> }
+    { path: "verify", element: <EmailVerifyPage /> },
+    { path: "profile", element: <ProfilePage /> }
 
 
   ]);
