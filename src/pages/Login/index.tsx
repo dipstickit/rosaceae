@@ -2,11 +2,11 @@ import { Helmet } from "react-helmet";
 import { Img, Text, Button, Heading, Input } from "../../components";
 import Header from "../../components/Header";
 import { loginValidateSchema } from "../../validates/ValidateSchema";
-import { useFormik } from "formik";
+import { ErrorMessage, useFormik } from "formik";
 import { userHandler } from "../../usecases/HandleLogin";
 import { useState } from "react";
 import { setAccessToken } from "../../store/authActions";
-import { useDispatch,  } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 export default function LoginPage() {
@@ -32,6 +32,7 @@ export default function LoginPage() {
     const result: any = await userHandler.Login(
       Object.entries(formik.errors).length,
       loginInfo
+
     );
     console.log(result.data);
     if (result.data.status === 0) {
@@ -39,6 +40,8 @@ export default function LoginPage() {
       dispatch(setAccessToken(token));
       navigate("/");
     }
+    console.log(formik.values);
+    
   };
 
   return (
@@ -51,17 +54,17 @@ export default function LoginPage() {
         />
       </Helmet>
       <Header />
-      <div className="flex w-full items-center justify-between gap-5 bg-white-A700 pb-[5px] pl-[139px] pt-[110px] md:flex-col md:pl-5 md:pt-5">
-        <div className="flex w-[36%] flex-col items-start md:w-full">
+      <div className="flex w-full items-center justify-between gap-5 bg-white-A700 pb-[5px] ml-10 md:flex-col md:pl-5 md:pt-5">
+        <div className="flex w-[32%] flex-col items-start md:w-full mt-5 ml-8">
           <Heading
-            size="8xl"
+            size="6xl"
             as="h1"
             className="!font-overpass !font-extrabold tracking-[3.60px] !text-blue_gray-800_01"
           >
             CHÀO MỪNG TRỞ LẠI!
           </Heading>
           <Text
-            size="9xl"
+            size="4xl"
             as="p"
             className="mt-[27px] flex !font-opensans tracking-[2.40px] !text-blue_gray-800_01"
           >
@@ -74,64 +77,57 @@ export default function LoginPage() {
           </Text>
           <div className="mt-[61px] flex flex-col gap-[43px] self-stretch">
             <div className="flex flex-col gap-[35px]">
-              <div className="flex flex-col items-start gap-3.5">
+              <div className="flex flex-col items-start gap-3.5 relative">
                 <Heading
-                  size="4xl"
+                  size="2xl"
                   as="h2"
                   className="!font-opensans !font-semibold tracking-[2.80px] !text-blue_gray-800_01"
                 >
                   Tên đăng nhập
                 </Heading>
-                {/* <input
-                  type="email"
-                  name="email"
-                  placeholder={`example@gmail.com`}
-                  className="self-stretch rounded-[40px] px-2 py-3 border-2 border-solid border-black-900 font-nunito tracking-[2.40px] !text-black-900 sm:px-5"
-                  onChange={e => { formik.handleChange(e); handleInput(e) }}
-                  onBlur={formik.handleBlur}
-                /> */}
                 <Input
-                  size="2xl"
+                  size="md"
                   type="email"
                   name="email"
-                  placeholder={`example@gmail.com`}
+                  placeholder="example@gmail.com"
                   onChange={formik.handleChange("email")}
                   onBlur={formik.handleBlur}
-                  className="self-stretch rounded-[40px] border-2 border-solid border-black-900 font-nunito tracking-[2.40px] !text-black-900 sm:px-5"
+                  className={`self-stretch rounded-[40px] border-2 border-solid ${
+                    formik.touched.email && formik.errors.email
+                      ? "border-red-500"
+                      : "border-black-900"
+                  } font-nunito tracking-[2.40px] !text-black-900 sm:px-5`}
                 />
                 {formik.touched.email && formik.errors.email && (
-                  <div className="flex-1 flex items-center mt-2 text-red-500 italic text-sm">
+                  <div className="absolute top-full left-0 mt-1 text-red-500 text-xl">
                     {formik.errors.email}
                   </div>
                 )}
               </div>
-              <div className="flex flex-col items-start gap-[15px]">
+              <div className="flex flex-col items-start gap-[15px] relative">
                 <Heading
-                  size="4xl"
+                  size="2xl"
                   as="h3"
                   className="!font-opensans !font-semibold tracking-[2.80px] !text-blue_gray-800_01"
                 >
                   Mật khẩu
                 </Heading>
-                {/* <input
-                  type="password"
-                  name="password"
-                  onChange={e => { formik.handleChange(e); handleInput(e) }}
-                  onBlur={formik.handleBlur}
-                  placeholder={`********`}
-                  className="gap-[35px] self-stretch rounded-[40px] px-2 py-3 border-2 border-solid border-black-900 sm:pr-5"
-                /> */}
                 <Input
-                  size="2xl"
+                  size="md"
                   type="password"
                   name="password"
                   placeholder={`********`}
                   onChange={formik.handleChange("password")}
+                  value={formik.values.password}
                   onBlur={formik.handleBlur}
-                  className="self-stretch rounded-[40px] border-2 border-solid border-black-900 font-nunito tracking-[2.40px] !text-black-900 sm:px-5"
+                  className={`self-stretch rounded-[40px] border-2 border-solid ${
+                    formik.touched.password && formik.errors.password
+                      ? "border-red-500"
+                      : "border-black-900"
+                  } font-nunito tracking-[2.40px] !text-black-900 sm:px-5`}
                 />
                 {formik.touched.password && formik.errors.password && (
-                  <div className="flex-1 flex items-center mt-2 text-red-500 italic text-sm">
+                  <div className="absolute top-full left-0 mt-1 text-red-500 text-xl">
                     {formik.errors.password}
                   </div>
                 )}
@@ -143,7 +139,7 @@ export default function LoginPage() {
                   </div>
                   <div className="flex pb-2.5 pt-[9px]">
                     <Text
-                      size="7xl"
+                      size="5xl"
                       as="p"
                       className="!font-opensans !font-normal tracking-[2.00px] !text-blue_gray-800_01"
                     >
@@ -166,8 +162,8 @@ export default function LoginPage() {
             </div>
             <Button
               color="black_900"
-              size="11xl"
-              className="w-full rounded-[40px] font-nunito font-extrabold tracking-[2.80px] sm:px-5"
+              size="6xl"
+              className="rounded-[40px] font-nunito font-extrabold tracking-[2.80px] sm:px-5"
               onClick={login}
             >
               Đăng nhập
@@ -176,7 +172,7 @@ export default function LoginPage() {
           <div className="relative mr-[185px] mt-12 h-[43px] w-[51%] self-end md:mr-0">
             <div className="absolute bottom-0 left-[0.00px] top-0 my-auto h-[43px] w-[82%] bg-white-A700" />
             <Text
-              size="7xl"
+              size="4xl"
               as="p"
               className="absolute bottom-0 left-0 right-0 top-0 m-auto h-max w-max !font-nunito !font-normal tracking-[2.00px] !text-blue_gray-800_01"
             >
@@ -210,7 +206,7 @@ export default function LoginPage() {
         <Img
           src="images/img_image_48.png"
           alt="imagefortyeight"
-          className="h-[965px] w-[57%] object-cover md:w-full"
+          className="h-[780px] w-[50%] object-cover md:w-full"
         />
       </div>
     </>

@@ -27,7 +27,7 @@ import ReportrevenuePage from "../pages/Reportrevenue";
 const RosaceaeRoutes = () => {
   const element = useRoutes([
     { path: "/", element: <HomePage /> },
-    { path: "*", element: <NotFound /> }, 
+    { path: "*", element: <NotFound /> },
     { path: "thumnail", element: <Thumnail /> },
     { path: "signup", element: <Signup /> },
     { path: "login", element: <Login /> },
@@ -51,10 +51,6 @@ const RosaceaeRoutes = () => {
     { path: "settingpage3", element: <SettingPageThreePage /> },
     { path: "dashboard", element: <DashboardDesignPage /> },
     { path: "reportave", element: <ReportrevenuePage /> },
-
-
-
-
   ]);
   return element;
 };
