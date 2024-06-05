@@ -4,8 +4,23 @@ import { Text, Img, Heading } from "../../components";
 import Footer from "../../components/Footer";
 import Header from "../../components/Header";
 import ProfileSection from "../../components/ProfileSection";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 export default function ProfilePage() {
+  let accessToken = useSelector((state: any) => state.auth.accessToken)
+  let userInformation = useSelector((state: any) => state.userInfo.userInfo)
+  const navigate = useNavigate()
+  console.log(userInformation)
+  if (accessToken === null) {
+    if (localStorage.getItem('access-token') !== null) {
+      accessToken = localStorage.getItem('access-token')
+      userInformation = JSON.parse(localStorage.getItem('user-info')!)
+    }
+    else {
+      navigate("/login")
+    }
+  }
   return (
     <>
       <Helmet>
@@ -30,14 +45,14 @@ export default function ProfilePage() {
                 as="h1"
                 className="!font-manrope !font-semibold !text-gray-900"
               >
-                TRẦN VĂN A
+                {userInformation.accountName}
               </Heading>
               <Text
                 size="xl"
                 as="p"
                 className="!font-manrope !font-medium !text-gray-600"
               >
-                Mã KH: 00000
+                Email: {userInformation.email}
               </Text>
             </div>
             <div className="flex items-center mt-8 w-1/2 gap-6 md:w-full md:flex-row md:justify-center">

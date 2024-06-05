@@ -1,6 +1,10 @@
-export const setAccessToken = (token: string) => ({
+export const setAccessToken = (token: string, currentUser: UserInfo, role: string) => ({
     type: 'SET_ACCESS_TOKEN',
-    payload: token,
+    payload: {
+        token,
+        currentUser,
+        role
+    },
 });
 
 export const clearAccessToken = () => ({

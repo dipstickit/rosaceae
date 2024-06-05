@@ -43,7 +43,7 @@ export default function SignUpPage() {
     const result: any = await userHandler.Register(Object.entries(formik.errors).length, registerInfo)
     console.log(result.data)
     if (result.data.status === 200) {
-      alert("account created!")
+      alert(result.data.msg)
       navigate('/login')
     }
     else {
