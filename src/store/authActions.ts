@@ -8,6 +8,6 @@ export const setAccessToken = (token: string, currentUser: UserInfo, role: strin
 });
 
 export const clearAccessToken = () => ({
-    type: 'SET_ACCESS_TOKEN',
+    type: 'CLEAR_ACCESS_TOKEN',
     payload: null,
 });

@@ -69,6 +69,22 @@ export default function ProfilePage() {
                   as="h2"
                   className="text-lg font-semibold text-gray-900"
                 >
+                  Edit Profile
+                </Heading>
+              </div>
+              <div className="flex-1 rounded-lg flex items-center gap-6 border border-gray-300 bg-white p-6 shadow-md">
+                <div className="flex items-center justify-center bg-gray-200 rounded-full w-12 h-12">
+                  <Img
+                    src="images/img_thumbs_up.svg"
+                    alt="silver"
+                    className="h-6 w-6"
+                  />
+                </div>
+                <Heading
+                  size="md"
+                  as="h2"
+                  className="text-lg font-semibold text-gray-900"
+                >
                   Silver
                 </Heading>
               </div>
