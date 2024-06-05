@@ -9,7 +9,7 @@ import { AuthData } from "../types/authData.type";
 import { ResponseData } from "../types/responseData.type";
 
 const instance: AxiosInstance = axios.create({
-    baseURL: "http://localhost:8080/",
+    baseURL: "https://0d4e-2405-4800-5724-89e3-b0a3-16e4-bfe9-ac40.ngrok-free.app",
     withCredentials: false
 });
 
