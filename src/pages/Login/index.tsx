@@ -4,15 +4,16 @@ import Header from "../../components/Header";
 import { loginValidateSchema } from "../../validates/ValidateSchema";
 import { useFormik } from "formik";
 import { userHandler } from "../../usecases/HandleLogin";
-import { useState } from "react";
+import { ChangeEvent, useState } from "react";
 import { setAccessToken } from "../../store/authActions";
-import { useDispatch,  } from "react-redux";
+import { useDispatch, } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { setUserInfo } from "../../store/userActions";
 
 export default function LoginPage() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [loginInfo] = useState<LoginInfo>({
+  const [loginInfo, setLoginInfo] = useState<LoginInfo>({
     email: "",
     password: "",
   });
@@ -28,18 +29,35 @@ export default function LoginPage() {
     },
   });
 
+  const handleInput = (e: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
+    setLoginInfo({
+      ...loginInfo,
+      [e.target.name]: e.target.value.trim()
+    })
+  }
+
   const login = async () => {
-    const result: any = await userHandler.Login(
-      Object.entries(formik.errors).length,
-      loginInfo
-    );
-    console.log(result.data);
-    if (result.data.status === 0) {
-      const token: string = result.data.access_token;
-      dispatch(setAccessToken(token));
-      navigate("/");
+    const result: any = await userHandler.Login(Object.entries(formik.errors).length, loginInfo)
+    console.log(result.data)
+    if (result.data.status === 200) {
+      const token: string = result.data.access_token
+      const data = result.data.userInfo
+      const userInfo: UserInfo = {
+        accountName: data.accountName,
+        email: data.email,
+        phone: data.phone,
+        address: data.address
+      }
+      dispatch(setAccessToken(token, userInfo, data.role));
+      dispatch(setUserInfo(userInfo))
+      localStorage.setItem("access-token", token)
+      localStorage.setItem("user-info", JSON.stringify(userInfo))
+      navigate('/')
     }
-  };
+    if (result.data.status === 400) {
+      alert(result.data.msg)
+    }
+  }
 
   return (
     <>
@@ -82,23 +100,23 @@ export default function LoginPage() {
                 >
                   Tên đăng nhập
                 </Heading>
-                {/* <input
+                <input
                   type="email"
                   name="email"
                   placeholder={`example@gmail.com`}
                   className="self-stretch rounded-[40px] px-2 py-3 border-2 border-solid border-black-900 font-nunito tracking-[2.40px] !text-black-900 sm:px-5"
                   onChange={e => { formik.handleChange(e); handleInput(e) }}
                   onBlur={formik.handleBlur}
-                /> */}
-                <Input
+                />
+                {/* <Input
                   size="2xl"
                   type="email"
                   name="email"
                   placeholder={`example@gmail.com`}
-                  onChange={formik.handleChange("email")}
+                  onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
                   className="self-stretch rounded-[40px] border-2 border-solid border-black-900 font-nunito tracking-[2.40px] !text-black-900 sm:px-5"
-                />
+                /> */}
                 {formik.touched.email && formik.errors.email && (
                   <div className="flex-1 flex items-center mt-2 text-red-500 italic text-sm">
                     {formik.errors.email}
@@ -113,23 +131,23 @@ export default function LoginPage() {
                 >
                   Mật khẩu
                 </Heading>
-                {/* <input
+                <input
                   type="password"
                   name="password"
                   onChange={e => { formik.handleChange(e); handleInput(e) }}
                   onBlur={formik.handleBlur}
                   placeholder={`********`}
                   className="gap-[35px] self-stretch rounded-[40px] px-2 py-3 border-2 border-solid border-black-900 sm:pr-5"
-                /> */}
-                <Input
+                />
+                {/* <Input
                   size="2xl"
                   type="password"
                   name="password"
                   placeholder={`********`}
-                  onChange={formik.handleChange("password")}
+                  onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
                   className="self-stretch rounded-[40px] border-2 border-solid border-black-900 font-nunito tracking-[2.40px] !text-black-900 sm:px-5"
-                />
+                /> */}
                 {formik.touched.password && formik.errors.password && (
                   <div className="flex-1 flex items-center mt-2 text-red-500 italic text-sm">
                     {formik.errors.password}
