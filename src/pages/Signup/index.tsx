@@ -56,10 +56,11 @@ export default function SignUpPage() {
     );
     console.log(result.data);
     if (result.data.status === 200) {
-      alert("account created!");
-      navigate("/login");
-    } else {
-      alert("there an error while creating account");
+      alert(result.data.msg)
+      navigate('/login')
+    }
+    else {
+      alert("there an error while creating account")
     }
   };
 
@@ -96,7 +97,7 @@ export default function SignUpPage() {
           </Text>
           <div className="mt-[61px] flex flex-col gap-[43px] self-stretch">
             <div className="flex flex-col gap-[35px]">
-              <div className="flex flex-col items-start gap-3.5">
+              {/* <div className="flex flex-col items-start gap-3.5">
                 <Heading
                   size="4xl"
                   as="h2"
@@ -113,9 +114,18 @@ export default function SignUpPage() {
                 />
                 {formik.touched.name && formik.errors.name && (
                   <div className='flex-1 flex items-center mt-2 text-red-500 italic text-sm'>{formik.errors.name}</div>
-                )} */}
-                <Input
-                  size="2xl"
+                )}
+              </div> */}
+              <div className="flex flex-col items-start gap-3.5">
+                <Heading
+                  size="4xl"
+                  as="h2"
+                  className="!font-nunito !font-semibold tracking-[2.80px] !text-blue_gray-800_01"
+                >
+                  Name
+                </Heading>
+                <input
+                  // size="2xl"
                   type="text"
                   name="name"
                   placeholder={`********`}

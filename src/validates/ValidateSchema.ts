@@ -24,6 +24,16 @@ export const registerValidateSchema = Yup.object().shape({
         .matches(/^[0-9]{10,11}$/, 'Invalid phone number')
 });
 
+export const profileEditValidateSchema = Yup.object().shape({
+    name: Yup.string().required("This field is required").min(5, "Name must be 5 or more characters"),
+    email: Yup.string().email("Please enter a valid email").required("This field is required"),
+    address: Yup.string().required("This field is required"),
+    phone: Yup.string()
+        .required('This field is required')
+        .matches(/^[0-9]{10,11}$/, 'Invalid phone number')
+});
+
+
 
 
 

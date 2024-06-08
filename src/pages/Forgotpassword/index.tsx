@@ -79,8 +79,8 @@ export default function ForgotPasswordPage() {
             >
               <div className="flex items-center">
                 <span className="text-blue_gray-800_01">
-                  Nếu bạn đã có tài khoản,   
-                </span> 
+                  Nếu bạn đã có tài khoản,
+                </span>
                 <a href="#" className="text-blue_gray-800_01 underline ml-1">
                   đăng nhập tại đây
                 </a>

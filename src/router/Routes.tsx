@@ -12,6 +12,7 @@ import SpaDetailPage from "../pages/SpaDetail";
 import SpafeedbackPage from "../pages/Spafeedback";
 import BookingServiceDetailPage from "../pages/BookingServiceDetail";
 import CartPage from "../pages/Cart";
+import EmailVerifyPage from "../pages/Verify";
 import ProfilePage from "../pages/ProfilePage";
 import AddressPage from "../pages/Address";
 import PaymentPage from "../pages/Payment";
@@ -40,6 +41,7 @@ const RosaceaeRoutes = () => {
     { path: "spafeedback", element: <SpafeedbackPage /> },
     { path: "booking", element: <BookingServiceDetailPage /> },
     { path: "cart", element: <CartPage /> },
+    { path: "verify", element: <EmailVerifyPage /> },
     { path: "profilepage", element: <ProfilePage /> },
     { path: "address", element: <AddressPage /> },
     { path: "payment", element: <PaymentPage /> },

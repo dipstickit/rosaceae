@@ -342,10 +342,10 @@ export default function HomePage() {
         </div>
         {/* <div className="pt-[43px] bg-gray-900 md:pt-5">
         </div> */}
-          <Footer />
+        <Footer />
       </div>
-      
+
     </>
-    
+
   );
 }
