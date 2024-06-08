@@ -94,7 +94,8 @@ export default function SpaDetailPage() {
             <Sidebar2
               categories={categories}
               setCategoryName={setCategoryName}
-              setMinMax={setMinMax} className="mt-60"
+              setMinMax={setMinMax}
+              className="mt-60"
             />
             <div className="flex flex-1 flex-col gap-1 md:self-stretch md:p-5">
               <div className="gap-[17px] w-[95%] flex flex-col md:w-full">
@@ -103,7 +104,7 @@ export default function SpaDetailPage() {
                   alt="image"
                   className="h-[232px] object-cover r"
                 />
-                <div className="bg-[url(/public/images/img_group_1278.svg)] pl-[23px] h-[45px] bg-cover bg-no-repeat md:h-auto sm:pl-5">
+                {/* <div className="bg-[url(/public/images/img_group_1278.svg)] pl-[23px] h-[45px] bg-cover bg-no-repeat md:h-auto sm:pl-5">
                   <div className="flex items-center justify-between gap-5 md:flex-col">
                     <div className="flex items-center justify-between gap-5 w-[32%] md:w-full">
                       <Text as="p" className="!font-alata12 !text-gray-900_03">
@@ -173,20 +174,17 @@ export default function SpaDetailPage() {
                       </div>
                     </div>
                   </div>
-                </div>                
+                </div> */}
                 <div className="gap-[53px] grid grid-cols-3 justify-center md:grid-cols-1 mb-[20px]">
-                  {/* {items.map((product: any, index) => (
-                    <ProductCardService key={index} {...product} />
-                  ))} */}
-                                    {items.map((product: any, index) => (
+                  {items.map((product: any, index) => (
                     <ProductCardService
-                    key={index}
-                    itemImages={product.itemImages}
-                    itemName={product.itemName}
-                    itemPrice={product.itemPrice}
-                    discount={product.discount}
-                    id={product.itemId}
-                  />
+                      key={index}
+                      itemImages={product.itemImages}
+                      itemName={product.itemName}
+                      itemPrice={product.itemPrice}
+                      discount={product.discount}
+                      id={product.itemId}
+                    />
                   ))}
                 </div>
               </div>
