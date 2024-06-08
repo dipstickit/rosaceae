@@ -5,6 +5,7 @@ import { Img } from "../Img";
 import { useSelector, useDispatch } from "react-redux";
 import { logoutUser } from "../../store/authActions";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 interface Props {
   className?: string;
@@ -12,6 +13,7 @@ interface Props {
 
 export default function Header({ ...props }: Props) {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   let accessToken = useSelector((state: any) => state.auth.accessToken);
   let userInformation = useSelector((state: any) => state.userInfo.userInfo);
 
@@ -33,6 +35,7 @@ export default function Header({ ...props }: Props) {
     localStorage.removeItem("access-token");
     localStorage.removeItem("user-info");
     dispatch(logoutUser());
+    navigate('/login');
   };
 
   return (
@@ -137,7 +140,7 @@ export default function Header({ ...props }: Props) {
                 {dropdownOpen && (
                   <div className="absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded-md shadow-lg z-10">
                     <button
-                      className="block w-full px-4 py-2 text-white bg-gray-100 hover:bg-blue-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
+                      className="block w-full px-4 py-2 text-white bg-gray-100 hover:bg-black rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
                       onClick={handleLogout}
                     >
                       Đăng xuất
