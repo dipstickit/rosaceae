@@ -32,6 +32,7 @@ export default function SignUpPage() {
     validationSchema: registerValidateSchema,
     onSubmit: (values) => {
       console.log(values);
+      register();
     },
   });
   const togglePasswordVisibility = () => {
@@ -39,14 +40,6 @@ export default function SignUpPage() {
   };
   const toggleConfirmPasswordVisibility = () => {
     setShowConfirmPassword(!showConfirmPassword);
-  };
-  const handleInput = (
-    e: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
-  ) => {
-    setRegisterInfo({
-      ...registerInfo,
-      [e.target.name]: e.target.value.trim(),
-    });
   };
 
   const register = async () => {
@@ -60,7 +53,7 @@ export default function SignUpPage() {
       navigate('/login')
     }
     else {
-      alert("there an error while creating account")
+      alert("An error occurred while creating the account")
     }
   };
 
@@ -89,48 +82,32 @@ export default function SignUpPage() {
             className="mt-[27px] flex !font-opensans tracking-[2.40px] !text-blue_gray-800_01"
           >
             <span className="text-blue_gray-800_01">
-              Nếu bạn chưa có tài khoản,{" "}
+              Nếu bạn chưa có tài khoản,
             </span>
-            <a href="#" className="text-blue_gray-800_01 underline">
+            <a href="/login" className="text-blue_gray-800_01 underline">
               đăng nhập tại đây
             </a>
           </Text>
-          <div className="mt-[61px] flex flex-col gap-[43px] self-stretch">
+          <form onSubmit={formik.handleSubmit} className="mt-[61px] flex flex-col gap-[43px] self-stretch">
             <div className="flex flex-col gap-[35px]">
-              {/* <div className="flex flex-col items-start gap-3.5">
-                <Heading
-                  size="4xl"
-                  as="h2"
-                  className="!font-opensans !font-semibold tracking-[2.80px] !text-blue_gray-800_01"
-                >
-                  Name
-                </Heading>
-                {/* <input
-                  type="text"
-                  name="name"
-                  className="self-stretch rounded-[40px] border-2 border-solid border-black-900 font-nunito tracking-[2.40px] !text-black-900 sm:px-5"
-                  onChange={e => { formik.handleChange(e); handleInput(e) }}
-                  onBlur={formik.handleBlur}
-                />
-                {formik.touched.name && formik.errors.name && (
-                  <div className='flex-1 flex items-center mt-2 text-red-500 italic text-sm'>{formik.errors.name}</div>
-                )}
-              </div> */}
               <div className="flex flex-col items-start gap-3.5">
                 <Heading
                   size="4xl"
                   as="h2"
                   className="!font-nunito !font-semibold tracking-[2.80px] !text-blue_gray-800_01"
                 >
-                  Name
+                  Tên của bạn
                 </Heading>
-                <input
-                  // size="2xl"
+                <Input
+                  size="2xl"
                   type="text"
                   name="name"
-                  placeholder={`********`}
-                  onChange={formik.handleChange("name")}
+                  placeholder={`Rosaceae`}
+                  onChange={(value) => formik.setFieldValue("name", value)}
                   onBlur={formik.handleBlur}
+                  value={formik.values.name}
+                  shape="round"
+                  variant="outline"
                   className={`self-stretch rounded-[40px] border-2 border-solid ${
                     formik.touched.name && formik.errors.name
                       ? "border-red-500"
@@ -151,24 +128,14 @@ export default function SignUpPage() {
                 >
                   Email
                 </Heading>
-                {/* <input
-                  type="email"
-                  name="email"
-                  placeholder={`example@gmail.com`}
-                  className="self-stretch rounded-[40px] border-2 border-solid border-black-900 font-nunito tracking-[2.40px] !text-black-900 sm:px-5"
-                  onChange={e => { formik.handleChange(e); handleInput(e) }}
-                  onBlur={formik.handleBlur}
-                />
-                {formik.touched.email && formik.errors.email && (
-                  <div className='flex-1 flex items-center mt-2 text-red-500 italic text-sm'>{formik.errors.email}</div>
-                )} */}
                 <Input
                   size="2xl"
                   type="email"
                   name="email"
                   placeholder={`********`}
-                  onChange={formik.handleChange("email")}
+                  onChange={(value) => formik.setFieldValue("email", value)}
                   onBlur={formik.handleBlur}
+                  value={formik.values.email}
                   className={`self-stretch rounded-[40px] border-2 border-solid ${
                     formik.touched.email && formik.errors.email
                       ? "border-red-500"
@@ -187,31 +154,16 @@ export default function SignUpPage() {
                   as="h2"
                   className="!font-nunito !font-semibold tracking-[2.80px] !text-blue_gray-800_01"
                 >
-                  Phone
+                  Số điện thoại
                 </Heading>
-                {/* <input
-                  // size="2xl"
-                  type="text"
-                  name="phone"
-                  className="self-stretch rounded-[40px] border-2 border-solid border-black-900 font-nunito tracking-[2.40px] !text-black-900 sm:px-5"
-                  onChange={(e) => {
-                    formik.handleChange(e);
-                    handleInput(e);
-                  }}
-                  onBlur={formik.handleBlur}
-                />
-                {formik.touched.phone && formik.errors.phone && (
-                  <div className="flex-1 flex items-center mt-2 text-red-500 italic text-sm">
-                    {formik.errors.phone}
-                  </div>
-                )} */}
                 <Input
                   size="2xl"
                   type="text"
                   name="phone"
                   placeholder={`********`}
-                  onChange={formik.handleChange("phone")}
+                  onChange={(value) => formik.setFieldValue("phone", value)}
                   onBlur={formik.handleBlur}
+                  value={formik.values.phone}
                   className={`self-stretch rounded-[40px] border-2 border-solid ${
                     formik.touched.phone && formik.errors.phone
                       ? "border-red-500"
@@ -230,31 +182,16 @@ export default function SignUpPage() {
                   as="h2"
                   className="!font-nunito !font-semibold tracking-[2.80px] !text-blue_gray-800_01"
                 >
-                  Address
+                  Địa chỉ
                 </Heading>
-                {/* <input
-                  // size="2xl"
-                  type="text"
-                  name="address"
-                  className="self-stretch rounded-[40px] border-2 border-solid border-black-900 font-nunito tracking-[2.40px] !text-black-900 sm:px-5"
-                  onChange={(e) => {
-                    formik.handleChange(e);
-                    handleInput(e);
-                  }}
-                  onBlur={formik.handleBlur}
-                />
-                {formik.touched.address && formik.errors.address && (
-                  <div className="flex-1 flex items-center mt-2 text-red-500 italic text-sm">
-                    {formik.errors.address}
-                  </div>
-                )} */}
                 <Input
                   size="2xl"
                   type="text"
                   name="address"
                   placeholder={`********`}
-                  onChange={formik.handleChange("address")}
+                  onChange={(value) => formik.setFieldValue("address", value)}
                   onBlur={formik.handleBlur}
+                  value={formik.values.address}
                   className={`self-stretch rounded-[40px] border-2 border-solid ${
                     formik.touched.address && formik.errors.address
                       ? "border-red-500"
@@ -275,51 +212,15 @@ export default function SignUpPage() {
                 >
                   Mật khẩu
                 </Heading>
-                {/* <input
-                  // size="2xl"
-                  name="password"
-                  type="password"
-                  // suffix={
-                  //   <Img
-                  //     src="images/img_icon_font_awesome_free_solid_e_eyeslash.svg"
-                  //     alt="icon/font awesome free/solid/e/eye-slash"
-                  //     className="h-[32px] w-[32px]"
-                  //   />
-                  // }
-                  placeholder={`********`}
-                  className="gap-[35px] self-stretch rounded-[40px] border-2 border-solid border-black-900 sm:pr-5"
-                  onChange={(e) => {
-                    formik.handleChange(e);
-                    handleInput(e);
-                  }}
-                  onBlur={formik.handleBlur}
-                />
-                {formik.touched.password && formik.errors.password && (
-                  <div className="flex-1 flex items-center mt-2 text-red-500 italic text-sm">
-                    {formik.errors.password}
-                  </div>
-                )} */}
-                {/* <Input
-                  size="2xl"
-                  type="password"
-                  name="password"
-                  placeholder={`********`}
-                  onChange={formik.handleChange("password")}
-                  onBlur={formik.handleBlur}
-                  className={`self-stretch rounded-[40px] border-2 border-solid ${
-                    formik.touched.password && formik.errors.password
-                      ? "border-red-500"
-                      : "border-black-900"
-                  } font-nunito tracking-[2.40px] !text-black-900 sm:px-5`}
-                /> */}
                 <div className="relative w-full">
                   <Input
                     size="2xl"
                     type={showPassword ? "text" : "password"}
                     name="password"
                     placeholder={`********`}
-                    onChange={formik.handleChange("password")}
+                    onChange={(value) => formik.setFieldValue("password", value)}
                     onBlur={formik.handleBlur}
+                    value={formik.values.password}
                     className={`self-stretch rounded-[40px] border-2 border-solid ${
                       formik.touched.password && formik.errors.password
                         ? "border-red-500"
@@ -347,31 +248,15 @@ export default function SignUpPage() {
                 >
                   Nhập lại mật khẩu
                 </Heading>
-                {/* <input
-                  name="confirmPassword"
-                  type="password"
-                  placeholder={`********`}
-                  className="gap-[35px] self-stretch rounded-[40px] border-2 border-solid border-black-900 sm:pr-5"
-                  onChange={(e) => {
-                    formik.handleChange(e);
-                    handleInput(e);
-                  }}
-                  onBlur={formik.handleBlur}
-                />
-                {formik.touched.confirmPassword &&
-                  formik.errors.confirmPassword && (
-                    <div className="flex-1 flex items-center mt-2 text-red-500 italic text-sm">
-                      {formik.errors.confirmPassword}
-                    </div>
-                  )} */}
                 <div className="relative w-full">
                   <Input
                     size="2xl"
                     type={showConfirmPassword ? "text" : "password"}
                     name="confirmPassword"
                     placeholder={`********`}
-                    onChange={formik.handleChange("confirmPassword")}
+                    onChange={(value) => formik.setFieldValue("confirmPassword", value)}
                     onBlur={formik.handleBlur}
+                    value={formik.values.confirmPassword}
                     className={`self-stretch rounded-[40px] border-2 border-solid ${
                       formik.touched.confirmPassword &&
                       formik.errors.confirmPassword
@@ -425,11 +310,11 @@ export default function SignUpPage() {
               color="black_900"
               size="11xl"
               className="w-full rounded-[40px] font-nunito font-extrabold tracking-[2.80px] sm:px-5"
-              onClick={register}
+              type="submit"
             >
               Đăng ký
             </Button>
-          </div>
+          </form>
           <div className="relative mr-[185px] mt-12 h-[43px] w-[51%] self-end md:mr-0">
             <div className="absolute bottom-0 left-[0.00px] top-0 my-auto h-[43px] w-[82%] bg-white-A700" />
             <Text

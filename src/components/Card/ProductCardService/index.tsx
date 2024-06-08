@@ -2,34 +2,38 @@ import { Heading, Text, Img, RatingBar } from "./../..";
 
 interface Props {
   className?: string;
-  userimage?: string;
-  title?: string;
-  saleprice?: string;
-  oriprice?: string;
-  saleoff?: string;
+  itemImages?: any[];
+  itemName?: string;
+  itemPrice?: number;
+  discount?: number;
+  itemType?: string;
 }
 
 export default function ProductCardService({
-  userimage = "images/img_rectangle_6028.png",
-  title = "Massage cổ vai gáy",
-  oriprice = "₫199.000",
-  saleprice = "₫199.000",
-  saleoff = "25% Off",
+  itemImages = [],
+  itemName = "Massage cổ vai gáy",
+  itemPrice = 199.0,
+  discount = 25,
+  itemType = "Sản Phẩm",
   ...props
 }: Props) {
+  const discountedPrice = itemPrice - (itemPrice / 100) * discount;
   return (
     <div
       {...props}
       className={`${props.className} flex flex-col items-center w-full`}
     >
       <Img
-        src={userimage}
+        src={itemImages[0]?.imageUrl}
         alt="image"
         className="h-[282px] w-full object-cover md:h-auto"
       />
       <div className="mt-4 flex flex-col items-center w-full">
-        <Heading as="h6" className="tracking-[0.50px] !text-indigo-900 text-center">
-          {title}
+        <Heading
+          as="h6"
+          className="tracking-[0.50px] !text-indigo-900 text-center"
+        >
+          {itemName}
         </Heading>
         <div className="flex justify-center w-full mt-2">
           <RatingBar
@@ -43,23 +47,29 @@ export default function ProductCardService({
         </div>
         <div className="flex flex-wrap items-center justify-center mt-2">
           <Heading as="h6" className="tracking-[0.50px] !text-light_blue-A200">
-            {saleprice}
+          đ{discountedPrice}
           </Heading>
           <Text
             size="xl"
             as="p"
             className="tracking-[0.50px] ml-[5px] line-through !text-gray-500"
           >
-            {oriprice}
+            đ{itemPrice}
           </Text>
           <Heading
             size="s"
             as="p"
             className="tracking-[0.50px] ml-2 text-sm font-bold !text-pink-300"
           >
-            {saleoff}
+            {discount}% OFF
           </Heading>
         </div>
+        <Heading
+          as="h6"
+          className="tracking-[0.50px] !text-indigo-900 text-center"
+        >
+          {itemType}
+        </Heading>
       </div>
     </div>
   );

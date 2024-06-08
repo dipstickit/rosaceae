@@ -1,20 +1,23 @@
 import { Helmet } from "react-helmet";
-import { Img, Text, Button, Heading, Input } from "../../components";
+import { Img, Text, Button, Heading } from "../../components";
 import Header from "../../components/Header";
 import { loginValidateSchema } from "../../validates/ValidateSchema";
-import { ErrorMessage, useFormik } from "formik";
+import { useFormik } from "formik";
 import { userHandler } from "../../usecases/HandleLogin";
-import { ChangeEvent, useState } from "react";
+import { useState } from "react";
 import { setAccessToken } from "../../store/authActions";
-import { useDispatch, } from "react-redux";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { setUserInfo } from "../../store/userActions";
+import { Input } from "../../components/Input";
 
 export default function LoginPage() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [loginInfo, setLoginInfo] = useState<LoginInfo>({
+  const [loginInfo, setLoginInfo] = useState<{
+    email: string;
+    password: string;
+  }>({
     email: "",
     password: "",
   });
@@ -25,53 +28,32 @@ export default function LoginPage() {
       password: "",
     },
     validationSchema: loginValidateSchema,
-    onSubmit: (values, { resetForm }) => {
-      console.log(values);
+    onSubmit: async (values, { resetForm }) => {
+      const result: any = await userHandler.Login(
+        Object.entries(formik.errors).length,
+        values
+      );
+      if (result && result.data.status === 200) {
+        const token: string = result.data.access_token;
+        const data = result.data.userInfo;
+        const userInfo = {
+          accountName: data.accountName,
+          email: data.email,
+          phone: data.phone,
+          address: data.address,
+        };
+        dispatch(setAccessToken(token, userInfo, data.role));
+        dispatch(setUserInfo(userInfo));
+        localStorage.setItem("access-token", token);
+        localStorage.setItem("user-info", JSON.stringify(userInfo));
+        navigate("/");
+      } else if (result && result.data.status === 400) {
+        alert(result.data.msg);
+      } else {
+        alert("An error occurred during login. Please try again.");
+      }
     },
   });
-
-  const handleInput = (e: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
-    setLoginInfo({
-      ...loginInfo,
-      [e.target.name]: e.target.value.trim()
-    })
-  }
-
-  const login = async () => {
-    const result: any = await userHandler.Login(Object.entries(formik.errors).length, loginInfo)
-    console.log(result.data)
-    if (result.data.status === 200) {
-      const token: string = result.data.access_token
-      const data = result.data.userInfo
-      const userInfo: UserInfo = {
-        accountName: data.accountName,
-        email: data.email,
-        phone: data.phone,
-        address: data.address
-      }
-      dispatch(setAccessToken(token, userInfo, data.role));
-      dispatch(setUserInfo(userInfo))
-      localStorage.setItem("access-token", token)
-      localStorage.setItem("user-info", JSON.stringify(userInfo))
-      navigate('/')
-    const result: any = await userHandler.Login(
-      Object.entries(formik.errors).length,
-      loginInfo
-
-    );
-    console.log(result.data);
-    if (result.data.status === 0) {
-      const token: string = result.data.access_token;
-      dispatch(setAccessToken(token));
-      navigate("/");
-    }
-    if (result.data.status === 400) {
-      alert(result.data.msg)
-    }
-  }
-    console.log(formik.values);
-    
-  };
 
   return (
     <>
@@ -104,7 +86,10 @@ export default function LoginPage() {
               đăng ký tại đây
             </a>
           </Text>
-          <div className="mt-[61px] flex flex-col gap-[43px] self-stretch">
+          <form
+            onSubmit={formik.handleSubmit}
+            className="mt-[61px] flex flex-col gap-[43px] self-stretch"
+          >
             <div className="flex flex-col gap-[35px]">
               <div className="flex flex-col items-start gap-3.5 relative">
                 <Heading
@@ -114,32 +99,26 @@ export default function LoginPage() {
                 >
                   Tên đăng nhập
                 </Heading>
-                <input
-                  type="email"
-                  name="email"
-                  placeholder={`example@gmail.com`}
-                  className="self-stretch rounded-[40px] px-2 py-3 border-2 border-solid border-black-900 font-nunito tracking-[2.40px] !text-black-900 sm:px-5"
-                  onChange={e => { formik.handleChange(e); handleInput(e) }}
-                  onBlur={formik.handleBlur}
-                />
-                {/* <Input
-                  size="2xl"
                 <Input
                   size="md"
                   type="email"
                   name="email"
-                  placeholder={`example@gmail.com`}
-                  onChange={formik.handleChange}
                   placeholder="example@gmail.com"
-                  onChange={formik.handleChange("email")}
+                  onChange={(value) => formik.setFieldValue("email", value)}
                   onBlur={formik.handleBlur}
-                  className="self-stretch rounded-[40px] border-2 border-solid border-black-900 font-nunito tracking-[2.40px] !text-black-900 sm:px-5"
-                /> */}
-                  className={`self-stretch rounded-[40px] border-2 border-solid ${
+                  value={formik.values.email}
+                  shape="round"
+                  variant="outline"
+                  color={
+                    formik.touched.email && formik.errors.email
+                      ? "gray_500_01"
+                      : "blue_gray_100"
+                  }
+                  className={`self-stretch ${
                     formik.touched.email && formik.errors.email
                       ? "border-red-500"
                       : "border-black-900"
-                  } font-nunito tracking-[2.40px] !text-black-900 sm:px-5`}
+                  }`}
                 />
                 {formik.touched.email && formik.errors.email && (
                   <div className="absolute top-full left-0 mt-1 text-red-500 text-xl">
@@ -155,32 +134,26 @@ export default function LoginPage() {
                 >
                   Mật khẩu
                 </Heading>
-                <input
-                  type="password"
-                  name="password"
-                  onChange={e => { formik.handleChange(e); handleInput(e) }}
-                  onBlur={formik.handleBlur}
-                  placeholder={`********`}
-                  className="gap-[35px] self-stretch rounded-[40px] px-2 py-3 border-2 border-solid border-black-900 sm:pr-5"
-                />
-                {/* <Input
-                  size="2xl"
                 <Input
                   size="md"
                   type="password"
                   name="password"
-                  placeholder={`********`}
-                  onChange={formik.handleChange}
-                  onChange={formik.handleChange("password")}
+                  placeholder="********"
+                  onChange={(value) => formik.setFieldValue("password", value)}
                   value={formik.values.password}
                   onBlur={formik.handleBlur}
-                  className="self-stretch rounded-[40px] border-2 border-solid border-black-900 font-nunito tracking-[2.40px] !text-black-900 sm:px-5"
-                /> */}
-                  className={`self-stretch rounded-[40px] border-2 border-solid ${
+                  shape="round"
+                  variant="outline"
+                  color={
+                    formik.touched.password && formik.errors.password
+                      ? "gray_500_01"
+                      : "blue_gray_100"
+                  }
+                  className={`self-stretch ${
                     formik.touched.password && formik.errors.password
                       ? "border-red-500"
                       : "border-black-900"
-                  } font-nunito tracking-[2.40px] !text-black-900 sm:px-5`}
+                  }`}
                 />
                 {formik.touched.password && formik.errors.password && (
                   <div className="absolute top-full left-0 mt-1 text-red-500 text-xl">
@@ -191,16 +164,6 @@ export default function LoginPage() {
               <div className="flex justify-between gap-5 sm:flex-col">
                 <div className="flex w-[40%] justify-center gap-4 sm:w-full sm:p-5">
                   <div className="w-[20%] rounded-[24px] border-2 border-solid border-white-A700 bg-white-A700 p-[9px]">
-                    <div className="h-[29px] w-[29px] rounded-[14px] bg-white-A700 shadow-2xl" />
-                  </div>
-                  <div className="flex pb-2.5 pt-[9px]">
-                    <Text
-                      size="5xl"
-                      as="p"
-                      className="!font-opensans !font-normal tracking-[2.00px] !text-blue_gray-800_01"
-                    >
-                      Remember me
-                    </Text>
                   </div>
                 </div>
                 <div className="flex pb-[9px] pr-2.5 pt-2.5 sm:p-5">
@@ -220,11 +183,11 @@ export default function LoginPage() {
               color="black_900"
               size="6xl"
               className="rounded-[40px] font-nunito font-extrabold tracking-[2.80px] sm:px-5"
-              onClick={login}
+              type="submit"
             >
               Đăng nhập
             </Button>
-          </div>
+          </form>
           <div className="relative mr-[185px] mt-12 h-[43px] w-[51%] self-end md:mr-0">
             <div className="absolute bottom-0 left-[0.00px] top-0 my-auto h-[43px] w-[82%] bg-white-A700" />
             <Text
@@ -262,7 +225,7 @@ export default function LoginPage() {
         <Img
           src="images/img_image_48.png"
           alt="imagefortyeight"
-          className="h-[780px] w-[50%] object-cover md:w-full"
+          className="h-[720px] w-[40%] sm:w-[50%] object-cover"
         />
       </div>
     </>

@@ -11,7 +11,6 @@ interface Props {
 export default function Header({ ...props }: Props) {
   let accessToken = useSelector((state: any) => state.auth.accessToken)
   let userInformation = useSelector((state: any) => state.userInfo.userInfo)
-  console.log(userInformation)
   if (accessToken === null) {
     if (localStorage.getItem('access-token') !== null) {
       accessToken = localStorage.getItem('access-token')
@@ -38,7 +37,7 @@ export default function Header({ ...props }: Props) {
             </Link>
           </li>
           <li>
-            <Link to="/makeupservicepage">
+            <Link to="/item">
               <Heading as="p">Dịch Vụ</Heading>
             </Link>
           </li>
@@ -119,8 +118,6 @@ export default function Header({ ...props }: Props) {
                 </Button>
               </Link>
           }
-
-
         </div>
       </div>
     </header>
