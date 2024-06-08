@@ -11,3 +11,9 @@ export const clearAccessToken = () => ({
     type: 'SET_ACCESS_TOKEN',
     payload: null,
 });
+
+export const logoutUser = () => {
+    return {
+      type: 'LOGOUT_USER',
+    };
+  };

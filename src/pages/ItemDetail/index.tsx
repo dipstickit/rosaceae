@@ -127,7 +127,7 @@ export default function ItemDetail() {
               >
                 Các dịch vụ khác
               </Heading>
-              <div className="flex overflow-x-auto space-x-4 mt-4 w-full">
+              <div className="flex overflow-x-auto space-x-4 mt-4 w-full mb-10">
                 {listProducts
                   .slice(0, 4)
                   .map((item) => (
