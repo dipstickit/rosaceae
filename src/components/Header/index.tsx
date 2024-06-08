@@ -46,7 +46,7 @@ export default function Header({ ...props }: Props) {
     >
       <Link to="/">
         <Img
-          src="images/img_header_logo.png"
+          src="../../../public/images/img_header_logo.png"
           alt="headerlogo"
           className="h-[45px] w-[54px] object-contain ml-[12rem]"
         />
@@ -98,14 +98,14 @@ export default function Header({ ...props }: Props) {
           <div className="flex items-center gap-[30px]">
             <Link to="/search">
               <Img
-                src="images/img_search_gray_900_06.svg"
+                src="../../../public/images/img_search_gray_900_06.svg"
                 alt="search"
                 className="h-[28px] w-[28px]"
               />
             </Link>
             <Link to="/cart">
               <Img
-                src="images/img_bi_bag_dash.svg"
+                src="../../../public/images/img_bi_bag_dash.svg"
                 alt="bibagdash"
                 className="h-[26px] w-[26px]"
               />
@@ -133,7 +133,7 @@ export default function Header({ ...props }: Props) {
               <div className="relative">
                 <button className="text-gray-900 focus:outline-none">
                   <Img
-                    src="images/img_checkmark.svg"
+                    src="../../../public/images/img_checkmark.svg"
                     alt="checkmark"
                     className="w-[20px] h-[20px]"
                   />
