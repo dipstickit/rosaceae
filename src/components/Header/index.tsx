@@ -140,7 +140,7 @@ export default function Header({ ...props }: Props) {
                 {dropdownOpen && (
                   <div className="absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded-md shadow-lg z-10">
                     <button
-                      className="block w-full px-4 py-2 text-white bg-gray-100 hover:bg-black rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
+                      className="block w-full px-4 py-2 text-white bg-gray-100 hover:bg-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
                       onClick={handleLogout}
                     >
                       Đăng xuất
