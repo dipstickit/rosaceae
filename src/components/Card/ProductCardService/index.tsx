@@ -1,3 +1,4 @@
+import { Link, useNavigate } from "react-router-dom";
 import { Heading, Text, Img, RatingBar } from "./../..";
 
 interface Props {
@@ -7,6 +8,7 @@ interface Props {
   itemPrice?: number;
   discount?: number;
   itemType?: string;
+  id?:number;
 }
 
 export default function ProductCardService({
@@ -15,19 +17,23 @@ export default function ProductCardService({
   itemPrice = 199.0,
   discount = 25,
   itemType = "Sản Phẩm",
+  id,
   ...props
 }: Props) {
+  const navigate = useNavigate();
+
   const discountedPrice = itemPrice - (itemPrice / 100) * discount;
   return (
     <div
       {...props}
       className={`${props.className} flex flex-col items-center w-full`}
     >
+      <Link to={`/item/${id}`}>
       <Img
         src={itemImages[0]?.imageUrl}
         alt="image"
         className="h-[282px] w-full object-cover md:h-auto"
-      />
+      /></Link>
       <div className="mt-4 flex flex-col items-center w-full">
         <Heading
           as="h6"

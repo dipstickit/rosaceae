@@ -185,6 +185,7 @@ export default function SpaDetailPage() {
                     itemName={product.itemName}
                     itemPrice={product.itemPrice}
                     discount={product.discount}
+                    id={product.itemId}
                   />
                   ))}
                 </div>
