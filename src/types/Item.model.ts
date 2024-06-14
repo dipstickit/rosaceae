@@ -21,30 +21,28 @@ export interface Item {
         itemTypeName: string;
       };
 }
-// export interface Category {
-//     categoryId: number;
-//     categoryName: string;
-//   }
+export interface Category {
+    categoryId: number;
+    categoryName: string;
+  }
   
-//   export interface ItemType {
-//     itemTypeId: number;
-//     itemTypeName: string;
-//   }
+  export interface ItemType {
+    itemTypeId: number;
+    itemTypeName: string;
+  }
   
-//   export interface Item {
-//     itemId: number;
-//     itemName: string;
-//     itemPrice: number;
-//     itemDescription: string;
-//     itemRate: number;
-//     itemImages: Image[];
-//     commentCount: number;
-//     countUsage: number;
-//     quantity: number;
-//     discount: number;
-//     category: Category;
-//     itemType: ItemType;
-//   }
+  export interface Items {
+    itemId: number;
+    itemName: string;
+    itemPrice: number;
+    itemDescription: string;
+    itemRate: number;
+    itemImages: Image[];
+    commentCount: number;
+    countUsage: number;
+    quantity: number;
+    discount: number;
+  }
 
 export interface ResponseData {
     content: Item[];

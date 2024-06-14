@@ -9,7 +9,7 @@ import { AuthData } from "../types/authData.type";
 import { ResponseData } from "../types/responseData.type";
 
 const instance: AxiosInstance = axios.create({
-    baseURL: "https://8e5d-113-161-74-165.ngrok-free.app/api/v1/",
+    baseURL: "https://93b9-118-71-127-9.ngrok-free.app/api/v1/",
     withCredentials: true,
     headers: {
         "Access-Control-Allow-Origin": "*",
@@ -40,7 +40,15 @@ const instance: AxiosInstance = axios.create({
 //     }
 // );
 
-
+instance.interceptors.request.use(config => {
+    const token = localStorage.getItem('token'); // Hoặc lấy token từ bất kỳ nơi nào bạn lưu
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
+    }
+    return config;
+  }, error => {
+    return Promise.reject(error);
+  });
 
 // // Add a response interceptor
 // instance.interceptors.response.use(

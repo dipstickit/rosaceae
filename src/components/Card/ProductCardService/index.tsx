@@ -1,5 +1,9 @@
 import { Link, useNavigate } from "react-router-dom";
 import { Heading, Text, Img, RatingBar } from "./../..";
+import { useDispatch } from "react-redux";
+import { add } from "../../../store/cartSlice";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 interface Props {
   className?: string;
@@ -8,7 +12,7 @@ interface Props {
   itemPrice?: number;
   discount?: number;
   itemType?: string;
-  id?: number;
+  itemId?: number;
 }
 
 export default function ProductCardService({
@@ -17,19 +21,39 @@ export default function ProductCardService({
   itemPrice = 199.0,
   discount = 25,
   itemType = "Sản Phẩm",
-  id,
+  itemId,
   ...props
 }: Props) {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
-  const discountedPrice = itemPrice - (itemPrice / 100) * discount;
+  const formatPrice = (price: number): string => {
+    return price.toLocaleString("vi-VN", {
+      style: "currency",
+      currency: "VND",
+    });
+  };
+  // const discountedPrice = itemPrice - (itemPrice / 100) * discount;
+
+  const handleAddToCart = () => {
+    const product = {
+      itemImages,
+      itemName,
+      itemPrice,
+      discount,
+      itemType,
+      itemId,
+    };
+    dispatch(add(product));
+    toast.success("Đã thêm 1 sản phẩm vào giỏ!");
+  };
 
   return (
     <div
       {...props}
       className={`${props.className} flex flex-col items-center w-full p-4 bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300`}
     >
-      <Link to={`/item/${id}`} className="w-full">
+      <Link to={`/item/${itemId}`} className="w-full">
         <Img
           src={itemImages[0]?.imageUrl}
           alt="image"
@@ -39,7 +63,7 @@ export default function ProductCardService({
       <div className="mt-4 flex flex-col items-center w-full">
         <Heading
           as="h6"
-          className="tracking-[0.50px] !text-indigo-900 text-center text-lg font-semibold"
+          className="tracking-[0.50px] text-indigo-900 text-center text-lg font-semibold"
         >
           {itemName}
         </Heading>
@@ -54,16 +78,13 @@ export default function ProductCardService({
           />
         </div>
         <div className="flex flex-wrap items-center justify-center mt-2 space-x-2">
-          <Heading as="h6" className="tracking-[0.50px] text-lg text-light_blue-A200">
-            đ{discountedPrice.toFixed(0)}
-          </Heading>
-          <Text
+          <Heading
             size="xl"
             as="p"
-            className="tracking-[0.50px] line-through text-gray-500"
+            className="tracking-[0.50px] text-sm font-bold text-gray-900"
           >
-            đ{itemPrice.toFixed(0)}
-          </Text>
+            {formatPrice(itemPrice)}
+          </Heading>
           <Heading
             size="s"
             as="p"
@@ -72,12 +93,14 @@ export default function ProductCardService({
             {discount}% OFF
           </Heading>
         </div>
-        {/* <Heading
-          as="h6"
-          className="tracking-[0.50px] !text-indigo-900 text-center mt-2 text-sm font-medium"
-        >
-          {itemType}
-        </Heading> */}
+        <div className="w-full mt-4">
+          <button
+            onClick={handleAddToCart}
+            className="w-full bg-orange-600 text-white py-2 px-4 rounded-full font-bold hover:bg-orange-700 transition duration-300"
+          >
+            <Text> Thêm vào giỏ hàng</Text>
+          </button>
+        </div>
       </div>
     </div>
   );

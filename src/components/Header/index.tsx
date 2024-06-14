@@ -7,6 +7,7 @@ import { logoutUser } from "../../store/authActions";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Text } from "../../components/Text";
+import { CustomizedBadges } from "../CustomizedBadges";
 
 interface Props {
   className?: string;
@@ -103,13 +104,7 @@ export default function Header({ ...props }: Props) {
                 className="h-[28px] w-[28px]"
               />
             </Link>
-            <Link to="/cart">
-              <Img
-                src="../../../public/images/img_bi_bag_dash.svg"
-                alt="bibagdash"
-                className="h-[26px] w-[26px]"
-              />
-            </Link>
+            <CustomizedBadges />
           </div>
           {accessToken && userInformation ? (
             <div

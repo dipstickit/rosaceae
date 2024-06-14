@@ -6,9 +6,32 @@ export default {
   ],
   darkMode: "class",
   theme: {
-    screens: { md: { max: "1050px" }, sm: { max: "550px" } },
+    screens: {
+      md: { max: "1050px" },
+      sm: { max: "550px" },
+      sx: "640px",
+      // => @media (min-width: 640px) { ... }
+
+      ml: "768px",
+      // => @media (min-width: 768px) { ... }
+      lg: "1024px",
+      // => @media (min-width: 1024px) { ... }
+
+      xl: "1280px",
+      // => @media (min-width: 1280px) { ... }
+
+      "2xl": "1536px",
+      // => @media (min-width: 1536px) { ... }
+    },
     extend: {
       colors: {
+        transparentBlack: "#969696",
+        primary: "#000000",
+        primaryy: "#E5BC69",
+        secondary: "#F8bc7c",
+        tertiary: "#9fa57c",
+        quaternary: "#e2bea9",
+        quinary: "#e8e2c9",
         white: { A700: "#ffffff", A700_cc: "#ffffffcc", A700_33: "#ffffff33" },
         blue: {
           100: "#cde7ff",
@@ -17,6 +40,11 @@ export default {
           A700: "#2d60ff",
           A200_02: "#4078ec",
           A400: "#2f80ed",
+        },
+        pastel: {
+          100: "#F2D0D3",
+          200: "#F2E9E9",
+          300: "F1E0B0",
         },
         cyan: {
           50: "#e2fff2",
@@ -202,17 +230,14 @@ export default {
         volkhov: "Volkhov",
         sura: "Sura",
         roboto: "Roboto",
-        applesystem:"-apple-system",
-        BlinkMacSystemFont:"BlinkMacSystemFont",
-        SegoeUI:"Segoe UI",
-        Helvetica:"Helvetica",
-        Arial:"Arial",
-        sansserif:"sans-serif",
-        AppleColorEmoji:"Apple Color Emoji",
-        SegoeUIEmoji:"Segoe UI Emoji"
-
-
-
+        applesystem: "-apple-system",
+        BlinkMacSystemFont: "BlinkMacSystemFont",
+        SegoeUI: "Segoe UI",
+        Helvetica: "Helvetica",
+        Arial: "Arial",
+        sansserif: "sans-serif",
+        AppleColorEmoji: "Apple Color Emoji",
+        SegoeUIEmoji: "Segoe UI Emoji",
       },
       textShadow: { ts: "0px 5px 13px #ffffff66" },
     },
