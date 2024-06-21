@@ -32,7 +32,7 @@ const Footer: React.FC<Props> = ({ className, ...props }) => {
                 “For the Love of Natural Beauty and Care”
               </Text>
               <Img
-                src="images/img_image_3.png"
+                src="http://res.cloudinary.com/dpxs39hkb/image/upload/v1718990818/tbgdiyfzhnnqnzkve85y.png"
                 alt="imagethree"
                 className="h-12 w-full object-cover md:h-auto mt-12"
               />
