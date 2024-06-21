@@ -65,7 +65,7 @@ const Header = ({ className }: Props) => {
     >
       <Link to="/">
         <Img
-          src="../../../public/images/img_header_logo.png"
+          src="http://res.cloudinary.com/dpxs39hkb/image/upload/v1718988677/uajyaf0i57hcj6alz6oy.png"
           alt="headerlogo"
           className="h-[45px] w-[54px] object-contain ml-[12rem]"
         />
@@ -142,11 +142,6 @@ const Header = ({ className }: Props) => {
               </Heading>
               <div className="relative">
                 <button className="text-gray-900 focus:outline-none">
-                  {/* <Img
-                    src="../../../public/images/img_checkmark.svg"
-                    alt="checkmark"
-                    className="w-[20px] h-[20px]"
-                  /> */}
                   <ChevronDownIcon />
                 </button>
                 {dropdownOpen && (
