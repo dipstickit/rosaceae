@@ -74,7 +74,7 @@ export default function BookingServiceDetailPage() {
           </button>
 
           <div className="container-xs mt-[27px] md:p-5">
-            <div className="gap-[15px] flex sm:flex-col">
+            {/* <div className="gap-[15px] flex sm:flex-col">
               <Input
                 color="gray_500_01"
                 size="lg"
@@ -105,7 +105,7 @@ export default function BookingServiceDetailPage() {
               >
                 1120, Phạm Văn Đồng, TP Hồ Chí Minh
               </Button>
-            </div>
+            </div> */}
           </div>
           <SelectBox
             className="container-xs mt-[27px] border border-solid border-gray-500 font-bevietnam11 font-bold md:p-5 sm:px-5 sm:pt-5"
