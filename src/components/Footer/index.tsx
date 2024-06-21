@@ -2,7 +2,7 @@ import React from "react";
 import { Heading } from "../Heading";
 import { Text } from "../Text";
 import { Img } from "../Img";
-
+import { CiFacebook } from "react-icons/ci";
 interface Props {
   className?: string;
 }
@@ -16,7 +16,7 @@ const Footer: React.FC<Props> = ({ className, ...props }) => {
             <div className="flex flex-col items-start gap-5 md:gap-3 md:items-center ml-[2rem]">
               <div className="flex items-center gap-2">
                 <Img
-                  src="../../../public/images/img_mask_group.png"
+                  src="http://res.cloudinary.com/dpxs39hkb/image/upload/v1718989859/fcg3qiqmvsz8dnc2lods.png"
                   alt="image"
                   className="h-8 object-cover"
                 />
@@ -32,10 +32,11 @@ const Footer: React.FC<Props> = ({ className, ...props }) => {
                 “For the Love of Natural Beauty and Care”
               </Text>
               <Img
-                src="../../../public/images/img_image_3.png"
+                src="images/img_image_3.png"
                 alt="imagethree"
                 className="h-12 w-full object-cover md:h-auto mt-12"
               />
+              {/* <CiFacebook/> */}
             </div>
             <div className="flex flex-col gap-5 md:gap-3">
               <Heading
