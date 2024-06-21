@@ -1,18 +1,22 @@
+import { useNavigate } from "react-router-dom";
 import { Button, Heading, RatingBar, Img } from "./../..";
 interface Props {
   className?: string;
   title?: string;
   buttontext?: string;
   userimage?: string;
-  ratingCount?: number; // New prop
+  ratingCount?: number;
+  id:number
 }
 export default function ProductList({
   title = "",
   buttontext = "",
   userimage = "",
   ratingCount = 54,
+  id,
   ...props
 }: Props) {
+  const navigate = useNavigate()
   return (
     <div
       {...props}
@@ -23,7 +27,6 @@ export default function ProductList({
           <div className="w-[27%] h-[143px] relative md:w-full">
             <Img
               src={userimage}
-              alt="gà_spa"
               className="h-[143px] absolute bottom-0 left-0 right-0 top-0 m-auto w-full rounded object-cover"
             />
           </div>
@@ -55,6 +58,7 @@ export default function ProductList({
           </div>
         </div>
         <Button
+        onClick={() => navigate(`/spadetail/${id}`)}
           color="teal_200"
           size="xs"
           className="rounded-[13px] min-w-[130px] mb-[17px] self-end font-mulish7 font-extrabold uppercase sm:px-5"

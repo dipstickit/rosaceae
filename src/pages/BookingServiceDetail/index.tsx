@@ -3,8 +3,10 @@ import { Button, Heading, Img, SelectBox, Input } from "../../components";
 import DateBooking from "../../components/DateBooking";
 import Footer from "../../components/Footer";
 import Header from "../../components/Header";
-import ListEmploy from "../../components/ListEmploy";
-import { OptionProps } from "react-select";
+import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { SpaLocation } from "../../types/spaLocation.type";
+import BookingSalon from "../BookingSalon";
 
 const dropDownOptions = [
   { label: "Option1", value: "option1" },
@@ -15,18 +17,20 @@ const dateBookingData = [
   { time: "13:20" },
   { time: "13:30" },
   { time: "14:00" },
-  // Add more time slots as needed
-];
-
-const employeesData = [
-  { imgIrl: "images/img_rectangle_6056.png", title: "Uyên Nhi" },
-  { imgIrl: "images/img_rectangle_6056.png", title: "Ánh Nhi" },
-  { imgIrl: "images/img_rectangle_6056.png", title: "Vân Anh" },
-  { imgIrl: "images/img_rectangle_6056.png", title: "Hoa Nhi" },
-  // Add more employees as needed
 ];
 
 export default function BookingServiceDetailPage() {
+  const navigate = useNavigate();
+  const [receivedData, setReceivedData] = useState<string>("");
+
+  const handleButtonClick = () => {
+    navigate("/bookingsalon");
+  };
+
+  const handleReceiveData = (spa: SpaLocation) => {
+    setReceivedData(spa.accountName);
+  };
+
   return (
     <>
       <Helmet>
@@ -44,53 +48,33 @@ export default function BookingServiceDetailPage() {
               <Heading
                 size="12xl"
                 as="h1"
-                className="!font-bevietnam11 !text-black-900"
+                className="!font-bevietnam11 !text-black-900 text-center "
               >
-                Đặt lịch tại thành phố Hồ Chí Minh
+                Đặt lịch giữ chỗ
               </Heading>
-              <div className="flex items-start justify-between gap-5">
-                <Img
-                  src="images/img_linkedin.svg"
-                  alt="linkedin"
-                  className="w-[50px] h-[50px]"
-                />
-
-                <Img
-                  src="images/img_arrow_down_gray_900_02.svg"
-                  alt="arrowdown"
-                  className="mb-[21px] h-[20px]"
-                />
-              </div>
             </div>
           </div>
-          <SelectBox
-            className="container-xs mt-[70px] border border-solid border-gray-500 font-bevietnam11 font-bold md:p-5 sm:px-5 sm:pt-5"
-            shape="round"
-            indicator={
-              <Img
-                src="images/img_arrowdown_black_900.svg"
-                alt="arrow_down"
-                className="h-[10px] w-[20px]"
-              />
-            }
-            getOptionLabel={(e: OptionProps) => (
-              <>
-                <div className="flex items-center">
-                  <Img
-                    src="images/img_iconhomeunselected.svg"
-                    alt="icon_home_unselected"
-                    className="h-[25px] w-[22px]"
-                  />
-                  <span>{e.label}</span>
-                </div>
-              </>
-            )}
-            name="chnspa"
-            placeholder={`Chọn Spa `}
-            options={dropDownOptions}
-          />
+          <button
+            className="container-xs mt-[27px] border border-solid border-gray-500 font-bevietnam11 font-bold md:p-5 sm:px-5 sm:pt-5 rounded-lg"
+            onClick={handleButtonClick}
+          >
+            <img
+              src="images/img_iconhomeunselected.svg"
+              alt="icon_home_unselected"
+              className="h-[20px] w-[22px] mr-2 mt-2"
+              style={{ alignSelf: "center" }}
+            />
+            <Heading className="text-left opacity-50 ml-8 mb-4" size="md">
+              {receivedData ? (
+                <BookingSalon onSelectSpa={handleReceiveData} />
+              ) : (
+                "Chọn Spa"
+              )}
+            </Heading>
+          </button>
+
           <div className="container-xs mt-[27px] md:p-5">
-            <div className="gap-[15px] flex sm:flex-col">
+            {/* <div className="gap-[15px] flex sm:flex-col">
               <Input
                 color="gray_500_01"
                 size="lg"
@@ -121,7 +105,7 @@ export default function BookingServiceDetailPage() {
               >
                 1120, Phạm Văn Đồng, TP Hồ Chí Minh
               </Button>
-            </div>
+            </div> */}
           </div>
           <SelectBox
             className="container-xs mt-[27px] border border-solid border-gray-500 font-bevietnam11 font-bold md:p-5 sm:px-5 sm:pt-5"
@@ -173,41 +157,6 @@ export default function BookingServiceDetailPage() {
               </Button>
             </div>
           </div>
-          <SelectBox
-            className="container-xs mt-[27px] border border-solid border-gray-500 font-bevietnam11 font-bold md:p-5 sm:px-5 sm:pt-5"
-            shape="round"
-            indicator={
-              <Img
-                src="images/img_arrowdown_black_900.svg"
-                alt="arrow_down"
-                className="h-[10px] w-[20px]"
-              />
-            }
-            getOptionLabel={(e: OptionProps) => (
-              <>
-                <div className="flex items-center">
-                  <Img
-                    src="images/img_settings_black_900.svg"
-                    alt="settings"
-                    className="h-[25px] w-[20px]"
-                  />
-                  <span>{e.label}</span>
-                </div>
-              </>
-            )}
-            name="chnnhnvin"
-            placeholder={`Chọn Nhân Viên`}
-            options={dropDownOptions}
-          />
-          
-          {/* {employeesData.map((item, index) => (
-            <ListEmploy
-              key={"makeupservice17" + index}
-              className="gap-[34px] items-center md:w-full"
-              {...item}
-            />
-          ))} */}
-          <ListEmploy />
           <div className="container-xs rounded-[10px] pb-[15px] mt-[27px] flex justify-center border border-solid border-gray-500 bg-gray-100_04 px-3.5 pt-3.5 md:p-5">
             <div className="flex w-full items-center justify-between gap-5 sm:flex-col">
               <div className="gap-[15px] flex items-center self-end">

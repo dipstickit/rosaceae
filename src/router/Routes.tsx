@@ -2,7 +2,6 @@ import { useRoutes } from "react-router-dom";
 import NotFound from "../pages/NotFound";
 import Thumnail from "../pages/Thumnail";
 import Signup from "../pages/Signup";
-import Login from "../pages/Login";
 import HomePage from "../pages/HomePage";
 import MakeupServicePage from "../pages/MakeupServicePage";
 import ForgotPasswordPage from "../pages/Forgotpassword";
@@ -24,6 +23,9 @@ import SettingPageThreePage from "../pages/SettingPageThree";
 import NotificationsupdatepasswordPage from "../pages/Notificationsupdatepassword";
 import DashboardDesignPage from "../pages/DashboardDesign";
 import ReportrevenuePage from "../pages/Reportrevenue";
+import LoginPage from "../pages/Login";
+import ItemDetail from "../pages/ItemDetail";
+import BookingSalon from "../pages/BookingSalon";
 
 const RosaceaeRoutes = () => {
   const element = useRoutes([
@@ -31,20 +33,21 @@ const RosaceaeRoutes = () => {
     { path: "*", element: <NotFound /> },
     { path: "thumnail", element: <Thumnail /> },
     { path: "signup", element: <Signup /> },
-    { path: "login", element: <Login /> },
+    { path: "login", element: <LoginPage /> },
     { path: "home", element: <HomePage /> },
-    { path: "makeupservicepage", element: <MakeupServicePage /> },
+    { path: "item", element: <MakeupServicePage /> },
     { path: "forgotpassword", element: <ForgotPasswordPage /> },
     { path: "service", element: <ServicePage /> },
     { path: "spa", element: <SpaPage /> },
-    { path: "spadetail", element: <SpaDetailPage /> },
+    { path: "spadetail/:id", element: <SpaDetailPage /> },
+    { path: "item/:id", element: <ItemDetail /> },
     { path: "spafeedback", element: <SpafeedbackPage /> },
     { path: "booking", element: <BookingServiceDetailPage /> },
-    { path: "cart", element: <CartPage /> },
+    // { path: "cart", element: <CartPage /> },
     { path: "verify", element: <EmailVerifyPage /> },
     { path: "profilepage", element: <ProfilePage /> },
     { path: "address", element: <AddressPage /> },
-    { path: "payment", element: <PaymentPage /> },
+    { path: "checkout", element: <PaymentPage /> },
     { path: "aboutus", element: <AboutUsPage /> },
     { path: "contact", element: <ContactPage /> },
     // { path: "noti", element: <NotificationsupdatepasswordPage /> },
@@ -53,10 +56,7 @@ const RosaceaeRoutes = () => {
     { path: "settingpage3", element: <SettingPageThreePage /> },
     { path: "dashboard", element: <DashboardDesignPage /> },
     { path: "reportave", element: <ReportrevenuePage /> },
-
-
-
-
+    { path: "bookingsalon", element: <BookingSalon /> },
   ]);
   return element;
 };

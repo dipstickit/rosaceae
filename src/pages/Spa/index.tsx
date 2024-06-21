@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Helmet } from "react-helmet";
-import { Button, Heading } from "../../components";
+import { Heading } from "../../components";
 import Footer from "../../components/Footer";
 import Header from "../../components/Header";
 import ProductList from "../../components/Card/ProductList";
+import shopService from "../../api/shop.api";
+import Pagination from "../../components/Pagination";
 
 interface Props {
   className?: string;
@@ -13,28 +15,30 @@ interface Props {
   ratingCount?: number;
 }
 
-const spaData: Props[] = [
-  {
-    title: "Gà Spa",
-    buttontext: "XEM CHI TIẾT",
-    userimage: "images/img_rectangle_14_143x225.png",
-    ratingCount: 54,
-  },
-  {
-    title: "Seoul Center",
-    buttontext: "XEM CHI TIẾT",
-    userimage: "images/img_rectangle_14_4.png",
-    ratingCount: 78,
-  },
-  {
-    title: "Serene Spa",
-    buttontext: "XEM CHI TIẾT",
-    userimage: "images/img_rectangle_14_4.png",
-    ratingCount: 62,
-  },
-];
-
 const SpaPage: React.FC = () => {
+  const [shops, setShops]:any = useState([])
+  const [page, setPage] = useState(0)
+  const [totalPage, setTotalPage] = useState(1)
+  
+  const fetchShop = async () => {
+    shopService
+      .getShop({page, size:10})
+      .then((res: any) => {
+        console.log("shop", res);
+        setShops(res.data.content);
+        setTotalPage(res.data.totalPages)
+      })
+      .catch((error) => {
+        console.error("Error fetching items:", (error as Error).message);
+      });
+  };
+  useEffect(() => {
+    fetchShop()
+  },[page])
+
+  const onPageChange = async (page:number) => {
+    setPage(page-1)
+  }
   return (
     <>
       <Helmet>
@@ -56,24 +60,18 @@ const SpaPage: React.FC = () => {
               >
                 Danh sách Spa
               </Heading>
-              {spaData.map((spa, index) => (
-                <ProductList
+              {shops.map((shop:any,index:number) => <ProductList
                   key={index}
-                  title={spa.title}
-                  buttontext={spa.buttontext}
-                  userimage={spa.userimage}
-                  ratingCount={spa.ratingCount}
-                />
-              ))}
+                  title={shop.accountName}
+                  buttontext={"XEM CHI TIẾT"}
+                  userimage={shop.coverImages}
+                  ratingCount={shop.rate}
+                  id={shop.usersID}
+                />)}
+             
             </div>
           </div>
-          <Button
-            color="blue_gray_100_02"
-            size="8xl"
-            className="rounded-[10px] min-w-[388px] font-manrope7 font-extrabold sm:px-5 mb-[15px]"
-          >
-            Hiển thị thêm
-          </Button>
+          <Pagination currentPage={page+1} totalPages={totalPage} onPageChange={onPageChange}/>
         </div>
       </div>
       <Footer />
