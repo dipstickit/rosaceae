@@ -89,12 +89,12 @@ const BookingSalon = ({ onSelectSpa }: BookingSalonProps) => {
 
   const handleSelectSpa = (spa: SpaLocation) => {
     console.log("Selected spa:", spa);
-    if (typeof onSelectSpa === "function") {
-      onSelectSpa(spa);
-    } else {
-      console.error("onSelectSpa is not a function");
-    }
-    navigate("/booking");
+    // if (typeof onSelectSpa === "function") {
+    //   onSelectSpa(spa);
+    // } else {
+    //   console.error("onSelectSpa is not a function");
+    // }
+    navigate(`/booking?spa=${spa.accountName}`);
   };
 
   const handleFindNearbySpas = async (
