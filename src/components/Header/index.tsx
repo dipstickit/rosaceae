@@ -3,8 +3,9 @@ import { Button } from "../Button";
 import { Heading } from "../Heading";
 import { Img } from "../Img";
 import { useSelector, useDispatch } from "react-redux";
+import { RootState } from "../../store/store";
 import { logoutUser } from "../../store/authActions";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Text } from "../../components/Text";
 import { CustomizedBadges } from "../CustomizedBadges";
@@ -17,11 +18,13 @@ interface Props {
 const Header = ({ className }: Props) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  let accessToken = useSelector((state: any) => state.auth.accessToken);
-  let userInformation = useSelector((state: any) => state.userInfo.userInfo);
+  let accessToken = useSelector((state: RootState) => state.auth.accessToken);
+  let userInformation = useSelector(
+    (state: RootState) => state.userInfo.userInfo
+  );
 
   // Check local storage
-  if (accessToken === null) {
+  if (!accessToken) {
     const tokenFromLocalStorage = localStorage.getItem("access-token");
     const userFromLocalStorage = localStorage.getItem("user-info");
     if (tokenFromLocalStorage) {
@@ -41,20 +44,24 @@ const Header = ({ className }: Props) => {
     navigate("/login");
   };
 
+  useEffect(() => {
+    const script = document.createElement("script");
+    script.type = "text/javascript";
+    script.id = "hs-script-loader";
+    script.async = true;
+    script.defer = true;
+    script.src = "//js-na1.hs-scripts.com/46526271.js";
+    document.head.appendChild(script);
+
+    return () => {
+      document.head.removeChild(script);
+    };
+  }, []);
+
   return (
     <header
       className={`${className} flex items-center py-[25px] border-blue_gray-100_01 border-b border-solid relative`}
     >
-      <div className="absolute bottom-0 right-0 mb-2 mr-2 z-50">
-        <script
-          type="text/javascript"
-          id="hs-script-loader"
-          async
-          defer
-          src="https://js-na1.hs-scripts.com/46526271.js"
-        ></script>
-      </div>
-
       <Link to="/">
         <Img
           src="../../../public/images/img_header_logo.png"
@@ -62,6 +69,7 @@ const Header = ({ className }: Props) => {
           className="h-[45px] w-[54px] object-contain ml-[12rem]"
         />
       </Link>
+
       <div className="mx-auto flex w-full max-w-[1079px] items-center justify-between gap-5 md:flex-col">
         <ul className="flex flex-wrap gap-[34px]">
           <li>
@@ -105,11 +113,13 @@ const Header = ({ className }: Props) => {
             </Link>
           </li>
         </ul>
+
         <div className="flex items-center gap-[30px]">
           <div className="flex items-center gap-[30px]">
             <SearchIcon />
             <CustomizedBadges />
           </div>
+
           {accessToken && userInformation ? (
             <div
               className="relative flex items-center gap-2.5"
@@ -119,7 +129,7 @@ const Header = ({ className }: Props) => {
               <div className="rounded-full w-[42px] h-[42px] bg-blue_gray-100_02 flex items-center justify-center">
                 {/* User avatar or placeholder */}
                 <span className="text-gray-900 font-semibold">
-                  {userInformation.accountName[0]}
+                  {userInformation.accountName?.[0]}
                 </span>
               </div>
               <Heading

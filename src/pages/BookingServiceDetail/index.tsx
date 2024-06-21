@@ -3,7 +3,7 @@ import { Button, Heading, Img, SelectBox, Input } from "../../components";
 import DateBooking from "../../components/DateBooking";
 import Footer from "../../components/Footer";
 import Header from "../../components/Header";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { useState } from "react";
 import { SpaLocation } from "../../types/spaLocation.type";
 import BookingSalon from "../BookingSalon";
@@ -22,6 +22,7 @@ const dateBookingData = [
 export default function BookingServiceDetailPage() {
   const navigate = useNavigate();
   const [receivedData, setReceivedData] = useState<string>("");
+  const [searchParams, setSearchParams] = useSearchParams();
 
   const handleButtonClick = () => {
     navigate("/bookingsalon");
@@ -65,7 +66,9 @@ export default function BookingServiceDetailPage() {
               style={{ alignSelf: "center" }}
             />
             <Heading className="text-left opacity-50 ml-8 mb-4" size="md">
-              {receivedData ? (
+              {searchParams.get("spa") !== null ? (
+                searchParams.get("spa")
+              ) : receivedData ? (
                 <BookingSalon onSelectSpa={handleReceiveData} />
               ) : (
                 "Chọn Spa"
