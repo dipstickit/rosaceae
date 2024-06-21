@@ -37,7 +37,7 @@ export default function Header({ ...props }: Props) {
     localStorage.removeItem("access-token");
     localStorage.removeItem("user-info");
     dispatch(logoutUser());
-    navigate('/login');
+    navigate("/login");
   };
 
   return (

@@ -25,6 +25,7 @@ import DashboardDesignPage from "../pages/DashboardDesign";
 import ReportrevenuePage from "../pages/Reportrevenue";
 import LoginPage from "../pages/Login";
 import ItemDetail from "../pages/ItemDetail";
+import BookingSalon from "../pages/BookingSalon";
 
 const RosaceaeRoutes = () => {
   const element = useRoutes([
@@ -55,6 +56,7 @@ const RosaceaeRoutes = () => {
     { path: "settingpage3", element: <SettingPageThreePage /> },
     { path: "dashboard", element: <DashboardDesignPage /> },
     { path: "reportave", element: <ReportrevenuePage /> },
+    { path: "bookingsalon", element: <BookingSalon /> },
   ]);
   return element;
 };

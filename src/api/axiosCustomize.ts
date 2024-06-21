@@ -1,22 +1,20 @@
-
 import axios, {
-    AxiosInstance,
-    AxiosResponse,
-    AxiosError,
-    InternalAxiosRequestConfig,
+  AxiosInstance,
+  AxiosResponse,
+  AxiosError,
+  InternalAxiosRequestConfig,
 } from "axios";
 import { AuthData } from "../types/authData.type";
 import { ResponseData } from "../types/responseData.type";
 
 const instance: AxiosInstance = axios.create({
-    baseURL: "https://93b9-118-71-127-9.ngrok-free.app/api/v1/",
-    withCredentials: true,
-    headers: {
-        "Access-Control-Allow-Origin": "*",
-        'ngrok-skip-browser-warning': 'true',
-    },
+  baseURL: "https://be27-113-22-107-62.ngrok-free.app/api/v1/",
+  withCredentials: true,
+  headers: {
+    "Access-Control-Allow-Origin": "*",
+    "ngrok-skip-browser-warning": "true",
+  },
 });
-
 
 // instance.interceptors.request.use(
 //     function (config: InternalAxiosRequestConfig<any>) {
@@ -40,15 +38,18 @@ const instance: AxiosInstance = axios.create({
 //     }
 // );
 
-instance.interceptors.request.use(config => {
-    const token = localStorage.getItem('token'); // Hoặc lấy token từ bất kỳ nơi nào bạn lưu
+instance.interceptors.request.use(
+  (config) => {
+    const token = localStorage.getItem("token"); // Hoặc lấy token từ bất kỳ nơi nào bạn lưu
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
     }
     return config;
-  }, error => {
+  },
+  (error) => {
     return Promise.reject(error);
-  });
+  }
+);
 
 // // Add a response interceptor
 // instance.interceptors.response.use(
