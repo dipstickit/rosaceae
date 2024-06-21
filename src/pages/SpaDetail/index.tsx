@@ -95,14 +95,14 @@ export default function SpaDetailPage() {
               categories={categories}
               setCategoryName={setCategoryName}
               setMinMax={setMinMax}
-              className="mt-60"
+              className="mt-96"
             />
             <div className="flex flex-1 flex-col gap-1 md:self-stretch md:p-5">
               <div className="gap-[17px] w-[95%] flex flex-col md:w-full">
                 <Img
-                  src="/public/OfferBanner.png"
+                  src="https://res.cloudinary.com/dpxs39hkb/image/upload/v1718990047/jvrp9ex08kejnhzeqbn0.png"
                   alt="image"
-                  className="h-[232px] object-cover r"
+                  className="h-[375px] w-full object-cover object-center"
                 />
                 <div className="gap-[53px] grid grid-cols-3 justify-center md:grid-cols-1 mb-[20px]">
                   {items.map((product: any, index) => (
