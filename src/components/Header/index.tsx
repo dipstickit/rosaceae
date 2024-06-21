@@ -10,6 +10,7 @@ import { useNavigate } from "react-router-dom";
 import { Text } from "../../components/Text";
 import { CustomizedBadges } from "../CustomizedBadges";
 import { SearchIcon } from "../SearchIcon";
+import ChevronDownIcon from "../icon/icondropdown";
 
 interface Props {
   className?: string;
@@ -141,11 +142,12 @@ const Header = ({ className }: Props) => {
               </Heading>
               <div className="relative">
                 <button className="text-gray-900 focus:outline-none">
-                  <Img
+                  {/* <Img
                     src="../../../public/images/img_checkmark.svg"
                     alt="checkmark"
                     className="w-[20px] h-[20px]"
-                  />
+                  /> */}
+                  <ChevronDownIcon />
                 </button>
                 {dropdownOpen && (
                   <div className="absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded-md shadow-lg z-10">
