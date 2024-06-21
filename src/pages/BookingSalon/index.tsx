@@ -99,10 +99,10 @@ export default function BookingSalon({ onSelectSpa }: any) {
 
   const handleSelectSpa = (spa: SpaLocation) => {
     console.log("Selected spa:", spa);
-    if (onSelectSpa) {
-      onSelectSpa(spa);
-      navigate("/booking");
-    }
+    navigate(`/booking?spa=${spa.accountName}`);
+    // if (onSelectSpa) {
+    //   onSelectSpa(spa);
+    // }
   };
 
   const handleFindNearbySpas = async (
