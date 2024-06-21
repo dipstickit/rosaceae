@@ -8,12 +8,13 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Text } from "../../components/Text";
 import { CustomizedBadges } from "../CustomizedBadges";
+import { SearchIcon } from "../SearchIcon";
 
 interface Props {
   className?: string;
 }
 
-export default function Header({ ...props }: Props) {
+const Header = ({ className }: Props) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   let accessToken = useSelector((state: any) => state.auth.accessToken);
@@ -42,9 +43,18 @@ export default function Header({ ...props }: Props) {
 
   return (
     <header
-      {...props}
-      className={`${props.className} flex items-center py-[25px] border-blue_gray-100_01 border-b border-solid`}
+      className={`${className} flex items-center py-[25px] border-blue_gray-100_01 border-b border-solid relative`}
     >
+      <div className="absolute bottom-0 right-0 mb-2 mr-2 z-50">
+        <script
+          type="text/javascript"
+          id="hs-script-loader"
+          async
+          defer
+          src="https://js-na1.hs-scripts.com/46526271.js"
+        ></script>
+      </div>
+
       <Link to="/">
         <Img
           src="../../../public/images/img_header_logo.png"
@@ -97,13 +107,7 @@ export default function Header({ ...props }: Props) {
         </ul>
         <div className="flex items-center gap-[30px]">
           <div className="flex items-center gap-[30px]">
-            <Link to="/search">
-              <Img
-                src="../../../public/images/img_search_gray_900_06.svg"
-                alt="search"
-                className="h-[28px] w-[28px]"
-              />
-            </Link>
+            <SearchIcon />
             <CustomizedBadges />
           </div>
           {accessToken && userInformation ? (
@@ -159,4 +163,6 @@ export default function Header({ ...props }: Props) {
       </div>
     </header>
   );
-}
+};
+
+export default Header;
