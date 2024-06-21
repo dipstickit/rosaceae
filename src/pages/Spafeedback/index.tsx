@@ -44,7 +44,7 @@ export default function SpafeedbackPage() {
       </Helmet>
       <Header />
       <div className="bg-gray-100_08 py-4 flex justify-center items-center px-5 font-bold">
-        <Link to="/spadetail" className="text-black pr-2">
+        <Link to="/spadetail/" className="text-black pr-2">
           Trang chủ /
         </Link>
         <div className="text-blue-400">Đánh giá</div>

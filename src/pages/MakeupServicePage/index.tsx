@@ -4,28 +4,51 @@ import Footer from "../../components/Footer";
 import Header from "../../components/Header";
 import ProductCard from "../../components/Card/ProductCard";
 import { Link } from "react-router-dom";
-
-interface ProductData {
-  img: string;
-  title: string;
-}
-const data: ProductData[] = [
-  {
-    img: "images/img_rectangle_6003.png",
-    title: "Trang điểm basic",
-  },
-  {
-    img: "images/img_rectangle_6004.png",
-    title: "Trang điểm douyin",
-
-  },
-  {
-    img: "images/img_rectangle_6005.png",
-    title: "Trang điểm cô dâu",
-  },
-];
+import productService from "../../api/product.api";
+import categoryService from "../../api/category.api";
+import { useEffect, useState } from "react";
+import { Item, ResponseData } from "../../types/Item.model";
+import Pagination from "../../components/Pagination";
 
 export default function MakeupServicePagePage() {
+  const [listProducts, setListProducts] = useState<Item[]>([]);
+  const [categories, setCategories] = useState([]);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [error, setError] = useState<string | null>(null);
+
+  const fetchItem = async () => {
+    try {
+      const response = await productService.getItem({});
+      console.log("Response headers:", response.headers);
+      console.log("Response data:", response.data);
+
+      if (response.data.content) {
+        setListProducts(response.data.content);
+      } else {
+        throw new Error("No content in response data.");
+      }
+    } catch (error) {
+      console.error("Error fetching items:", (error as Error).message);
+    }
+  };
+
+  const fetchCategories = async () => {
+    categoryService
+      .getCategories()
+      .then((res: any) => {
+        console.log("categories", res);
+        setCategories(res.data.content);
+      })
+      .catch((error) => {
+        setError((error as Error).message);
+        console.error("Error fetching items:", (error as Error).message);
+      });
+  };
+  useEffect(() => {
+    fetchItem();
+    fetchCategories();
+  }, []);
+
   return (
     <>
       <Helmet>
@@ -35,7 +58,7 @@ export default function MakeupServicePagePage() {
           content="Web site created using create-react-app"
         />
       </Helmet>
-      <Header/>
+      <Header />
       <div className="max-w-[1353px] mt-[46px] mx-auto flex w-full flex-col items-center md:p-5">
         <div className="h-[637px] relative self-stretch">
           <Text
@@ -74,184 +97,47 @@ export default function MakeupServicePagePage() {
           </div>
         </div>
 
-        <div className="gap-[43px] flex flex-1 flex-col mt-[5rem]">
-          <div className="flex items-center justify-between gap-5 md:flex-col">
-            <div className="flex py-2.5">
-              <Heading
-                size="11xl"
-                as="h3"
-                className="!font-suwannaphum13 !text-gray-900_06"
-              >
-                Trang điểm hàng ngày
-              </Heading>
-            </div>
-            <Link to="/service">
-            <Button
-              shape="round"
-              className="min-w-[210px] mb-2.5 self-end !rounded-sm border border-solid border-gray-900_06 font-montserrat13 sm:px-5"
-            >
-              Khám phá tất cả
-            </Button>
-            </Link>
-          </div>
-          <div className="gap-[130px] w-[96%] flex md:w-full md:flex-col">
-            {data.map((item, index) => (
-              <ProductCard
-                key={"makeupservice17" + index}
-                className="gap-[34px] items-center md:w-full"
-                {...item} // Spread the item object as props
-              />
-            ))}
-          </div>
-        </div>
+        <div className="gap-[43px] flex flex-1 flex-col mt-[5rem]"></div>
         <div className="gap-[188px] mt-[221px] w-[97%] flex flex-col md:w-full">
-          <div className="flex flex-1 pt-1">
-            <div className="gap-[43px] flex w-full flex-col">
-              <div className="flex items-center justify-between gap-5">
-                <Heading
-                  size="11xl"
-                  as="h2"
-                  className="!font-sura13 !text-gray-900_06"
-                >
-                  Gội đầu
-                </Heading>
-                <Button
-                  shape="round"
-                  className="min-w-[210px] !rounded-sm border border-solid border-gray-900_06 font-montserrat13 sm:px-5"
-                >
-                  Khám phá tất cả
-                </Button>
+          {categories.map((cate: any) => (
+            <>
+              <div className="flex flex-1 pt-1">
+                <div className="gap-[43px] flex w-full flex-col">
+                  <div className="flex items-center justify-between gap-5">
+                    <Heading
+                      size="11xl"
+                      as="h2"
+                      className="!font-sura13 !text-gray-900_06"
+                    >
+                      {cate?.categoryName}
+                    </Heading>
+                    <Button
+                      shape="round"
+                      className="min-w-[210px] !rounded-sm border border-solid border-gray-900_06 font-montserrat13 sm:px-5"
+                    >
+                      Khám phá tất cả
+                    </Button>
+                  </div>
+                  <div className="gap-[130px] w-[96%] flex md:w-full md:flex-col">
+                    {listProducts
+                      .filter(
+                        (p: any) => p?.category?.categoryId == cate?.categoryId
+                      )
+                      .slice(0, 2)
+                      .map((item, index) => (
+                        <ProductCard
+                          key={index}
+                          className="gap-[34px] items-center md:w-full"
+                          title={item.itemName}
+                          img={item?.itemImages[0]?.imageUrl}
+                          id={item.itemId}
+                        />
+                      ))}
+                  </div>
+                </div>
               </div>
-              <div className="gap-[130px] w-[96%] flex md:w-full md:flex-col">
-                {data.map((item, index) => (
-                  <ProductCard
-                    key={"makeupservice17" + index}
-                    className="gap-[34px] items-center md:w-full"
-                    {...item} // Spread the item object as props
-                  />
-                ))}
-              </div>
-            </div>
-          </div>
-          <div className="gap-[43px] flex flex-1 flex-col">
-            <div className="flex items-center justify-between gap-5 md:flex-col">
-              <div className="flex py-2.5">
-                <Heading
-                  size="11xl"
-                  as="h3"
-                  className="!font-suwannaphum13 !text-gray-900_06"
-                >
-                  Làm nail
-                </Heading>
-              </div>
-              <Button
-                shape="round"
-                className="min-w-[210px] mb-2.5 self-end !rounded-sm border border-solid border-gray-900_06 font-montserrat13 sm:px-5"
-              >
-                Khám phá tất cả
-              </Button>
-            </div>
-            <div className="gap-[130px] w-[96%] flex md:w-full md:flex-col">
-              {data.map((item, index) => (
-                <ProductCard
-                  key={"makeupservice17" + index}
-                  className="gap-[34px] items-center md:w-full"
-                  {...item}
-                />
-              ))}
-            </div>
-          </div>
-          <div className="gap-[46px] flex flex-1 flex-col">
-            <div className="flex items-start justify-between gap-5">
-              <Heading
-                size="11xl"
-                as="h4"
-                className="mb-[5px] !font-syne13 !font-semibold !text-gray-900_06"
-              >
-                Nối Mi
-              </Heading>
-              <Button
-                shape="round"
-                className="min-w-[210px] !rounded-sm border border-solid border-gray-900_06 font-montserrat13 sm:px-5"
-              >
-                Khám phá tất cả
-              </Button>
-            </div>
-            <div className="gap-[130px] w-[96%] flex md:w-full md:flex-col">
-              {data.map((item, index) => (
-                <ProductCard
-                  key={"makeupservice17" + index}
-                  className="gap-[34px] items-center md:w-full"
-                  {...item} // Spread the item object as props
-                />
-              ))}
-            </div>
-          </div>
-        </div>
-        <div className="mt-[156px] flex gap-3 md:flex-col">
-          <div className="rounded-[19px] p-[19px] flex flex-col items-center border-2 border-solid border-blue_gray-50_04 bg-white-A700">
-            <Img
-              src="images/img_icon_pagination.svg"
-              alt="iconpagination"
-              className="w-[38px] h-[38px]"
-            />
-          </div>
-          <div className="rounded-[19px] p-[19px] flex flex-col items-center border-2 border-solid border-blue_gray-50_04 bg-white-A700">
-            <Img
-              src="images/img_icon_pagination_black_900.svg"
-              alt="iconpagination"
-              className="w-[38px] h-[38px]"
-            />
-          </div>
-          <Button
-            color="blue_A400"
-            size="10xl"
-            className="rounded-[19px] min-w-[77px] font-opensans13 sm:px-5"
-          >
-            1
-          </Button>
-          <Button
-            color="white_A700"
-            size="10xl"
-            className="rounded-[19px] min-w-[77px] border-2 border-solid border-blue_gray-50_04 font-opensans13 sm:px-5"
-          >
-            2
-          </Button>
-          <Button
-            color="white_A700"
-            size="10xl"
-            className="rounded-[19px] min-w-[77px] border-2 border-solid border-blue_gray-50_04 font-opensans13 sm:px-5"
-          >
-            3
-          </Button>
-          <Button
-            color="white_A700"
-            size="10xl"
-            className="rounded-[19px] min-w-[77px] font-opensans13 sm:px-5"
-          >
-            ...
-          </Button>
-          <Button
-            color="white_A700"
-            size="10xl"
-            className="rounded-[19px] min-w-[77px] border-2 border-solid border-blue_gray-50_04 font-opensans13"
-          >
-            10
-          </Button>
-          <div className="rounded-[19px] p-[19px] flex flex-col items-center border-2 border-solid border-blue_gray-50_04 bg-white-A700">
-            <Img
-              src="images/img_icon_pagination_black_900_38x38.svg"
-              alt="iconpagination"
-              className="w-[38px] h-[38px]"
-            />
-          </div>
-          <div className="rounded-[19px] p-[19px] flex flex-col items-center border-2 border-solid border-blue_gray-50_04 bg-white-A700">
-            <Img
-              src="images/img_icon_pagination_38x38.svg"
-              alt="iconpagination"
-              className="w-[38px] h-[38px]"
-            />
-          </div>
+            </>
+          ))}
         </div>
       </div>
       <Footer className="mt-[15px]" />

@@ -16,7 +16,7 @@ const Footer: React.FC<Props> = ({ className, ...props }) => {
             <div className="flex flex-col items-start gap-5 md:gap-3 md:items-center ml-[2rem]">
               <div className="flex items-center gap-2">
                 <Img
-                  src="images/img_mask_group.png"
+                  src="../../../public/images/img_mask_group.png"
                   alt="image"
                   className="h-8 object-cover"
                 />
@@ -32,7 +32,7 @@ const Footer: React.FC<Props> = ({ className, ...props }) => {
                 “For the Love of Natural Beauty and Care”
               </Text>
               <Img
-                src="images/img_image_3.png"
+                src="../../../public/images/img_image_3.png"
                 alt="imagethree"
                 className="h-12 w-full object-cover md:h-auto mt-12"
               />

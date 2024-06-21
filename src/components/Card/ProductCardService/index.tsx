@@ -1,35 +1,71 @@
+import { Link, useNavigate } from "react-router-dom";
 import { Heading, Text, Img, RatingBar } from "./../..";
+import { useDispatch } from "react-redux";
+import { add } from "../../../store/cartSlice";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 interface Props {
   className?: string;
-  userimage?: string;
-  title?: string;
-  saleprice?: string;
-  oriprice?: string;
-  saleoff?: string;
+  itemImages?: any[];
+  itemName?: string;
+  itemPrice?: number;
+  discount?: number;
+  itemType?: string;
+  itemId?: number;
 }
 
 export default function ProductCardService({
-  userimage = "images/img_rectangle_6028.png",
-  title = "Massage cổ vai gáy",
-  oriprice = "₫199.000",
-  saleprice = "₫199.000",
-  saleoff = "25% Off",
+  itemImages = [],
+  itemName = "Massage cổ vai gáy",
+  itemPrice = 199.0,
+  discount = 25,
+  itemType = "Sản Phẩm",
+  itemId,
   ...props
 }: Props) {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const formatPrice = (price: number): string => {
+    return price.toLocaleString("vi-VN", {
+      style: "currency",
+      currency: "VND",
+    });
+  };
+  // const discountedPrice = itemPrice - (itemPrice / 100) * discount;
+
+  const handleAddToCart = () => {
+    const product = {
+      itemImages,
+      itemName,
+      itemPrice,
+      discount,
+      itemType,
+      itemId,
+    };
+    dispatch(add(product));
+    toast.success("Đã thêm 1 sản phẩm vào giỏ!");
+  };
+
   return (
     <div
       {...props}
-      className={`${props.className} flex flex-col items-center w-full`}
+      className={`${props.className} flex flex-col items-center w-full p-4 bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300`}
     >
-      <Img
-        src={userimage}
-        alt="image"
-        className="h-[282px] w-full object-cover md:h-auto"
-      />
+      <Link to={`/item/${itemId}`} className="w-full">
+        <Img
+          src={itemImages[0]?.imageUrl}
+          alt="image"
+          className="h-[282px] w-full object-cover rounded-t-lg"
+        />
+      </Link>
       <div className="mt-4 flex flex-col items-center w-full">
-        <Heading as="h6" className="tracking-[0.50px] !text-indigo-900 text-center">
-          {title}
+        <Heading
+          as="h6"
+          className="tracking-[0.50px] text-indigo-900 text-center text-lg font-semibold"
+        >
+          {itemName}
         </Heading>
         <div className="flex justify-center w-full mt-2">
           <RatingBar
@@ -41,24 +77,29 @@ export default function ProductCardService({
             className="flex"
           />
         </div>
-        <div className="flex flex-wrap items-center justify-center mt-2">
-          <Heading as="h6" className="tracking-[0.50px] !text-light_blue-A200">
-            {saleprice}
-          </Heading>
-          <Text
+        <div className="flex flex-wrap items-center justify-center mt-2 space-x-2">
+          <Heading
             size="xl"
             as="p"
-            className="tracking-[0.50px] ml-[5px] line-through !text-gray-500"
+            className="tracking-[0.50px] text-sm font-bold text-gray-900"
           >
-            {oriprice}
-          </Text>
+            {formatPrice(itemPrice)}
+          </Heading>
           <Heading
             size="s"
             as="p"
-            className="tracking-[0.50px] ml-2 text-sm font-bold !text-pink-300"
+            className="tracking-[0.50px] text-sm font-bold text-pink-300"
           >
-            {saleoff}
+            {discount}% OFF
           </Heading>
+        </div>
+        <div className="w-full mt-4">
+          <button
+            onClick={handleAddToCart}
+            className="w-full bg-orange-600 text-white py-2 px-4 rounded-full font-bold hover:bg-orange-700 transition duration-300"
+          >
+            <Text> Thêm vào giỏ hàng</Text>
+          </button>
         </div>
       </div>
     </div>

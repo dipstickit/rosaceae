@@ -2,7 +2,7 @@ import instance from "./axiosCustomize";
 
 export const UserApi = {
     Login: (data: LoginInfo) => {
-        return instance.post('/api/v1/auth/login', data, {
+        return instance.post("auth/login", data, {
             headers: {
                 crossDomain: true,
                 'Content-Type': 'application/json'
@@ -11,7 +11,7 @@ export const UserApi = {
     },
 
     Register: (data: RegisterInfo) => {
-        return instance.post('/api/v1/auth/register', data, {
+        return instance.post('auth/register', data, {
             headers: {
                 crossDomain: true,
                 'Content-Type': 'application/json'
@@ -20,7 +20,7 @@ export const UserApi = {
     },
 
     ForgotPassword: (e: string) => {
-        return instance.post('/api/v1/auth/forgot-password', { email: e }, {
+        return instance.post('auth/forgot-password', { email: e }, {
             headers: {
                 crossDomain: true,
                 'Content-Type': 'application/json'
@@ -29,7 +29,7 @@ export const UserApi = {
     },
 
     EmailVerify: (token: string) => {
-        return instance.post('/api/v1/auth/email-verify', { token: token }, {
+        return instance.post('auth/email-verify', { token: token }, {
             headers: {
                 crossDomain: true,
                 'Content-Type': 'application/json'
@@ -38,7 +38,7 @@ export const UserApi = {
     },
 
     GetUserByEmail: (email: string, token: string) => {
-        return instance.get(`/api/v1/user?email=${email}`, {
+        return instance.get(`user?email=${email}`, {
             headers: {
                 crossDomain: true,
                 Authorization: `Bearer ${token}`,
@@ -49,7 +49,7 @@ export const UserApi = {
     },
 
     EditProfile: (token: string, data: UserInfo) => {
-        return instance.post(`/api/v1/user/edit-profile`, data, {
+        return instance.post(`user/edit-profile`, data, {
             headers: {
                 crossDomain: true,
                 Authorization: `Bearer ${token}`,
