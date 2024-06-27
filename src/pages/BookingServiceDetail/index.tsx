@@ -13,6 +13,7 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DesktopDatePicker } from "@mui/x-date-pickers/DesktopDatePicker";
 import TextField from "@mui/material/TextField";
 import dayjs, { Dayjs } from "dayjs";
+import { useSelector } from "react-redux";
 
 const dropDownOptions = [
   { label: "Option1", value: "option1" },
@@ -25,6 +26,12 @@ interface ServiceItem {
   itemName: string;
   // Add other properties as needed
 }
+interface BookingInfo {
+  email: string
+  itemId: number
+  datetime: number
+  timeBookingId: number
+}
 const dateBookingData = await bookingApi.getTimeBooking()
 
 export default function BookingServiceDetailPage() {
@@ -33,7 +40,22 @@ export default function BookingServiceDetailPage() {
   const [searchParams, setSearchParams] = useSearchParams();
   const [itemNames, setItemNames] = useState<ServiceItem[]>([]);
   const [selectedDate, setSelectedDate] = useState<Dayjs | null>(dayjs());
-
+  let accessToken = useSelector((state: any) => state.auth.accessToken)
+  let userInformation = useSelector((state: any) => state.userInfo.userInfo)
+  console.log(userInformation)
+  if (localStorage.getItem('access-token') !== null && localStorage.getItem('user-info') !== null) {
+    accessToken = localStorage.getItem('access-token')
+    userInformation = JSON.parse(localStorage.getItem('user-info')!)
+  }
+  else {
+    navigate("/login")
+  }
+  const [bookingInfo, setBookingInfo] = useState<BookingInfo>({
+    email: userInformation.email,
+    itemId: 0,
+    datetime: 0,
+    timeBookingId: 0
+  });
   useEffect(() => {
     if (searchParams.get("sid") !== null) {
       const fetchItemTypes = async () => {
@@ -70,13 +92,29 @@ export default function BookingServiceDetailPage() {
     setReceivedData(spa.accountName);
   };
 
-  const handleSelect = (e: ChangeEvent<HTMLSelectElement>) => {
-    console.log(e)
+  const handleSelect = (e: any) => {
+    updateBookingInfo({ itemId: e.value })
   }
 
   const handleDateChange = (newValue: Dayjs | null) => {
+    console.log(newValue)
     setSelectedDate(newValue);
+    updateBookingInfo({
+      datetime: newValue?.toDate().getTime(),
+    })
   };
+
+  const updateBookingInfo = (newInfo: Partial<BookingInfo>) => {
+    setBookingInfo((prevInfo) => ({
+      ...prevInfo,
+      ...newInfo,
+    }));
+  };
+
+  const submit = async () => {
+    const res = await bookingApi.createBooking(bookingInfo)
+    console.log(res)
+  }
 
   return (
     <>
@@ -174,7 +212,7 @@ export default function BookingServiceDetailPage() {
           </div> */}
           <div className="container-xs rounded-[10px] pb-[15px] mt-[27px] flex justify-center border border-solid border-gray-500 bg-gray-100_04 px-3.5 pt-3.5 md:p-5">
             <div className="flex w-full items-center justify-between gap-5 sm:flex-col">
-              <div className="gap-[15px] flex items-center self-end">
+              <div className="gap-[15px] flex items-center self-end" style={{ width: '100%' }}>
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
                   <DesktopDatePicker
                     label="Ngày"
@@ -183,15 +221,15 @@ export default function BookingServiceDetailPage() {
                     onChange={handleDateChange}
                   />
                 </LocalizationProvider>
-                <TextField
+                {/* <TextField
                   value={selectedDate ? selectedDate.format("MM/DD/YYYY") : ""}
                   onChange={(e) => {
                     const newDate = dayjs(e.target.value, "MM/DD/YYYY");
                     setSelectedDate(newDate.isValid() ? newDate : null);
                   }}
-                />
+                /> */}
               </div>
-              <div className="flex items-center gap-5">
+              {/* <div className="flex items-center gap-5">
                 <Button
                   color="green_A100"
                   size="md"
@@ -205,7 +243,7 @@ export default function BookingServiceDetailPage() {
                   alt="arrowdown"
                   className="h-[10px]"
                 />
-              </div>
+              </div> */}
             </div>
           </div>
           <div className="container-xs pr-[9px] pb-[50px] mt-[27px] flex justify-center md:p-5 md:pb-5">
@@ -216,6 +254,7 @@ export default function BookingServiceDetailPage() {
                     key={item.timeID}
                     className="gap-[34px] items-center md:w-full"
                     time={item.time}
+                    clickEvent={() => { console.log(item.timeID), updateBookingInfo({ timeBookingId: item.timeID }) }}
                   />
                 ))}
               </div>
@@ -226,6 +265,7 @@ export default function BookingServiceDetailPage() {
               color="blue_gray_100_02"
               size="8xl"
               className="rounded-[10px] w-full font-extrabold sm:px-5 mb-[2rem]"
+              onClick={submit}
             >
               HOÀN TẤT
             </Button>

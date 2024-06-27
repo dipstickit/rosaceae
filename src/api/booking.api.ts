@@ -18,8 +18,13 @@ const getTimeBooking = (): Promise<AxiosResponse<any>> => {
   return instance.get('booking/time-booking')
 }
 
+const createBooking = (bookingInfo: any): Promise<AxiosResponse<any>> => {
+  return instance.post('booking', bookingInfo)
+}
+
 export default {
   getAllLocation,
   getLocationNearBy,
-  getTimeBooking
+  getTimeBooking,
+  createBooking
 };
