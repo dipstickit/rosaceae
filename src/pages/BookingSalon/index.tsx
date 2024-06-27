@@ -15,11 +15,7 @@ import spaService from "../../api/booking.api";
 import { SpaLocation } from "../../types/spaLocation.type";
 import { useNavigate } from "react-router-dom";
 
-type BookingSalonProps = {
-  onSelectSpa: (spa: SpaLocation) => void;
-};
-
-const BookingSalon = ({ onSelectSpa }: BookingSalonProps) => {
+export default function BookingSalon({ onSelectSpa }: any) {
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [spas, setSpas] = useState<SpaLocation[]>([]);
   const [filteredSpas, setFilteredSpas] = useState<SpaLocation[]>([]);
@@ -51,17 +47,31 @@ const BookingSalon = ({ onSelectSpa }: BookingSalonProps) => {
   const fetchSpaLocation = async () => {
     try {
       setLoading(true);
-      const response = await spaService.getLocationNearBy();
-      if (response && response.data) {
-        const data: any = response.data;
-        setSpas(data);
-        setFilteredSpas(data);
-        setLoading(false);
-        setShowSpas(true);
-      } else {
-        console.error("Failed to fetch spas data");
-        setLoading(false);
-      }
+      navigator.geolocation.getCurrentPosition(
+        async (position) => {
+          const latitude = position.coords.latitude;
+          const longitude = position.coords.longitude;
+
+          const response = await spaService.getLocationNearBy(
+            latitude,
+            longitude
+          );
+
+          if (response && response.data) {
+            const data: any = response.data;
+            setSpas(data);
+            setFilteredSpas(data);
+            setShowSpas(true);
+          } else {
+            console.error("Failed to fetch spas data");
+          }
+          setLoading(false);
+        },
+        (error) => {
+          console.error("Error getting current position:", error);
+          setLoading(false);
+        }
+      );
     } catch (error) {
       console.error("Error fetching spas data:", error);
       setLoading(false);
@@ -89,12 +99,10 @@ const BookingSalon = ({ onSelectSpa }: BookingSalonProps) => {
 
   const handleSelectSpa = (spa: SpaLocation) => {
     console.log("Selected spa:", spa);
-    // if (typeof onSelectSpa === "function") {
+    navigate(`/booking?spa=${spa.accountName}&sid=${spa.usersID}`);
+    // if (onSelectSpa) {
     //   onSelectSpa(spa);
-    // } else {
-    //   console.error("onSelectSpa is not a function");
     // }
-    navigate(`/booking?spa=${spa.accountName}`);
   };
 
   const handleFindNearbySpas = async (
@@ -204,6 +212,4 @@ const BookingSalon = ({ onSelectSpa }: BookingSalonProps) => {
       <Footer />
     </div>
   );
-};
-
-export default BookingSalon;
+}

@@ -6,12 +6,20 @@ const getAllLocation = (): Promise<AxiosResponse<SpaLocation>> => {
   return instance.get(`location`);
 };
 
-const getLocationNearBy = (): Promise<AxiosResponse<SpaLocation>> => {
-  return instance.get(
-    `location/nearby-spa?latitude=10.868614&longitude=106.762813&radiusKm=10`
-  );
+const getLocationNearBy = (
+  latitude: number,
+  longitude: number
+): Promise<AxiosResponse<SpaLocation>> => {
+  const url = `location/nearby-spa?latitude=${latitude}&longitude=${longitude}&radiusKm=10`;
+  return instance.get(url);
 };
+
+const getTimeBooking = (): Promise<AxiosResponse<any>> => {
+  return instance.get('booking/time-booking')
+}
+
 export default {
   getAllLocation,
   getLocationNearBy,
+  getTimeBooking
 };

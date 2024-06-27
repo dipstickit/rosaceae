@@ -3,24 +3,29 @@ import { Button } from "../Button";
 import { Heading } from "../Heading";
 import { Img } from "../Img";
 import { useSelector, useDispatch } from "react-redux";
+import { RootState } from "../../store/store";
 import { logoutUser } from "../../store/authActions";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Text } from "../../components/Text";
 import { CustomizedBadges } from "../CustomizedBadges";
+import { SearchIcon } from "../SearchIcon";
+import ChevronDownIcon from "../icon/icondropdown";
 
 interface Props {
   className?: string;
 }
 
-export default function Header({ ...props }: Props) {
+const Header = ({ className }: Props) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  let accessToken = useSelector((state: any) => state.auth.accessToken);
-  let userInformation = useSelector((state: any) => state.userInfo.userInfo);
+  let accessToken = useSelector((state: RootState) => state.auth.accessToken);
+  let userInformation = useSelector(
+    (state: RootState) => state.userInfo.userInfo
+  );
 
   // Check local storage
-  if (accessToken === null) {
+  if (!accessToken) {
     const tokenFromLocalStorage = localStorage.getItem("access-token");
     const userFromLocalStorage = localStorage.getItem("user-info");
     if (tokenFromLocalStorage) {
@@ -40,18 +45,32 @@ export default function Header({ ...props }: Props) {
     navigate("/login");
   };
 
+  useEffect(() => {
+    const script = document.createElement("script");
+    script.type = "text/javascript";
+    script.id = "hs-script-loader";
+    script.async = true;
+    script.defer = true;
+    script.src = "//js-na1.hs-scripts.com/46526271.js";
+    document.head.appendChild(script);
+
+    return () => {
+      document.head.removeChild(script);
+    };
+  }, []);
+
   return (
     <header
-      {...props}
-      className={`${props.className} flex items-center py-[25px] border-blue_gray-100_01 border-b border-solid`}
+      className={`${className} flex items-center py-[25px] border-blue_gray-100_01 border-b border-solid relative`}
     >
       <Link to="/">
         <Img
-          src="../../../public/images/img_header_logo.png"
+          src="http://res.cloudinary.com/dpxs39hkb/image/upload/v1718988677/uajyaf0i57hcj6alz6oy.png"
           alt="headerlogo"
           className="h-[45px] w-[54px] object-contain ml-[12rem]"
         />
       </Link>
+
       <div className="mx-auto flex w-full max-w-[1079px] items-center justify-between gap-5 md:flex-col">
         <ul className="flex flex-wrap gap-[34px]">
           <li>
@@ -95,17 +114,13 @@ export default function Header({ ...props }: Props) {
             </Link>
           </li>
         </ul>
+
         <div className="flex items-center gap-[30px]">
           <div className="flex items-center gap-[30px]">
-            <Link to="/search">
-              <Img
-                src="../../../public/images/img_search_gray_900_06.svg"
-                alt="search"
-                className="h-[28px] w-[28px]"
-              />
-            </Link>
+            <SearchIcon />
             <CustomizedBadges />
           </div>
+
           {accessToken && userInformation ? (
             <div
               className="relative flex items-center gap-2.5"
@@ -115,7 +130,7 @@ export default function Header({ ...props }: Props) {
               <div className="rounded-full w-[42px] h-[42px] bg-blue_gray-100_02 flex items-center justify-center">
                 {/* User avatar or placeholder */}
                 <span className="text-gray-900 font-semibold">
-                  {userInformation.accountName[0]}
+                  {userInformation.accountName?.[0]}
                 </span>
               </div>
               <Heading
@@ -127,11 +142,7 @@ export default function Header({ ...props }: Props) {
               </Heading>
               <div className="relative">
                 <button className="text-gray-900 focus:outline-none">
-                  <Img
-                    src="../../../public/images/img_checkmark.svg"
-                    alt="checkmark"
-                    className="w-[20px] h-[20px]"
-                  />
+                  <ChevronDownIcon />
                 </button>
                 {dropdownOpen && (
                   <div className="absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded-md shadow-lg z-10">
@@ -159,4 +170,6 @@ export default function Header({ ...props }: Props) {
       </div>
     </header>
   );
-}
+};
+
+export default Header;

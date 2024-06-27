@@ -4,26 +4,55 @@ import DateBooking from "../../components/DateBooking";
 import Footer from "../../components/Footer";
 import Header from "../../components/Header";
 import { useNavigate, useSearchParams } from "react-router-dom";
-import { useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import { SpaLocation } from "../../types/spaLocation.type";
 import BookingSalon from "../BookingSalon";
-
+import bookingApi from "../../api/booking.api";
 const dropDownOptions = [
   { label: "Option1", value: "option1" },
   { label: "Option2", value: "option2" },
   { label: "Option3", value: "option3" },
 ];
-const dateBookingData = [
-  { time: "13:20" },
-  { time: "13:30" },
-  { time: "14:00" },
-];
+interface ServiceItem {
+  itemId: number;
+  itemName: string;
+  // Add other properties as needed
+}
+const dateBookingData = await bookingApi.getTimeBooking()
 
 export default function BookingServiceDetailPage() {
   const navigate = useNavigate();
   const [receivedData, setReceivedData] = useState<string>("");
   const [searchParams, setSearchParams] = useSearchParams();
 
+  const [itemNames, setItemNames] = useState<ServiceItem[]>([]);
+
+  useEffect(() => {
+    if (searchParams.get("sid") !== null) {
+      const fetchItemTypes = async () => {
+        try {
+          const response = await fetch(
+            `http://localhost:8080/api/v1/shop/${searchParams.get("sid")}?itemType=D%E1%BB%8Bch%20V%E1%BB%A5`
+          );
+          console.log("Response:", response);
+
+          if (!response.ok) {
+            throw new Error("Network response was not ok");
+          }
+          const data = await response.json();
+          const serviceItems: ServiceItem[] = data.items.content;
+          const names: ServiceItem[] = serviceItems.map(item => ({
+            itemId: item.itemId,
+            itemName: item.itemName
+          }));
+          setItemNames(names);
+        } catch (error) {
+          console.error("Error fetching item types:", error);
+        }
+      };
+      fetchItemTypes();
+    }
+  }, []);
   const handleButtonClick = () => {
     navigate("/bookingsalon");
   };
@@ -32,6 +61,10 @@ export default function BookingServiceDetailPage() {
     console.log(spa)
     setReceivedData(spa.accountName);
   };
+
+  const handleSelect = (e: ChangeEvent<HTMLSelectElement>) => {
+    console.log(e)
+  }
 
   return (
     <>
@@ -67,7 +100,9 @@ export default function BookingServiceDetailPage() {
               style={{ alignSelf: "center" }}
             />
             <Heading className="text-left opacity-50 ml-8 mb-4" size="md">
-              {searchParams.get("spa") !== null ? searchParams.get("spa") : receivedData ? (
+              {searchParams.get("spa") !== null ? (
+                searchParams.get("spa")
+              ) : receivedData ? (
                 <BookingSalon onSelectSpa={handleReceiveData} />
               ) : (
                 "Chọn Spa"
@@ -76,7 +111,7 @@ export default function BookingServiceDetailPage() {
           </button>
 
           <div className="container-xs mt-[27px] md:p-5">
-            <div className="gap-[15px] flex sm:flex-col">
+            {/* <div className="gap-[15px] flex sm:flex-col">
               <Input
                 color="gray_500_01"
                 size="lg"
@@ -107,7 +142,7 @@ export default function BookingServiceDetailPage() {
               >
                 1120, Phạm Văn Đồng, TP Hồ Chí Minh
               </Button>
-            </div>
+            </div> */}
           </div>
           <SelectBox
             className="container-xs mt-[27px] border border-solid border-gray-500 font-bevietnam11 font-bold md:p-5 sm:px-5 sm:pt-5"
@@ -121,9 +156,10 @@ export default function BookingServiceDetailPage() {
             }
             name="chndchv"
             placeholder={`Chọn Dịch Vụ`}
-            options={dropDownOptions}
+            options={itemNames ? itemNames.map((item) => ({ label: item.itemName, value: item.itemId })) : null}
+            onChange={handleSelect}
           />
-          <div className="container-xs mt-[27px] md:p-5">
+          {/* <div className="container-xs mt-[27px] md:p-5">
             <div className="gap-[15px] flex md:flex-col">
               <Button
                 color="gray_500_01"
@@ -158,7 +194,7 @@ export default function BookingServiceDetailPage() {
                 Nối Mi
               </Button>
             </div>
-          </div>
+          </div> */}
           <div className="container-xs rounded-[10px] pb-[15px] mt-[27px] flex justify-center border border-solid border-gray-500 bg-gray-100_04 px-3.5 pt-3.5 md:p-5">
             <div className="flex w-full items-center justify-between gap-5 sm:flex-col">
               <div className="gap-[15px] flex items-center self-end">
@@ -195,11 +231,11 @@ export default function BookingServiceDetailPage() {
           <div className="container-xs pr-[9px] pb-[50px] mt-[27px] flex justify-center md:p-5 md:pb-5">
             <div className="flex w-full flex-col gap-5">
               <div className="gap-[15px] flex flex-wrap">
-                {dateBookingData.map((item, index) => (
+                {dateBookingData.data.map((item: any, index: number) => (
                   <DateBooking
-                    key={"makeupservice17" + index}
+                    key={item.timeID}
                     className="gap-[34px] items-center md:w-full"
-                    {...item} // Spread the item object as props
+                    time={item.time}
                   />
                 ))}
               </div>

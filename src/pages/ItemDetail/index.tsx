@@ -128,19 +128,17 @@ export default function ItemDetail() {
                 Các dịch vụ khác
               </Heading>
               <div className="flex overflow-x-auto space-x-4 mt-4 w-full mb-10">
-                {listProducts
-                  .slice(0, 4)
-                  .map((item) => (
-                    <ProductCardService
-                      key={item.itemId}
-                      itemImages={item.itemImages}
-                      itemName={item.itemName}
-                      itemPrice={item.itemPrice}
-                      discount={item.discount}
-                      id={item.itemId}
-                      className="min-w-[200px]"
-                    />
-                  ))}
+                {listProducts.slice(0, 4).map((item) => (
+                  <ProductCardService
+                    key={item.itemId}
+                    itemImages={item.itemImages}
+                    itemName={item.itemName}
+                    itemPrice={item.itemPrice}
+                    discount={item.discount}
+                    itemId={item.itemId}
+                    className="min-w-[200px]"
+                  />
+                ))}
               </div>
             </div>
           </div>
