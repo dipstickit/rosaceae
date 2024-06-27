@@ -4,15 +4,19 @@ import DateBooking from "../../components/DateBooking";
 import Footer from "../../components/Footer";
 import Header from "../../components/Header";
 import { useNavigate, useSearchParams } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { SpaLocation } from "../../types/spaLocation.type";
 import BookingSalon from "../BookingSalon";
-
 const dropDownOptions = [
   { label: "Option1", value: "option1" },
   { label: "Option2", value: "option2" },
   { label: "Option3", value: "option3" },
 ];
+interface ServiceItem {
+  itemId: number;
+  itemName: string;
+  // Add other properties as needed
+}
 const dateBookingData = [
   { time: "13:20" },
   { time: "13:30" },
@@ -24,6 +28,30 @@ export default function BookingServiceDetailPage() {
   const [receivedData, setReceivedData] = useState<string>("");
   const [searchParams, setSearchParams] = useSearchParams();
 
+  const [itemNames, setItemNames] = useState<string[]>([]);
+
+  useEffect(() => {
+    const fetchItemTypes = async () => {
+      try {
+        const response = await fetch(
+          "https://be27-113-22-107-62.ngrok-free.app/api/v1/shop/3?itemType=D%E1%BB%8Bch%20V%E1%BB%A5"
+        );
+        console.log("Response:", response);
+
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        const data = await response.json();
+        const serviceItems: ServiceItem[] = data.items.content;
+        const names: string[] = serviceItems.map((item) => item.itemName);
+        setItemNames(names);
+      } catch (error) {
+        console.error("Error fetching item types:", error);
+      }
+    };
+
+    fetchItemTypes();
+  }, []);
   const handleButtonClick = () => {
     navigate("/bookingsalon");
   };
@@ -122,7 +150,8 @@ export default function BookingServiceDetailPage() {
             }
             name="chndchv"
             placeholder={`Chọn Dịch Vụ`}
-            options={dropDownOptions}
+            options={itemNames.map((name) => ({ label: name, value: name }))}
+            // onChange={handleSelectChange}
           />
           <div className="container-xs mt-[27px] md:p-5">
             <div className="gap-[15px] flex md:flex-col">
@@ -200,7 +229,7 @@ export default function BookingServiceDetailPage() {
                   <DateBooking
                     key={"makeupservice17" + index}
                     className="gap-[34px] items-center md:w-full"
-                    {...item} // Spread the item object as props
+                    {...item}
                   />
                 ))}
               </div>
