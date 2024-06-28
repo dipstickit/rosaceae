@@ -11,6 +11,7 @@ import { Text } from "../../components/Text";
 import { CustomizedBadges } from "../CustomizedBadges";
 import { SearchIcon } from "../SearchIcon";
 import ChevronDownIcon from "../icon/icondropdown";
+import { toast } from "react-toastify";
 
 interface Props {
   className?: string;
@@ -43,6 +44,15 @@ const Header = ({ className }: Props) => {
     localStorage.removeItem("user-info");
     dispatch(logoutUser());
     navigate("/login");
+    toast.success("Đăng xuất thành công", {
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: false,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+    });
   };
 
   useEffect(() => {
@@ -93,16 +103,16 @@ const Header = ({ className }: Props) => {
               <Heading as="p">Đặt Lịch</Heading>
             </Link>
           </li>
-          <li>
+          {/* <li>
             <Link to="/blog">
               <Heading as="p">Blog</Heading>
             </Link>
-          </li>
-          <li>
+          </li> */}
+          {/* <li>
             <Link to="/su-kien">
               <Heading as="p">Sự Kiện</Heading>
             </Link>
-          </li>
+          </li> */}
           <li>
             <Link to="/aboutus">
               <Heading as="p">Thông Tin</Heading>
@@ -117,7 +127,7 @@ const Header = ({ className }: Props) => {
 
         <div className="flex items-center gap-[30px]">
           <div className="flex items-center gap-[30px]">
-            <SearchIcon />
+            {/* <SearchIcon /> */}
             <CustomizedBadges />
           </div>
 
@@ -128,7 +138,6 @@ const Header = ({ className }: Props) => {
               onMouseLeave={() => setDropdownOpen(false)}
             >
               <div className="rounded-full w-[42px] h-[42px] bg-blue_gray-100_02 flex items-center justify-center">
-                {/* User avatar or placeholder */}
                 <span className="text-gray-900 font-semibold">
                   {userInformation.accountName?.[0]}
                 </span>
@@ -141,7 +150,10 @@ const Header = ({ className }: Props) => {
                 {userInformation.accountName}
               </Heading>
               <div className="relative">
-                <button className="text-gray-900 focus:outline-none">
+                <button
+                  className="text-gray-900 focus:outline-none"
+                  onClick={() => setDropdownOpen(!dropdownOpen)}
+                >
                   <ChevronDownIcon />
                 </button>
                 {dropdownOpen && (
@@ -150,8 +162,13 @@ const Header = ({ className }: Props) => {
                       className="block w-full text-white px-4 py-2 text-white bg-gray-800 hover:bg-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
                       onClick={handleLogout}
                     >
-                      <Text className="text-white"> Đăng xuất</Text>
+                      <Text className="text-white">Đăng xuất</Text>
                     </button>
+                    <Link to="profilepage">
+                      <button className="block w-full text-white px-4 py-2 text-white bg-gray-800 hover:bg-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">
+                        <Text className="text-white">Thông tin của tôi</Text>
+                      </button>
+                    </Link>
                   </div>
                 )}
               </div>
