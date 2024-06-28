@@ -240,7 +240,6 @@ export default function BookingServiceDetailPage() {
           <div className="container-xs pr-[9px] pb-[50px] mt-[27px] flex justify-center md:p-5 md:pb-5">
             <div className="flex w-full flex-col gap-5">
               <div className="gap-[15px] flex flex-wrap">
-                {/* Assuming dateBookingData.data is properly set elsewhere */}
                 {dateBookingData.data.map((item: any, index: number) => (
                   <DateBooking
                     key={item.timeID}
