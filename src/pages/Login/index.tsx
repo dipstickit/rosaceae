@@ -10,6 +10,7 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { setUserInfo } from "../../store/userActions";
 import { Input } from "../../components/Input";
+import { toast } from "react-toastify";
 
 export default function LoginPage() {
   const dispatch = useDispatch();
@@ -49,6 +50,7 @@ export default function LoginPage() {
         localStorage.setItem("user-info", JSON.stringify(userInfo));
         localStorage.setItem("usersID", JSON.stringify(data.usersID));
         navigate("/");
+        toast.success("Đăng nhập thành công!");
       } else if (result && result.data.status === 400) {
         alert(result.data.msg);
       } else {

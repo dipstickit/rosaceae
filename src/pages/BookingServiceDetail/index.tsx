@@ -14,6 +14,8 @@ import { DesktopDatePicker } from "@mui/x-date-pickers/DesktopDatePicker";
 import TextField from "@mui/material/TextField";
 import dayjs, { Dayjs } from "dayjs";
 import { useSelector } from "react-redux";
+import instance from "../../api/axiosCustomize";
+import { toast } from "react-toastify";
 
 const dropDownOptions = [
   { label: "Option1", value: "option1" },
@@ -62,18 +64,14 @@ export default function BookingServiceDetailPage() {
     if (searchParams.get("sid") !== null) {
       const fetchItemTypes = async () => {
         try {
-          const response = await fetch(
-            `https://80a9-42-117-186-213.ngrok-free.app/api/v1/shop/${searchParams.get(
-              "sid"
-            )}?itemType=D%E1%BB%8Bch%20V%E1%BB%A5`
+          const response = await instance.get(
+            `shop/${searchParams.get("sid")}?itemType=D%E1%BB%8Bch%20V%E1%BB%A5`
           );
           console.log("Response:", response);
 
-          if (!response.ok) {
-            throw new Error("Network response was not ok");
-          }
-          const data = await response.json();
+          const data = response.data;
           const serviceItems: ServiceItem[] = data.items.content;
+          console.log("Service items:", serviceItems);
           const names: ServiceItem[] = serviceItems.map((item) => ({
             itemId: item.itemId,
             itemName: item.itemName,
@@ -85,7 +83,7 @@ export default function BookingServiceDetailPage() {
       };
       fetchItemTypes();
     }
-  }, []);
+  }, [searchParams.get("sid")]);
 
   const handleButtonClick = () => {
     navigate("/bookingsalon");
@@ -106,6 +104,15 @@ export default function BookingServiceDetailPage() {
     updateBookingInfo({
       datetime: newValue?.toDate().getTime(),
     });
+    toast.success("Đã chọn thời gian thành công!", {
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: false,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+    });
   };
 
   const updateBookingInfo = (newInfo: Partial<BookingInfo>) => {
@@ -116,8 +123,30 @@ export default function BookingServiceDetailPage() {
   };
 
   const submit = async () => {
-    const res = await bookingApi.createBooking(bookingInfo);
-    console.log(res);
+    try {
+      const res = await bookingApi.createBooking(bookingInfo);
+      console.log(res);
+      toast.success("Đặt lịch thành công!", {
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
+    } catch (error) {
+      console.error("Error creating booking:", error);
+      toast.error("Đã xảy ra lỗi khi đặt lịch. Vui lòng thử lại sau.", {
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
+    }
   };
 
   return (
@@ -185,42 +214,6 @@ export default function BookingServiceDetailPage() {
             }
             onChange={handleSelect}
           />
-          {/* <div className="container-xs mt-[27px] md:p-5">
-            <div className="gap-[15px] flex md:flex-col">
-              <Button
-                color="gray_500_01"
-                size="7xl"
-                variant="outline"
-                className="rounded-[10px] w-full font-bevietnam11 sm:px-5"
-              >
-                Combo làm móng
-              </Button>
-              <Button
-                color="gray_500_01"
-                size="7xl"
-                variant="outline"
-                className="rounded-[10px] w-full font-bevietnam11 sm:px-5"
-              >
-                Làm mụn
-              </Button>
-              <Button
-                color="gray_500_01"
-                size="7xl"
-                variant="outline"
-                className="rounded-[10px] w-full font-bevietnam11 sm:px-5"
-              >
-                Mát xa toàn thân
-              </Button>
-              <Button
-                color="gray_500_01"
-                size="7xl"
-                variant="outline"
-                className="rounded-[10px] w-full font-bevietnam11 sm:px-5"
-              >
-                Nối Mi
-              </Button>
-            </div>
-          </div> */}
           <div className="container-xs rounded-[10px] pb-[15px] mt-[27px] flex justify-center border border-solid border-gray-500 bg-gray-100_04 px-3.5 pt-3.5 md:p-5">
             <div className="flex w-full items-center justify-between gap-5 sm:flex-col">
               <div
@@ -235,29 +228,7 @@ export default function BookingServiceDetailPage() {
                     onChange={handleDateChange}
                   />
                 </LocalizationProvider>
-                {/* <TextField
-                  value={selectedDate ? selectedDate.format("MM/DD/YYYY") : ""}
-                  onChange={(e) => {
-                    const newDate = dayjs(e.target.value, "MM/DD/YYYY");
-                    setSelectedDate(newDate.isValid() ? newDate : null);
-                  }}
-                /> */}
               </div>
-              {/* <div className="flex items-center gap-5">
-                <Button
-                  color="green_A100"
-                  size="md"
-                  shape="round"
-                  className="!rounded-[5px] min-w-[110px] font-bevietnam11"
-                >
-                  Ngày thường
-                </Button>
-                <Img
-                  src="images/img_arrowdown_black_900.svg"
-                  alt="arrowdown"
-                  className="h-[10px]"
-                />
-              </div> */}
             </div>
           </div>
           <div className="container-xs pr-[9px] pb-[50px] mt-[27px] flex justify-center md:p-5 md:pb-5">
@@ -271,6 +242,18 @@ export default function BookingServiceDetailPage() {
                     clickEvent={() => {
                       console.log(item.timeID),
                         updateBookingInfo({ timeBookingId: item.timeID });
+                      toast.success(
+                        `Đã chọn thời gian ${item.time} thành công!`,
+                        {
+                          autoClose: 3000,
+                          hideProgressBar: false,
+                          closeOnClick: true,
+                          pauseOnHover: false,
+                          draggable: true,
+                          progress: undefined,
+                          theme: "dark",
+                        }
+                      );
                     }}
                   />
                 ))}

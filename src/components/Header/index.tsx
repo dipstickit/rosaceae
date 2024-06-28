@@ -11,6 +11,7 @@ import { Text } from "../../components/Text";
 import { CustomizedBadges } from "../CustomizedBadges";
 import { SearchIcon } from "../SearchIcon";
 import ChevronDownIcon from "../icon/icondropdown";
+import { toast } from "react-toastify";
 
 interface Props {
   className?: string;
@@ -43,6 +44,15 @@ const Header = ({ className }: Props) => {
     localStorage.removeItem("user-info");
     dispatch(logoutUser());
     navigate("/login");
+    toast.success("Đăng xuất thành công", {
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: false,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+    });
   };
 
   useEffect(() => {

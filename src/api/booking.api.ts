@@ -15,16 +15,20 @@ const getLocationNearBy = (
 };
 
 const getTimeBooking = (): Promise<AxiosResponse<any>> => {
-  return instance.get('booking/time-booking')
-}
+  return instance.get("booking/time-booking");
+};
 
 const createBooking = (bookingInfo: any): Promise<AxiosResponse<any>> => {
-  return instance.post('booking', bookingInfo)
-}
+  return instance.post("booking", bookingInfo);
+};
+
+// const getBookingById = (customerID: number): Promise<AxiosResponse<any>> => {
+//   return instance.get(`order/customer/${customerID}`);
+// };
 
 export default {
   getAllLocation,
   getLocationNearBy,
   getTimeBooking,
-  createBooking
+  createBooking,
 };
