@@ -8,7 +8,8 @@ import { AuthData } from "../types/authData.type";
 import { ResponseData } from "../types/responseData.type";
 
 const instance: AxiosInstance = axios.create({
-  baseURL: "https://be27-113-22-107-62.ngrok-free.app/api/v1/",
+  // baseURL: "https://daa5-58-187-104-212.ngrok-free.app/api/v1/",
+  baseURL: "http://localhost:8080/api/v1/",
   withCredentials: true,
   headers: {
     "Access-Control-Allow-Origin": "*",

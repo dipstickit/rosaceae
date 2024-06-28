@@ -99,7 +99,7 @@ export default function BookingSalon({ onSelectSpa }: any) {
 
   const handleSelectSpa = (spa: SpaLocation) => {
     console.log("Selected spa:", spa);
-    navigate(`/booking?spa=${spa.accountName}`);
+    navigate(`/booking?spa=${spa.accountName}&sid=${spa.usersID}`);
     // if (onSelectSpa) {
     //   onSelectSpa(spa);
     // }
