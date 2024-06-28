@@ -77,12 +77,12 @@ const Header = ({ className }: Props) => {
         <Img
           src="http://res.cloudinary.com/dpxs39hkb/image/upload/v1718988677/uajyaf0i57hcj6alz6oy.png"
           alt="headerlogo"
-          className="h-[45px] w-[54px] object-contain ml-[12rem]"
+          className="h-[45px] w-[54px] object-contain ml-[14rem]"
         />
       </Link>
 
-      <div className="mx-auto flex w-full max-w-[1079px] items-center justify-between gap-5 md:flex-col">
-        <ul className="flex flex-wrap gap-[34px]">
+      <div className="mx-auto flex w-full max-w-[1079px] items-center justify-between gap-5 md:flex-col ml-10">
+        <ul className="flex flex-wrap gap-[34px] ">
           <li>
             <Link to="/thumnail">
               <Heading as="p">Giới Thiệu</Heading>
@@ -103,11 +103,11 @@ const Header = ({ className }: Props) => {
               <Heading as="p">Đặt Lịch</Heading>
             </Link>
           </li>
-          {/* <li>
+          <li>
             <Link to="/blog">
               <Heading as="p">Blog</Heading>
             </Link>
-          </li> */}
+          </li>
           {/* <li>
             <Link to="/su-kien">
               <Heading as="p">Sự Kiện</Heading>
