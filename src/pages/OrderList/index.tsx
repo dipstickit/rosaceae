@@ -29,7 +29,7 @@ const OrderList: React.FC = () => {
   useEffect(() => {
     const fetchOrders = async () => {
       try {
-        const response = await orderService.getOrderById(customerId);
+        const response = await orderService.getOrderById(customerId || 0);
         setOrders(response.data.content);
       } catch (error) {
         setError(error.message);
