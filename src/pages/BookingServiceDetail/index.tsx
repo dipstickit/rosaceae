@@ -17,12 +17,6 @@ import { useSelector } from "react-redux";
 import instance from "../../api/axiosCustomize";
 import { toast } from "react-toastify";
 
-const dropDownOptions = [
-  { label: "Option1", value: "option1" },
-  { label: "Option2", value: "option2" },
-  { label: "Option3", value: "option3" },
-];
-
 interface ServiceItem {
   itemId: number;
   itemName: string;
@@ -34,13 +28,13 @@ interface BookingInfo {
   datetime: number;
   timeBookingId: number;
 }
-const dateBookingData = await bookingApi.getTimeBooking();
 
 export default function BookingServiceDetailPage() {
   const navigate = useNavigate();
   const [receivedData, setReceivedData] = useState<string>("");
   const [searchParams, setSearchParams] = useSearchParams();
   const [itemNames, setItemNames] = useState<ServiceItem[]>([]);
+  const [dateBookingData, setDateBookingData] = useState<any>({ data: [] });
   const [selectedDate, setSelectedDate] = useState<Dayjs | null>(dayjs());
   let accessToken = useSelector((state: any) => state.auth.accessToken);
   let userInformation = useSelector((state: any) => state.userInfo.userInfo);
@@ -60,6 +54,18 @@ export default function BookingServiceDetailPage() {
     datetime: 0,
     timeBookingId: 0,
   });
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const dateBookingData = await bookingApi.getTimeBooking();
+        setDateBookingData(dateBookingData);
+      } catch (error) {
+        console.error("Error fetching time booking:", error);
+      }
+    };
+    fetchData();
+  }, []);
   useEffect(() => {
     if (searchParams.get("sid") !== null) {
       const fetchItemTypes = async () => {
@@ -234,6 +240,7 @@ export default function BookingServiceDetailPage() {
           <div className="container-xs pr-[9px] pb-[50px] mt-[27px] flex justify-center md:p-5 md:pb-5">
             <div className="flex w-full flex-col gap-5">
               <div className="gap-[15px] flex flex-wrap">
+                {/* Assuming dateBookingData.data is properly set elsewhere */}
                 {dateBookingData.data.map((item: any, index: number) => (
                   <DateBooking
                     key={item.timeID}
