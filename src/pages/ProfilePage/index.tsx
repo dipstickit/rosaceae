@@ -5,20 +5,19 @@ import Footer from "../../components/Footer";
 import Header from "../../components/Header";
 import ProfileSection from "../../components/ProfileSection";
 import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function ProfilePage() {
-  let accessToken = useSelector((state: any) => state.auth.accessToken)
-  let userInformation = useSelector((state: any) => state.userInfo.userInfo)
-  const navigate = useNavigate()
-  console.log(userInformation)
+  let accessToken = useSelector((state: any) => state.auth.accessToken);
+  let userInformation = useSelector((state: any) => state.userInfo.userInfo);
+  const navigate = useNavigate();
+  console.log(userInformation);
   if (accessToken === null) {
-    if (localStorage.getItem('access-token') !== null) {
-      accessToken = localStorage.getItem('access-token')
-      userInformation = JSON.parse(localStorage.getItem('user-info')!)
-    }
-    else {
-      navigate("/login")
+    if (localStorage.getItem("access-token") !== null) {
+      accessToken = localStorage.getItem("access-token");
+      userInformation = JSON.parse(localStorage.getItem("user-info")!);
+    } else {
+      navigate("/login");
     }
   }
   return (
@@ -69,22 +68,6 @@ export default function ProfilePage() {
                   as="h2"
                   className="text-lg font-semibold text-gray-900"
                 >
-                  Edit Profile
-                </Heading>
-              </div>
-              <div className="flex-1 rounded-lg flex items-center gap-6 border border-gray-300 bg-white p-6 shadow-md">
-                <div className="flex items-center justify-center bg-gray-200 rounded-full w-12 h-12">
-                  <Img
-                    src="images/img_thumbs_up.svg"
-                    alt="silver"
-                    className="h-6 w-6"
-                  />
-                </div>
-                <Heading
-                  size="md"
-                  as="h2"
-                  className="text-lg font-semibold text-gray-900"
-                >
                   Silver
                 </Heading>
               </div>
@@ -119,17 +102,15 @@ export default function ProfilePage() {
             </div>
             <div className="my-8 self-stretch">
               <div className="gap-4 flex flex-col">
-                <ProfileSection
-                  icon="images/img_lock_black_900.svg"
-                  title="Lịch sử mua hàng"
-                />
+                <Link to="/order">
+                  <ProfileSection
+                    icon="images/img_lock_black_900.svg"
+                    title="Lịch sử mua hàng"
+                  />
+                </Link>
                 <ProfileSection
                   icon="images/img_icon_terms_privacy.svg"
                   title="Quản lý địa chỉ"
-                />
-                <ProfileSection
-                  icon="images/img_icon_terms_privacy.svg"
-                  title="Lịch sử mua hàng"
                 />
                 <ProfileSection
                   icon="images/img_thumbs_up_gray_300_05.svg"

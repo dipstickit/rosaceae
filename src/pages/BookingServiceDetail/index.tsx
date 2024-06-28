@@ -27,12 +27,12 @@ interface ServiceItem {
   // Add other properties as needed
 }
 interface BookingInfo {
-  email: string
-  itemId: number
-  datetime: number
-  timeBookingId: number
+  email: string;
+  itemId: number;
+  datetime: number;
+  timeBookingId: number;
 }
-const dateBookingData = await bookingApi.getTimeBooking()
+const dateBookingData = await bookingApi.getTimeBooking();
 
 export default function BookingServiceDetailPage() {
   const navigate = useNavigate();
@@ -40,28 +40,32 @@ export default function BookingServiceDetailPage() {
   const [searchParams, setSearchParams] = useSearchParams();
   const [itemNames, setItemNames] = useState<ServiceItem[]>([]);
   const [selectedDate, setSelectedDate] = useState<Dayjs | null>(dayjs());
-  let accessToken = useSelector((state: any) => state.auth.accessToken)
-  let userInformation = useSelector((state: any) => state.userInfo.userInfo)
-  console.log(userInformation)
-  if (localStorage.getItem('access-token') !== null && localStorage.getItem('user-info') !== null) {
-    accessToken = localStorage.getItem('access-token')
-    userInformation = JSON.parse(localStorage.getItem('user-info')!)
-  }
-  else {
-    navigate("/login")
+  let accessToken = useSelector((state: any) => state.auth.accessToken);
+  let userInformation = useSelector((state: any) => state.userInfo.userInfo);
+  console.log(userInformation);
+  if (
+    localStorage.getItem("access-token") !== null &&
+    localStorage.getItem("user-info") !== null
+  ) {
+    accessToken = localStorage.getItem("access-token");
+    userInformation = JSON.parse(localStorage.getItem("user-info")!);
+  } else {
+    navigate("/login");
   }
   const [bookingInfo, setBookingInfo] = useState<BookingInfo>({
     email: userInformation.email,
     itemId: 0,
     datetime: 0,
-    timeBookingId: 0
+    timeBookingId: 0,
   });
   useEffect(() => {
     if (searchParams.get("sid") !== null) {
       const fetchItemTypes = async () => {
         try {
           const response = await fetch(
-            `http://localhost:8080/api/v1/shop/${searchParams.get("sid")}?itemType=D%E1%BB%8Bch%20V%E1%BB%A5`
+            `https://80a9-42-117-186-213.ngrok-free.app/api/v1/shop/${searchParams.get(
+              "sid"
+            )}?itemType=D%E1%BB%8Bch%20V%E1%BB%A5`
           );
           console.log("Response:", response);
 
@@ -70,9 +74,9 @@ export default function BookingServiceDetailPage() {
           }
           const data = await response.json();
           const serviceItems: ServiceItem[] = data.items.content;
-          const names: ServiceItem[] = serviceItems.map(item => ({
+          const names: ServiceItem[] = serviceItems.map((item) => ({
             itemId: item.itemId,
-            itemName: item.itemName
+            itemName: item.itemName,
           }));
           setItemNames(names);
         } catch (error) {
@@ -88,20 +92,20 @@ export default function BookingServiceDetailPage() {
   };
 
   const handleReceiveData = (spa: SpaLocation) => {
-    console.log(spa)
+    console.log(spa);
     setReceivedData(spa.accountName);
   };
 
   const handleSelect = (e: any) => {
-    updateBookingInfo({ itemId: e.value })
-  }
+    updateBookingInfo({ itemId: e.value });
+  };
 
   const handleDateChange = (newValue: Dayjs | null) => {
-    console.log(newValue)
+    console.log(newValue);
     setSelectedDate(newValue);
     updateBookingInfo({
       datetime: newValue?.toDate().getTime(),
-    })
+    });
   };
 
   const updateBookingInfo = (newInfo: Partial<BookingInfo>) => {
@@ -112,9 +116,9 @@ export default function BookingServiceDetailPage() {
   };
 
   const submit = async () => {
-    const res = await bookingApi.createBooking(bookingInfo)
-    console.log(res)
-  }
+    const res = await bookingApi.createBooking(bookingInfo);
+    console.log(res);
+  };
 
   return (
     <>
@@ -171,7 +175,14 @@ export default function BookingServiceDetailPage() {
             }
             name="chndchv"
             placeholder={`Chọn Dịch Vụ`}
-            options={itemNames ? itemNames.map((item) => ({ label: item.itemName, value: item.itemId })) : null}
+            options={
+              itemNames
+                ? itemNames.map((item) => ({
+                    label: item.itemName,
+                    value: item.itemId,
+                  }))
+                : null
+            }
             onChange={handleSelect}
           />
           {/* <div className="container-xs mt-[27px] md:p-5">
@@ -212,7 +223,10 @@ export default function BookingServiceDetailPage() {
           </div> */}
           <div className="container-xs rounded-[10px] pb-[15px] mt-[27px] flex justify-center border border-solid border-gray-500 bg-gray-100_04 px-3.5 pt-3.5 md:p-5">
             <div className="flex w-full items-center justify-between gap-5 sm:flex-col">
-              <div className="gap-[15px] flex items-center self-end" style={{ width: '100%' }}>
+              <div
+                className="gap-[15px] flex items-center self-end"
+                style={{ width: "100%" }}
+              >
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
                   <DesktopDatePicker
                     label="Ngày"
@@ -254,7 +268,10 @@ export default function BookingServiceDetailPage() {
                     key={item.timeID}
                     className="gap-[34px] items-center md:w-full"
                     time={item.time}
-                    clickEvent={() => { console.log(item.timeID), updateBookingInfo({ timeBookingId: item.timeID }) }}
+                    clickEvent={() => {
+                      console.log(item.timeID),
+                        updateBookingInfo({ timeBookingId: item.timeID });
+                    }}
                   />
                 ))}
               </div>

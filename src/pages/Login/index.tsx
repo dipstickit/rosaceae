@@ -37,6 +37,7 @@ export default function LoginPage() {
         const token: string = result.data.access_token;
         const data = result.data.userInfo;
         const userInfo = {
+          usersID: data.usersID,
           accountName: data.accountName,
           email: data.email,
           phone: data.phone,
@@ -46,6 +47,7 @@ export default function LoginPage() {
         dispatch(setUserInfo(userInfo));
         localStorage.setItem("access-token", token);
         localStorage.setItem("user-info", JSON.stringify(userInfo));
+        localStorage.setItem("usersID", JSON.stringify(data.usersID));
         navigate("/");
       } else if (result && result.data.status === 400) {
         alert(result.data.msg);
@@ -163,8 +165,7 @@ export default function LoginPage() {
               </div>
               <div className="flex justify-between gap-5 sm:flex-col">
                 <div className="flex w-[40%] justify-center gap-4 sm:w-full sm:p-5">
-                  <div className="w-[20%] rounded-[24px] border-2 border-solid border-white-A700 bg-white-A700 p-[9px]">
-                  </div>
+                  <div className="w-[20%] rounded-[24px] border-2 border-solid border-white-A700 bg-white-A700 p-[9px]"></div>
                 </div>
                 <div className="flex pb-[9px] pr-2.5 pt-2.5 sm:p-5">
                   <a href="/forgotpassword" target="_blank">

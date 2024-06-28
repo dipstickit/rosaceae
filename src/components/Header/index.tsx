@@ -152,6 +152,11 @@ const Header = ({ className }: Props) => {
                     >
                       <Text className="text-white"> Đăng xuất</Text>
                     </button>
+                    <Link to="profilepage">
+                      <button className="block w-full text-white px-4 py-2 text-white bg-gray-800 hover:bg-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">
+                        <Text className="text-white"> Thông tin của tôi</Text>
+                      </button>
+                    </Link>
                   </div>
                 )}
               </div>
