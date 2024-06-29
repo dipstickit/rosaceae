@@ -22,13 +22,14 @@ const createBooking = (bookingInfo: any): Promise<AxiosResponse<any>> => {
   return instance.post("booking", bookingInfo);
 };
 
-// const getBookingById = (customerID: number): Promise<AxiosResponse<any>> => {
-//   return instance.get(`order/customer/${customerID}`);
-// };
+const getBookingById = (customerID: number): Promise<AxiosResponse<any>> => {
+  return instance.get(`booking/customer/${customerID}`);
+};
 
 export default {
   getAllLocation,
   getLocationNearBy,
   getTimeBooking,
   createBooking,
+  getBookingById,
 };
