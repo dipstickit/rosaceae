@@ -141,6 +141,7 @@ export default function BookingServiceDetailPage() {
         progress: undefined,
         theme: "dark",
       });
+      navigate("/viewbooking");
     } catch (error) {
       console.error("Error creating booking:", error);
       toast.error("Đã xảy ra lỗi khi đặt lịch. Vui lòng thử lại sau.", {
