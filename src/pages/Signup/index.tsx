@@ -328,9 +328,9 @@ export default function SignUpPage() {
           <div className="relative mr-[185px] mt-[12px] h-[43px] w-[51%] self-end md:mr-0">
             <div className="absolute bottom-0 left-0 top-0 my-auto h-[43px] w-[82%] bg-white-A700" />
             <Text
-              size="7xl"
+              size="6xl"
               as="p"
-              className="absolute bottom-0 left-0 right-0 top-0 m-auto h-max w-max !font-opensans !font-normal tracking-[2.00px] !text-blue_gray-800_01"
+              className="absolute ml-[5rem] bottom-0 left-0 right-0 top-0 m-auto h-max w-max !font-opensans !font-normal tracking-[2.00px] !text-blue_gray-800_01"
             >
               Hoặc đăng nhập bằng
             </Text>
