@@ -147,10 +147,10 @@ const CheckOutPage: React.FC = () => {
     const orderData = {
       description: "Thanh toán đơn hàng",
       returnUrl: "https://rosaceae.id.vn/order",
-      cancelUrl: "http://localhost:5173/",
+      cancelUrl: "https://rosaceae.id.vn/",
       total: finalTotal,
       voucherId: 0,
-      customerId: 23,
+      customerId: localStorage.getItem("usersID"),
       items: cartItems.map((item, index) => {
         const productKey = item.itemId ? item.itemId : `unknown-${index}`;
         if (!item.itemId) {
