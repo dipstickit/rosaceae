@@ -1,7 +1,12 @@
+// Define variables for reusable values
+$font-family: 'Poppins', sans-serif;
+$scrollbar-color: #6b6b6b;
+
+// Global styles
 body {
     margin: 0;
     padding: 0;
-    font-family: Poppins;
+    font-family: $font-family;
 }
 
 * {
@@ -26,10 +31,10 @@ ul {
 input {
     background-color: transparent;
     width: 100%;
-}
 
-input:focus {
-    outline: none;
+    &:focus {
+        outline: none;
+    }
 }
 
 table {
@@ -40,6 +45,7 @@ table {
     cursor: pointer;
 }
 
+// Scrollbar styles
 ::-webkit-scrollbar {
     width: 4px;
     height: 4px;
@@ -51,10 +57,11 @@ table {
 }
 
 ::-webkit-scrollbar-thumb {
-    background: #6b6b6b;
+    background: $scrollbar-color;
     border-radius: 10px;
 }
 
+// Menu and sidebar styles
 .ps-menu-icon {
     width: unset !important;
     min-width: unset !important;
@@ -118,6 +125,8 @@ table {
     align-items: center;
 }
 
-.ps-sidebar-container::-webkit-scrollbar {
-    width: 2px;
+.ps-sidebar-container {
+    &::-webkit-scrollbar {
+        width: 2px;
+    }
 }
