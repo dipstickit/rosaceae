@@ -270,10 +270,7 @@ export default function HomePage() {
               </div>
               <div className="gap-[27px] ml-[5px] flex md:ml-0 md:flex-col">
                 {data.map((d, index) => (
-                  <Home
-                    {...d}
-                    key={"listwomanhaving3" + index}
-                  />
+                  <Home {...d} key={"listwomanhaving3" + index} />
                 ))}
               </div>
             </div>
@@ -344,8 +341,6 @@ export default function HomePage() {
         </div> */}
         <Footer />
       </div>
-
     </>
-
   );
 }

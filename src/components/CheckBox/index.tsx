@@ -5,7 +5,7 @@ const variants = {
 } as const;
 
 const sizes = {
-  xs: "h-[13px] w-[13px]",
+  xs: "h-[17px] w-[17px]",
 } as const;
 
 type CheckboxProps = Omit<
@@ -52,8 +52,9 @@ const CheckBox = React.forwardRef<HTMLInputElement, CheckboxProps>(
         >
           <input
             id={id}
-            className={`${size && sizes[size] ? sizes[size] : ""} 
-            ${variant && variants[variant] ? variants[variant] : ""}
+            className={`appearance-none rounded-full border-[2px] border-solid 
+              ${size && sizes[size] ? sizes[size] : ""} 
+              ${variant && variants[variant] ? variants[variant] : ""}
             `}
             ref={ref}
             type="checkbox"
@@ -61,7 +62,11 @@ const CheckBox = React.forwardRef<HTMLInputElement, CheckboxProps>(
             onChange={handleChange}
             {...restProps}
           />
-          {!!label && <label htmlFor={id}>{label}</label>}
+          {!!label && (
+            <label htmlFor={id} className="ml-2 text-black-900">
+              {label}
+            </label>
+          )}
         </div>
         {children}
       </>

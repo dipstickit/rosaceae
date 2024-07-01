@@ -8,8 +8,8 @@ import { logoutUser } from "../../store/authActions";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Text } from "../../components/Text";
-import { CustomizedBadges } from "../CustomizedBadges";
-import { SearchIcon } from "../SearchIcon";
+import { CustomizedBadges } from "../icon/CustomizedBadges";
+import { SearchIcon } from "../icon/SearchIcon";
 import ChevronDownIcon from "../icon/icondropdown";
 import { toast } from "react-toastify";
 
