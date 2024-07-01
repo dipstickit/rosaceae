@@ -1,8 +1,8 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App.tsx";
-import "./styles/index.css";
-import "./styles/tailwind.css";
+import "./styles/index.scss";
+import "./styles/tailwind.scss";
 import store from "./store/store";
 import { Provider } from "react-redux";
 import "react-toastify/dist/ReactToastify.css";
