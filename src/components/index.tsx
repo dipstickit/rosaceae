@@ -13,7 +13,6 @@ import { Slider } from "./Slider";
 import Header from "./Header";
 import Footer from "./Footer";
 import Sidebar from "./Sidebar";
-import DashboardDesignRowbagOne from "./DashboardDesignRowbagOne";
 
 export {
   Img,
@@ -31,5 +30,4 @@ export {
   Header,
   Footer,
   Sidebar,
-  DashboardDesignRowbagOne,
 };

@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "../../store/store";
+import { RootState } from "../../../store/store";
 import { AiOutlineShoppingCart } from "react-icons/ai";
-import { open } from "../../store/CheckOutSlice";
+import { open } from "../../../store/CheckOutSlice";
 
 export function CustomizedBadges() {
   const dispatch = useDispatch();

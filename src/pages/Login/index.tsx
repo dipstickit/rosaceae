@@ -7,7 +7,7 @@ import { userHandler } from "../../usecases/HandleLogin";
 import { useState } from "react";
 import { setAccessToken } from "../../store/authActions";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { setUserInfo } from "../../store/userActions";
 import { Input } from "../../components/Input";
 import { toast } from "react-toastify";
@@ -86,9 +86,9 @@ export default function LoginPage() {
             <span className="text-blue_gray-800_01">
               Nếu bạn chưa có tài khoản,
             </span>
-            <a href="signup" className="text-blue_gray-800_01 underline">
+            <Link to="/signup" className="text-blue_gray-800_01 underline">
               đăng ký tại đây
-            </a>
+            </Link>
           </Text>
           <form
             onSubmit={formik.handleSubmit}
@@ -170,7 +170,7 @@ export default function LoginPage() {
                   <div className="w-[20%] rounded-[24px] border-2 border-solid border-white-A700 bg-white-A700 p-[9px]"></div>
                 </div>
                 <div className="flex pb-[9px] pr-2.5 pt-2.5 sm:p-5">
-                  <a href="/forgotpassword" target="_blank">
+                  <Link to="/forgotpassword">
                     <Heading
                       size="2xl"
                       as="h4"
@@ -178,7 +178,7 @@ export default function LoginPage() {
                     >
                       Quên mật khẩu?
                     </Heading>
-                  </a>
+                  </Link>
                 </div>
               </div>
             </div>

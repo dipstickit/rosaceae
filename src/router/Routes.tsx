@@ -13,16 +13,10 @@ import BookingServiceDetailPage from "../pages/BookingServiceDetail";
 import CartPage from "../pages/Cart";
 import EmailVerifyPage from "../pages/Verify";
 import ProfilePage from "../pages/ProfilePage";
-import AddressPage from "../pages/Address";
 import PaymentPage from "../pages/Payment";
 import AboutUsPage from "../pages/AboutUs";
 import ContactPage from "../pages/Contact";
-import SettingPageOnePage from "../pages/SettingPageOne";
-import SettingPageTwoPage from "../pages/SettingPageTwo";
-import SettingPageThreePage from "../pages/SettingPageThree";
 import NotificationsupdatepasswordPage from "../pages/Notificationsupdatepassword";
-import DashboardDesignPage from "../pages/DashboardDesign";
-import ReportrevenuePage from "../pages/Reportrevenue";
 import LoginPage from "../pages/Login";
 import ItemDetail from "../pages/ItemDetail";
 import BookingSalon from "../pages/BookingSalon";
@@ -48,16 +42,10 @@ const RosaceaeRoutes = () => {
     // { path: "cart", element: <CartPage /> },
     { path: "verify", element: <EmailVerifyPage /> },
     { path: "profilepage", element: <ProfilePage /> },
-    { path: "address", element: <AddressPage /> },
     { path: "checkout", element: <PaymentPage /> },
     { path: "aboutus", element: <AboutUsPage /> },
     { path: "contact", element: <ContactPage /> },
     // { path: "noti", element: <NotificationsupdatepasswordPage /> },
-    { path: "settingpageOne", element: <SettingPageOnePage /> },
-    { path: "settingpage2", element: <SettingPageTwoPage /> },
-    { path: "settingpage3", element: <SettingPageThreePage /> },
-    { path: "dashboard", element: <DashboardDesignPage /> },
-    { path: "reportave", element: <ReportrevenuePage /> },
     { path: "bookingsalon", element: <BookingSalon /> },
     { path: "order", element: <OrderList /> },
     { path: "viewbooking", element: <ViewBooking /> },

@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
-import { Button } from "../Button";
-import { Heading } from "../Heading";
-import { Img } from "../Img";
+import { Heading } from "../../Heading";
+import { Img } from "../../Img";
+import { Button } from "../../Button";
 
 interface Props {
   className?: string;
@@ -31,13 +31,13 @@ export default function ServiceCard({
           className="h-[273px] w-[46%] rounded-[51px] object-cover sm:w-full"
         />
         <Link to="/spa">
-        <Button
-          color="blue_gray_100_02"
-          size="12xl"
-          className="mb-[53px] min-w-[217px] self-end rounded-[41px] font-suwannaphum font-bold sm:px-5"
-        >
-          {buttontext}
-        </Button>
+          <Button
+            color="blue_gray_100_02"
+            size="12xl"
+            className="mb-[53px] min-w-[217px] self-end rounded-[41px] font-suwannaphum font-bold sm:px-5"
+          >
+            {buttontext}
+          </Button>
         </Link>
       </div>
     </div>
