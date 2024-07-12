@@ -14,6 +14,9 @@ import { useParams } from "react-router-dom";
 import ItemDetailComponent from "../../components/Card/ItemDetail";
 import ItemDescrip from "../../components/Card/ItemFeedback";
 import ProductCardService from "../../components/Card/ProductCardService";
+import { useDispatch } from "react-redux";
+import { add } from "../../store/cartSlice";
+import { toast } from "react-toastify";
 
 export default function ItemDetail() {
   const params = useParams();
@@ -23,6 +26,14 @@ export default function ItemDetail() {
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [listProducts, setListProducts] = useState<Item[]>([]);
+  const dispatch = useDispatch();
+
+  const formatPrice = (price: number): string => {
+    return price.toLocaleString("vi-VN", {
+      style: "currency",
+      currency: "VND",
+    });
+  };
 
   const fetchItemById = async (id: number) => {
     try {
@@ -87,30 +98,40 @@ export default function ItemDetail() {
       <div className="w-full bg-white">
         <Header />
         <div className="mt-20 flex flex-col items-center">
-          <div className="w-11/12 flex flex-col items-start md:w-full md:px-5">
+          <div className="w-11/12 flex flex-col items-start md:w-4/5 md:px-5">
             <Heading
               size="8xl"
               as="h1"
-              className="!font-opensans !font-bold !text-gray-900"
+              className="!font-opensans !font-bold !text-gray-900 mb-10"
             >
               Chi tiết dịch vụ
             </Heading>
-            <div className="w-full mt-10 flex flex-col md:flex-row items-start gap-8">
-              <div className="md:flex-1 p-6 bg-white rounded-lg shadow-md md:mr-4">
+            <div className="w-full flex flex-col md:flex-row items-start gap-8">
+              <div className="md:flex-1 p-6 bg-white rounded-lg shadow-lg">
                 {item && (
-                  <ItemDetailComponent
-                    key={item.itemId}
-                    coverImg={item.itemImages[0].imageUrl}
-                    name={item.itemName}
-                    itemPrice={item.itemPrice}
-                    discount={item.discount}
-                    itemType={item.itemType.itemTypeName}
-                    ratingCount={item.itemRate}
-                    className=""
-                  />
+                  <div className="flex flex-col items-start">
+                    <img
+                      src={item.itemImages[0].imageUrl}
+                      alt={item.itemName}
+                      className="w-full h-auto rounded-lg mb-6"
+                    />
+                    <h2 className="text-3xl font-bold text-gray-900">
+                      {item.itemName}
+                    </h2>
+                    <p className="mt-2 text-2xl text-gray-700">
+                      {formatPrice(item.itemPrice)}
+                    </p>
+                    <p className="mt-2 text-xl text-orange-500">
+                      {item.discount}% Off
+                    </p>
+                    <p className="mt-4 text-lg text-gray-600">
+                      {item.itemDescription}
+                    </p>
+                  </div>
                 )}
               </div>
-              <div className="md:flex-1 p-6 bg-white rounded-lg shadow-md">
+
+              <div className="w-full p-6 bg-white rounded-lg shadow-lg">
                 {item && (
                   <ItemDescrip
                     key={item.itemId}
@@ -119,11 +140,11 @@ export default function ItemDetail() {
                 )}
               </div>
             </div>
-            <div className="mt-12 w-full">
+            <div className="mt-16 w-full">
               <Heading
                 size="8xl"
                 as="h2"
-                className="!font-opensans !font-bold !text-gray-800 mb-6 text-center"
+                className="!font-opensans !font-bold !text-gray-800 mb-8 text-center"
               >
                 Các dịch vụ khác
               </Heading>

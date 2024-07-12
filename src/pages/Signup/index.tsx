@@ -63,7 +63,7 @@ export default function SignUpPage() {
       </Helmet>
       <Header />
       <div className="flex w-full items-center justify-between gap-5 bg-white-A700 pb-[5px] ml-10 md:flex-col md:pl-5 md:pt-5">
-        <div className="flex w-[32%] flex-col items-start md:w-full mt-5 ml-8">
+        <div className="flex w-[40%] flex-col items-start md:w-full mt-5 ml-8">
           <Heading
             size="6xl"
             as="h1"
@@ -318,7 +318,7 @@ export default function SignUpPage() {
             </div>
             <Button
               color="black_900"
-              size="11xl"
+              size="6xl"
               className="w-full rounded-[40px] font-nunito font-extrabold tracking-[2.80px] sm:px-5"
               type="submit"
             >
@@ -359,11 +359,13 @@ export default function SignUpPage() {
             </div>
           </div>
         </div>
-        <Img
-          src="images/img_image_48.png"
-          alt="imagefortyeight"
-          className="h-[965px] w-[57%] object-cover md:w-full"
-        />
+        <div className="h-[1210px] w-[55%] sm:w-[50%] object-cover overflow-hidden">
+          <Img
+            src="images/img_image_48.png"
+            alt="imagefortyeight"
+            className="h-full w-full object-cover"
+          />
+        </div>
       </div>
     </>
   );

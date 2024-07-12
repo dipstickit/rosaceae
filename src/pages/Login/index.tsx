@@ -4,24 +4,55 @@ import Header from "../../components/Header";
 import { loginValidateSchema } from "../../validates/ValidateSchema";
 import { useFormik } from "formik";
 import { userHandler } from "../../usecases/HandleLogin";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { setAccessToken } from "../../store/authActions";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { setUserInfo } from "../../store/userActions";
 import { Input } from "../../components/Input";
 import { toast } from "react-toastify";
+import "firebase/auth";
+import { auth, provider } from "../../firebase.config";
+import { signInWithPopup } from "firebase/auth";
 
 export default function LoginPage() {
+  const [value, setValue] = useState("");
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [loginInfo, setLoginInfo] = useState<{
-    email: string;
-    password: string;
-  }>({
+  const [loginInfo, setLoginInfo] = useState({
     email: "",
     password: "",
   });
+
+  const handleClick = () => {
+    signInWithPopup(auth, provider)
+      .then((result) => {
+        const user = result.user;
+        console.log(user);
+        if (user && user.email) {
+          const googleUserInfo = {
+            displayName: user.displayName || "",
+            email: user.email,
+            photoURL: user.photoURL || "",
+          };
+          localStorage.setItem(
+            "google-user-info",
+            JSON.stringify(googleUserInfo)
+          );
+          navigate("/");
+        } else {
+          console.error("User email is null or user is not available");
+        }
+      })
+      .catch((error) => {
+        console.error("Error signing in with popup:", error);
+      });
+  };
+
+  useEffect(() => {
+    const storedEmail = localStorage.getItem("email");
+    setValue(storedEmail || "");
+  }, []);
 
   const formik = useFormik({
     initialValues: {
@@ -29,13 +60,13 @@ export default function LoginPage() {
       password: "",
     },
     validationSchema: loginValidateSchema,
-    onSubmit: async (values, { resetForm }) => {
-      const result: any = await userHandler.Login(
+    onSubmit: async (values) => {
+      const result = await userHandler.Login(
         Object.entries(formik.errors).length,
         values
       );
       if (result && result.data.status === 200) {
-        const token: string = result.data.access_token;
+        const token = result.data.access_token;
         const data = result.data.userInfo;
         const userInfo = {
           usersID: data.usersID,
@@ -52,7 +83,9 @@ export default function LoginPage() {
         navigate("/");
         toast.success("Đăng nhập thành công!");
       } else if (result && result.data.status === 400) {
-        alert(result.data.msg);
+        toast.error(
+          "Đăng nhập thất bại, vui lòng kiểm tra email hoặc password!"
+        );
       } else {
         alert("An error occurred during login. Please try again.");
       }
@@ -69,12 +102,12 @@ export default function LoginPage() {
         />
       </Helmet>
       <Header />
-      <div className="flex w-full items-center justify-between gap-5 bg-white-A700 pb-[5px] ml-10 md:flex-col md:pl-5 md:pt-5">
-        <div className="flex w-[32%] flex-col items-start md:w-full mt-5 ml-8">
+      <div className="flex w-full items-center justify-between gap-5 bg-white-A700 pb-[5px] px-10 md:flex-col md:pl-5 md:pt-5">
+        <div className="flex w-[40%] flex-col items-start md:w-full mt-5">
           <Heading
             size="6xl"
             as="h1"
-            className="!font-overpass !font-extrabold tracking-[3.60px] !text-blue_gray-800_01"
+            className="!font-sansserif !font-extrabold tracking-[3.60px] !text-blue_gray-800_01"
           >
             CHÀO MỪNG TRỞ LẠI!
           </Heading>
@@ -191,7 +224,7 @@ export default function LoginPage() {
               Đăng nhập
             </Button>
           </form>
-          <div className="relative mr-[185px] mt-12 h-[43px] w-[51%] self-end md:mr-0">
+          <div className="relative mt-12 h-[43px] w-[75%] self-center md:w-full">
             <div className="absolute bottom-0 left-[0.00px] top-0 my-auto h-[43px] w-[82%] bg-white-A700" />
             <Text
               size="4xl"
@@ -202,7 +235,10 @@ export default function LoginPage() {
             </Text>
           </div>
           <div className="mt-4 flex w-[75%] justify-between gap-5 self-center md:w-full md:p-5">
-            <div className="flex w-[25%] justify-center rounded-lg border-2 border-solid border-indigo-300 bg-white-A700 px-[22px] pb-5 pt-[22px] sm:px-5 sm:pt-5">
+            <div
+              className="flex w-[25%] justify-center rounded-lg border-2 border-solid border-indigo-300 bg-white-A700 px-[22px] pb-5 pt-[22px] sm:px-5 sm:pt-5 cursor-pointer"
+              onClick={handleClick}
+            >
               <Img
                 src="images/img_google.svg"
                 alt="google"
@@ -225,11 +261,13 @@ export default function LoginPage() {
             </div>
           </div>
         </div>
-        <Img
-          src="images/img_image_48.png"
-          alt="imagefortyeight"
-          className="h-[720px] w-[40%] sm:w-[50%] object-cover"
-        />
+        <div className="h-[880px] w-[55%] sm:w-[50%] object-cover overflow-hidden">
+          <Img
+            src="images/img_image_48.png"
+            alt="imagefortyeight"
+            className="h-full w-full object-cover"
+          />
+        </div>
       </div>
     </>
   );

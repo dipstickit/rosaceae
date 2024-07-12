@@ -22,6 +22,10 @@ import ItemDetail from "../pages/ItemDetail";
 import BookingSalon from "../pages/BookingSalon";
 import OrderList from "../pages/OrderList";
 import ViewBooking from "../pages/ViewBooking";
+import UpdatePasswordPage from "../pages/Updatepassword";
+import ContactAdmin from "../pages/ContactAdmin";
+import Blog from "../pages/Blog";
+import SuccessPay from "../pages/SuccessPay";
 
 const RosaceaeRoutes = () => {
   const element = useRoutes([
@@ -49,6 +53,10 @@ const RosaceaeRoutes = () => {
     { path: "bookingsalon", element: <BookingSalon /> },
     { path: "order", element: <OrderList /> },
     { path: "viewbooking", element: <ViewBooking /> },
+    { path: "updatepassword", element: <UpdatePasswordPage /> },
+    { path: "lienhe", element: <ContactAdmin /> },
+    { path: "blog", element: <Blog /> },
+    { path: "successpay", element: <SuccessPay /> },
   ]);
   return element;
 };
