@@ -48,7 +48,11 @@ const CheckOutItem = ({ cartItem }: IProductProps) => {
         />
         <div className="text-lg">
           {cartItem.itemPrice * cartItem.quantity
-            ? formatPrice(cartItem.itemPrice * cartItem.quantity)
+            ? formatPrice(
+                (cartItem.itemPrice -
+                  (cartItem.itemPrice * cartItem.discount) / 100) *
+                  cartItem.quantity
+              )
             : "0.0 VND"}
         </div>
       </div>

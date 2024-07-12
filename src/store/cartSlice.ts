@@ -43,7 +43,10 @@ const CartSlice = createSlice({
         state.cartItems.push({ ...action.payload, quantity: 1 });
       }
       state.total = state.cartItems.reduce(
-        (total, item) => total + item.quantity * (item.itemPrice || 0),
+        (total, item) =>
+          total +
+          item.quantity *
+            (item.itemPrice - (item.itemPrice * item.discount) / 100),
         0
       );
       state.finalTotal = state.total + state.shippingFee;
@@ -57,7 +60,10 @@ const CartSlice = createSlice({
         state.cartItems[itemIndex].quantity += 1;
       }
       state.total = state.cartItems.reduce(
-        (total, item) => total + item.quantity * (item.itemPrice || 0),
+        (total, item) =>
+          total +
+          item.quantity *
+            (item.itemPrice - (item.itemPrice * item.discount) / 100),
         0
       );
       state.finalTotal = state.total + state.shippingFee;
@@ -74,7 +80,10 @@ const CartSlice = createSlice({
         }
       }
       state.total = state.cartItems.reduce(
-        (total, item) => total + item.quantity * (item.itemPrice || 0),
+        (total, item) =>
+          total +
+          item.quantity *
+            (item.itemPrice - (item.itemPrice * item.discount) / 100),
         0
       );
       state.finalTotal = state.total + state.shippingFee;

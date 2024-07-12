@@ -35,7 +35,7 @@ export default function ProductCardService({
       currency: "VND",
     });
   };
-
+  const discountPrice = itemPrice - (itemPrice * discount) / 100;
   const handleAddToCart = () => {
     console.log("itemType: ", itemType);
     if (itemType?.itemTypeId === 1) {
@@ -90,7 +90,7 @@ export default function ProductCardService({
             as="p"
             className="tracking-[0.50px] text-sm font-bold text-gray-900"
           >
-            {formatPrice(itemPrice)}
+            {formatPrice(discountPrice)}
           </Heading>
           <Heading
             size="s"
