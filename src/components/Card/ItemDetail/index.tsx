@@ -25,7 +25,6 @@ export default function ItemDetail({
   itemType = "Chăm sóc",
   ...props
 }: Props) {
-  const discountedPrice = itemPrice - (itemPrice / 100) * discount;
   return (
     <div
       {...props}
@@ -66,12 +65,6 @@ export default function ItemDetail({
           </div>
           <div className="mt-[11px] h-[2px] self-stretch bg-gray-100_08" />
           <div className="mt-[22px] flex flex-wrap items-start">
-            <Heading
-              as="h6"
-              className="tracking-[0.50px] !text-light_blue-A200"
-            >
-              đ{discountedPrice}
-            </Heading>
             <Text
               size="xl"
               as="p"

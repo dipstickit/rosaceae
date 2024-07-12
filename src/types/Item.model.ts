@@ -42,6 +42,7 @@ export interface Items {
   countUsage: number;
   quantity: number;
   discount: number;
+  itemType: ItemType;
 }
 
 export interface ResponseData {

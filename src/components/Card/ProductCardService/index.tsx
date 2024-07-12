@@ -11,7 +11,10 @@ interface Props {
   itemName?: string;
   itemPrice?: number;
   discount?: number;
-  itemType?: string;
+  itemType?: {
+    itemTypeId: number;
+    itemTypeName: string;
+  };
   itemId?: number;
 }
 
@@ -20,11 +23,10 @@ export default function ProductCardService({
   itemName = "Massage cổ vai gáy",
   itemPrice = 199.0,
   discount = 25,
-  itemType = "Sản Phẩm",
+  itemType,
   itemId,
   ...props
 }: Props) {
-  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const formatPrice = (price: number): string => {
@@ -33,9 +35,14 @@ export default function ProductCardService({
       currency: "VND",
     });
   };
-  // const discountedPrice = itemPrice - (itemPrice / 100) * discount;
 
   const handleAddToCart = () => {
+    console.log("itemType: ", itemType);
+    if (itemType?.itemTypeId === 1) {
+      toast.error("Đây là dịch vụ không được thêm vào giỏ hàng!");
+      return;
+    }
+
     const product = {
       itemImages,
       itemName,
