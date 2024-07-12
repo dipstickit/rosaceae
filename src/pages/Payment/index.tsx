@@ -130,9 +130,10 @@ const CheckOutPage: React.FC = () => {
 
   const handleOrder = async () => {
     if (!isUserLoggedIn) {
-      toast.error("Bạn cần đăng nhập trước khi thanh toán", {
-        onClose: () => navigate("/login"),
-      });
+      toast.error("Bạn cần đăng nhập trước khi thanh toán");
+      setTimeout(() => {
+        navigate("/login");
+      }, 3000);
       return;
     }
 
