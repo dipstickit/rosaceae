@@ -46,7 +46,7 @@ const CartSlice = createSlice({
         (total, item) => total + item.quantity * (item.itemPrice || 0),
         0
       );
-      state.finalTotal = state.total + state.shippingFee - state.couponDiscount;
+      state.finalTotal = state.total + state.shippingFee;
     },
     increase: (state, action) => {
       state.quantity++;
@@ -60,7 +60,7 @@ const CartSlice = createSlice({
         (total, item) => total + item.quantity * (item.itemPrice || 0),
         0
       );
-      state.finalTotal = state.total + state.shippingFee - state.couponDiscount;
+      state.finalTotal = state.total + state.shippingFee;
     },
     decrease: (state, action) => {
       const itemIndex = state.cartItems.findIndex(
@@ -77,7 +77,7 @@ const CartSlice = createSlice({
         (total, item) => total + item.quantity * (item.itemPrice || 0),
         0
       );
-      state.finalTotal = state.total + state.shippingFee - state.couponDiscount;
+      state.finalTotal = state.total + state.shippingFee;
     },
     remove: (state, action) => {
       const cartItem = state.cartItems.find(
@@ -93,7 +93,7 @@ const CartSlice = createSlice({
         (total, item) => total + item.quantity * (item.itemPrice || 0),
         0
       );
-      state.finalTotal = state.total + state.shippingFee - state.couponDiscount;
+      state.finalTotal = state.total + state.shippingFee;
     },
     clear: (state) => {
       state.cartItems = [];
@@ -104,7 +104,7 @@ const CartSlice = createSlice({
     },
     addCoupon: (state, action) => {
       state.couponDiscount = action.payload;
-      state.finalTotal = state.total + state.shippingFee - state.couponDiscount;
+      state.finalTotal = state.total + state.shippingFee;
     },
   },
 });
