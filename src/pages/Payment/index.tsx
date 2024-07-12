@@ -6,7 +6,7 @@ import WarningAmberIcon from "@mui/icons-material/WarningAmber";
 import { useDispatch, useSelector } from "react-redux";
 import { clear } from "./../../store/cartSlice";
 import { RootState } from "../../store/store";
-import { toast } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Marginer } from "../../components/Checkout/Marginer";
 import { Footer, Header } from "../../components";
@@ -15,6 +15,7 @@ import instance from "../../api/axiosCustomize";
 const formatPrice = (price: number): string => {
   return price.toLocaleString("vi-VN", { style: "currency", currency: "VND" });
 };
+
 interface City {
   Name: string;
   Id: string;
@@ -42,6 +43,9 @@ const CheckOutPage: React.FC = () => {
   const { quantity, cartItems, total, finalTotal } = useSelector(
     (state: RootState) => state.cart
   );
+
+  const isUserLoggedIn = Boolean(localStorage.getItem("usersID"));
+
   useEffect(() => {
     const citis = document.getElementById("city") as HTMLSelectElement;
     const districts = document.getElementById("district") as HTMLSelectElement;
@@ -125,6 +129,13 @@ const CheckOutPage: React.FC = () => {
   };
 
   const handleOrder = async () => {
+    if (!isUserLoggedIn) {
+      toast.error("Bạn cần đăng nhập trước khi thanh toán", {
+        onClose: () => navigate("/login"),
+      });
+      return;
+    }
+
     if (!validateForm()) {
       return;
     }
@@ -164,7 +175,7 @@ const CheckOutPage: React.FC = () => {
         };
       }),
     };
-
+    console.log("Final Total:", finalTotal);
     console.log("Final Order Data:", orderData);
 
     try {
@@ -213,7 +224,6 @@ const CheckOutPage: React.FC = () => {
               Không có sản phẩm nào trong giỏ hàng
             </div>
             <Link to="/" className="text-center underline">
-              {" "}
               bấm vào đây để quay lại trang chủ
             </Link>
             <Marginer margin="4em" direction="vertical" />
@@ -368,41 +378,6 @@ const CheckOutPage: React.FC = () => {
                     </div>
                   </div>
                 </div>
-                {/* <div>
-                  <label className="font-bold inline-block mb-3 text-sx uppercase">
-                    Vận chuyển
-                  </label>
-                  <select className="block p-2 border border-primary text-gray-600 w-full text-sx">
-                    <option>
-                      Giao hàng tận nơi - chuyển phát thương mại điện tử -
-                      30.000đ
-                    </option>
-                  </select>
-                </div> */}
-                {/* <div className="my-10 p-4 border border-tertiary">
-                  <label className="font-semibold inline-block mb-3 text-sx uppercase">
-                    Mã giảm giá
-                  </label>
-                  <input
-                    type="text"
-                    id="promo"
-                    placeholder="Nhập mã giảm giá tại đây"
-                    className="p-2 text-sx w-full border border-primary"
-                    value={couponInput}
-                    onChange={(e) => setCouponInput(e.target.value)}
-                  />
-                  {couponDescription && (
-                    <p className="text-primary font-medium mt-2">
-                      {couponDescription}
-                    </p>
-                  )}
-                  <button
-                    className="mt-5 bg-red-500 hover:bg-red-600 px-5 py-2 text-sx text-white uppercase"
-                    // onClick={applyCoupon}
-                  >
-                    Áp dụng mã
-                  </button>
-                </div> */}
                 <div className="border-t mt-8">
                   <div className="flex font-semibold justify-between py-6 text-sx uppercase">
                     <span>Tổng cộng</span>
@@ -423,6 +398,7 @@ const CheckOutPage: React.FC = () => {
       </div>
       <Footer />
       <div />
+      <ToastContainer />
     </>
   );
 };
