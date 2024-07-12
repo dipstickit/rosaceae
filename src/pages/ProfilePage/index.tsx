@@ -108,22 +108,26 @@ export default function ProfilePage() {
                     title="Lịch sử mua hàng"
                   />
                 </Link>
-                <ProfileSection
+                {/* <ProfileSection
                   icon="images/img_icon_terms_privacy.svg"
                   title="Quản lý địa chỉ"
-                />
-                <ProfileSection
-                  icon="images/img_thumbs_up_gray_300_05.svg"
-                  title="Lịch sử đặt lịch"
-                />
-                <ProfileSection
+                /> */}
+                <Link to="/viewbooking">
+                  <ProfileSection
+                    icon="images/img_thumbs_up_gray_300_05.svg"
+                    title="Lịch sử đặt lịch"
+                  />
+                </Link>
+                {/* <ProfileSection
                   icon="images/img_user_black_900.svg"
                   title="Cài đặt"
-                />
-                <ProfileSection
-                  icon="images/img_inbox.svg"
-                  title="Về chúng tôi"
-                />
+                /> */}
+                <Link to="/aboutus">
+                  <ProfileSection
+                    icon="images/img_inbox.svg"
+                    title="Về chúng tôi"
+                  />
+                </Link>
                 <ProfileSection
                   icon="images/img_group_248.svg"
                   title="Điều khoản sử dụng"

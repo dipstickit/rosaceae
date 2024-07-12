@@ -146,8 +146,10 @@ const CheckOutPage: React.FC = () => {
 
     const orderData = {
       description: "Thanh toán đơn hàng",
-      returnUrl: "https://rosaceae.id.vn/order",
-      cancelUrl: "https://rosaceae.id.vn/",
+      returnUrl:
+        "https://joint-socially-pipefish.ngrok-free.app/api/v1/payOS/success",
+      cancelUrl:
+        "https://joint-socially-pipefish.ngrok-free.app/api/v1/payOS/cancel",
       total: finalTotal,
       voucherId: 0,
       customerId: localStorage.getItem("usersID"),
@@ -168,7 +170,7 @@ const CheckOutPage: React.FC = () => {
     try {
       const response = await instance.post("payOS/createOrderQR", orderData);
       const { error, message, data } = response.data;
-
+      console.log(response.data);
       if (error === 0) {
         const { checkoutUrl, qrCode, orderCode } = data;
         console.log("Checkout URL:", checkoutUrl);

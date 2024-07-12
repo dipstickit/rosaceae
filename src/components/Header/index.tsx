@@ -9,10 +9,10 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Text } from "../../components/Text";
 import { CustomizedBadges } from "../icon/CustomizedBadges";
-import { SearchIcon } from "../icon/SearchIcon";
 import ChevronDownIcon from "../icon/icondropdown";
 import { toast } from "react-toastify";
-
+import { doc, getDoc } from "firebase/firestore";
+import { auth, db } from "../../firebase.config";
 interface Props {
   className?: string;
 }
@@ -25,7 +25,6 @@ const Header = ({ className }: Props) => {
     (state: RootState) => state.userInfo.userInfo
   );
 
-  // Check local storage
   if (!accessToken) {
     const tokenFromLocalStorage = localStorage.getItem("access-token");
     const userFromLocalStorage = localStorage.getItem("user-info");
@@ -38,10 +37,24 @@ const Header = ({ className }: Props) => {
   }
 
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [displayName, setDisplayName] = useState("");
+
+  // useEffect(() => {
+  //   const googleUserInfo = localStorage.getItem("google-user-info");
+  //   if (googleUserInfo) {
+  //     const userInfo = JSON.parse(googleUserInfo);
+  //     console.log("Retrieved user info:", userInfo);
+  //     setDisplayName(userInfo.displayName);
+  //   } else {
+  //     console.log("No Google user info found in local storage");
+  //   }
+  // }, []);
 
   const handleLogout = () => {
     localStorage.removeItem("access-token");
     localStorage.removeItem("user-info");
+    localStorage.removeItem("google-user-info");
+    localStorage.removeItem("usersID");
     dispatch(logoutUser());
     navigate("/login");
     toast.success("Đăng xuất thành công", {
@@ -69,6 +82,7 @@ const Header = ({ className }: Props) => {
     };
   }, []);
 
+  // console.log("Display Name in Header:", displayName);
   return (
     <header
       className={`${className} flex items-center py-[25px] border-blue_gray-100_01 border-b border-solid relative`}
@@ -108,11 +122,6 @@ const Header = ({ className }: Props) => {
               <Heading as="p">Blog</Heading>
             </Link>
           </li>
-          {/* <li>
-            <Link to="/su-kien">
-              <Heading as="p">Sự Kiện</Heading>
-            </Link>
-          </li> */}
           <li>
             <Link to="/aboutus">
               <Heading as="p">Thông Tin</Heading>
@@ -123,11 +132,15 @@ const Header = ({ className }: Props) => {
               <Heading as="p">Liên Hệ</Heading>
             </Link>
           </li>
+          <li>
+            <Link to="/lienhe">
+              <Heading as="p">Liên Hệ Admin</Heading>
+            </Link>
+          </li>
         </ul>
 
         <div className="flex items-center gap-[30px]">
           <div className="flex items-center gap-[30px]">
-            {/* <SearchIcon /> */}
             <CustomizedBadges />
           </div>
 
@@ -139,7 +152,7 @@ const Header = ({ className }: Props) => {
             >
               <div className="rounded-full w-[42px] h-[42px] bg-blue_gray-100_02 flex items-center justify-center">
                 <span className="text-gray-900 font-semibold">
-                  {userInformation.accountName?.[0]}
+                  {userInformation.accountName?.[0] || displayName}
                 </span>
               </div>
               <Heading
@@ -147,7 +160,7 @@ const Header = ({ className }: Props) => {
                 as="h6"
                 className="tracking-[0.36px] !font-montserrat13 !font-semibold !text-gray-900_06 ml-2"
               >
-                {userInformation.accountName}
+                {userInformation.accountName || displayName}
               </Heading>
               <div className="relative">
                 <button
@@ -158,12 +171,12 @@ const Header = ({ className }: Props) => {
                 </button>
                 {dropdownOpen && (
                   <div className="absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded-md shadow-lg z-10">
-                    <button
+                    <Button
                       className="block w-full text-white px-4 py-2 text-white bg-gray-800 hover:bg-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
                       onClick={handleLogout}
                     >
                       <Text className="text-white">Đăng xuất</Text>
-                    </button>
+                    </Button>
                     <Link to="profilepage">
                       <button className="block w-full text-white px-4 py-2 text-white bg-gray-800 hover:bg-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">
                         <Text className="text-white">Thông tin của tôi</Text>
@@ -177,7 +190,7 @@ const Header = ({ className }: Props) => {
             <Link to="/login">
               <Button
                 shape="round"
-                className="min-w-[160px] !rounded-sm border border-solid border-gray-900_06 font-montserrat font-semibold sm:px-5"
+                className="min-w-[140px] !rounded-3xl border border-solid border-gray-900_06 font-montserrat font-semibold sm:px-5"
               >
                 Đăng nhập
               </Button>

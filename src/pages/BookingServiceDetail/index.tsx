@@ -22,6 +22,7 @@ interface ServiceItem {
   itemName: string;
   // Add other properties as needed
 }
+
 interface BookingInfo {
   email: string;
   itemId: number;
@@ -36,20 +37,43 @@ export default function BookingServiceDetailPage() {
   const [itemNames, setItemNames] = useState<ServiceItem[]>([]);
   const [dateBookingData, setDateBookingData] = useState<any>({ data: [] });
   const [selectedDate, setSelectedDate] = useState<Dayjs | null>(dayjs());
-  let accessToken = useSelector((state: any) => state.auth.accessToken);
-  let userInformation = useSelector((state: any) => state.userInfo.userInfo);
-  console.log(userInformation);
-  if (
-    localStorage.getItem("access-token") !== null &&
-    localStorage.getItem("user-info") !== null
-  ) {
-    accessToken = localStorage.getItem("access-token");
-    userInformation = JSON.parse(localStorage.getItem("user-info")!);
-  } else {
-    navigate("/login");
-  }
+  const userInformation = useSelector((state: any) => state.userInfo.userInfo);
+  const [toastShown, setToastShown] = useState(false);
+
+  useEffect(() => {
+    const checkAuth = () => {
+      const storedAccessToken = localStorage.getItem("access-token");
+      const storedUserInfo = localStorage.getItem("user-info");
+
+      if (!storedAccessToken || !storedUserInfo) {
+        if (!toastShown) {
+          toast.error("Bạn cần đăng nhập để truy cập vào trang này.", {
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: false,
+            draggable: true,
+            progress: undefined,
+            theme: "dark",
+          });
+          setToastShown(true);
+        }
+        navigate("/login");
+      }
+    };
+
+    checkAuth();
+
+    // Kiểm tra lại mỗi khi trang được tải lại
+    window.addEventListener("load", checkAuth);
+
+    return () => {
+      window.removeEventListener("load", checkAuth);
+    };
+  }, [toastShown, navigate]);
+
   const [bookingInfo, setBookingInfo] = useState<BookingInfo>({
-    email: userInformation.email,
+    email: userInformation?.email || "",
     itemId: 0,
     datetime: 0,
     timeBookingId: 0,
@@ -66,6 +90,7 @@ export default function BookingServiceDetailPage() {
     };
     fetchData();
   }, []);
+
   useEffect(() => {
     if (searchParams.get("sid") !== null) {
       const fetchItemTypes = async () => {
@@ -73,11 +98,8 @@ export default function BookingServiceDetailPage() {
           const response = await instance.get(
             `shop/${searchParams.get("sid")}?itemType=D%E1%BB%8Bch%20V%E1%BB%A5`
           );
-          console.log("Response:", response);
-
           const data = response.data;
           const serviceItems: ServiceItem[] = data.items.content;
-          console.log("Service items:", serviceItems);
           const names: ServiceItem[] = serviceItems.map((item) => ({
             itemId: item.itemId,
             itemName: item.itemName,
@@ -89,14 +111,13 @@ export default function BookingServiceDetailPage() {
       };
       fetchItemTypes();
     }
-  }, [searchParams.get("sid")]);
+  }, [searchParams]);
 
   const handleButtonClick = () => {
     navigate("/bookingsalon");
   };
 
   const handleReceiveData = (spa: SpaLocation) => {
-    console.log(spa);
     setReceivedData(spa.accountName);
   };
 
@@ -105,10 +126,9 @@ export default function BookingServiceDetailPage() {
   };
 
   const handleDateChange = (newValue: Dayjs | null) => {
-    console.log(newValue);
     setSelectedDate(newValue);
     updateBookingInfo({
-      datetime: newValue?.toDate().getTime(),
+      datetime: newValue?.toDate().getTime() || 0,
     });
     toast.success("Đã chọn thời gian thành công!", {
       autoClose: 3000,
@@ -131,7 +151,6 @@ export default function BookingServiceDetailPage() {
   const submit = async () => {
     try {
       const res = await bookingApi.createBooking(bookingInfo);
-      console.log(res);
       toast.success("Đặt lịch thành công!", {
         autoClose: 3000,
         hideProgressBar: false,
@@ -247,8 +266,7 @@ export default function BookingServiceDetailPage() {
                     className="gap-[34px] items-center md:w-full"
                     time={item.time}
                     clickEvent={() => {
-                      console.log(item.timeID),
-                        updateBookingInfo({ timeBookingId: item.timeID });
+                      updateBookingInfo({ timeBookingId: item.timeID });
                       toast.success(
                         `Đã chọn thời gian ${item.time} thành công!`,
                         {

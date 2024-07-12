@@ -2,8 +2,26 @@ import { Helmet } from "react-helmet";
 import { Button, TextArea, Input, Text, Heading, Img } from "../../components";
 import Footer from "../../components/Footer";
 import Header from "../../components/Header";
+import { useFormik } from "formik";
+import * as Yup from "yup";
+import { FormContactValidateSchema } from "../../validates/ValidateSchema";
+import { Link } from "react-router-dom";
+export default function ContactAdmin() {
+  const formik = useFormik({
+    initialValues: {
+      name: "",
+      email: "",
+      service: "",
+      phone: "",
+      message: "",
+    },
+    validationSchema: FormContactValidateSchema,
+    onSubmit: (values, { setSubmitting }) => {
+      console.log(values);
+      setSubmitting(false);
+    },
+  });
 
-export default function ContactPage() {
   return (
     <>
       <Helmet>
@@ -13,11 +31,11 @@ export default function ContactPage() {
           content="Web site created using create-react-app"
         />
       </Helmet>
-      <div className="sm:gap-[94px] md:gap-[141px] gap-[188px] pt-[5px] flex w-full flex-col bg-white-A700">
+      <div className="sm:gap-[90px] md:gap-[141px] gap-[188px] pt-[5px] flex w-full flex-col bg-white-A700">
         <Header />
         <div className="max-w-[1497px] gap-[43px] mx-auto flex w-full flex-col items-center md:p-5">
           <div className="w-[88%] flex flex-col items-start md:w-full">
-            <div className="z-[1] ml-[69px] w-[34%] relative flex flex-col gap-5 md:ml-0 md:w-full">
+            <div className="z-[1] ml-[69px] w-[38%] relative flex flex-col gap-5 md:ml-0 md:w-full">
               <Heading
                 size="8xl"
                 as="h1"
@@ -67,9 +85,8 @@ export default function ContactPage() {
                         as="p"
                         className="mb-3 self-end !font-montserrat6 !font-medium !text-gray-800"
                       >
-                        <span className="text-gray-800">@</span>
                         <span className="font-normal text-gray-800">
-                          efurniture@gmail.com
+                          rosaceae.makebeauty@gmail.com
                         </span>
                       </Text>
                     </div>
@@ -83,42 +100,46 @@ export default function ContactPage() {
                         <Img src="images/img_fluent_call_24_regular.svg" />
                       </Button>
                       <Text as="p" className="!text-gray-800">
-                        (+84)28 7300 5588
+                        (+84)39 2272 536
                       </Text>
                     </div>
                   </div>
-                  <div className="w-[69%] flex justify-between gap-5 md:w-full">
+                  <div className="w-[70%] flex justify-between gap-5 md:w-full">
+                    <Link to="https://www.instagram.com/rosaceae_vn?fbclid=IwZXh0bgNhZW0CMTAAAR1fXBxl3_3JsvTi9VW9HG6edoCfcW_BiPn74MTAvh5VBUu4Eq6RZgHbLmo_aem_Y4J-lHgRW5_TbfEOl1mDPg">
+                      <Button
+                        color="orange_700"
+                        size="3xl"
+                        variant="outline"
+                        className="rounded-[24px] px-[11px] w-[49px] mb-5"
+                      >
+                        <Img src="images/icons8-instagram.svg" />
+                      </Button>
+                    </Link>
+                    <Link to="https://www.facebook.com/rosaceaevn">
+                      <Button
+                        color="orange_700"
+                        size="3xl"
+                        variant="outline"
+                        className="rounded-[24px] px-[11px] w-[49px] mb-5"
+                      >
+                        <Img src="images/icons8-facebook.svg" />
+                      </Button>
+                    </Link>
                     <Button
                       color="orange_700"
                       size="3xl"
                       variant="outline"
-                      className="rounded-[24px] px-[11px] w-[49px]"
+                      className="rounded-[24px] px-[11px] w-[49px] mb-5"
                     >
-                      <Img src="images/img_iconoir_instagram.svg" />
+                      <Img src="images/icons8-youtube.svg" />
                     </Button>
                     <Button
                       color="orange_700"
                       size="3xl"
                       variant="outline"
-                      className="rounded-[24px] px-[11px] w-[49px]"
+                      className="rounded-[24px] px-[11px] w-[49px] mb-2"
                     >
-                      <Img src="images/img_ri_youtube_fill.svg" />
-                    </Button>
-                    <Button
-                      color="orange_700"
-                      size="3xl"
-                      variant="outline"
-                      className="rounded-[24px] px-[11px] w-[49px]"
-                    >
-                      <Img src="images/img_mdi_twitter.svg" />
-                    </Button>
-                    <Button
-                      color="orange_700"
-                      size="3xl"
-                      variant="outline"
-                      className="rounded-[24px] px-[11px] w-[49px]"
-                    >
-                      <Img src="images/img_bi_pinterest.svg" />
+                      <Img src="images/icons8-pinterest.svg" />
                     </Button>
                   </div>
                 </div>
@@ -140,10 +161,10 @@ export default function ContactPage() {
                         as="p"
                         className="!font-syne6 capitalize !text-orange-700"
                       >
-                        Giờ làm việc
+                        Giờ làm việc:
                       </Text>
                       <Text
-                        size="7xl"
+                        size="6xl"
                         as="p"
                         className="!font-lato6 capitalize !text-black-900"
                       >
@@ -168,68 +189,171 @@ export default function ContactPage() {
                         <span className="text-[19px] font-montserrat6 font-semibold text-gray-700">
                           &nbsp;
                         </span>
-                        <span className="text-[19px] font-montserrat6 text-gray-700">
-                          09 AM To 05 PM
+                        <span className="font-montserrat6 text-lg text-gray-700">
+                          09 AM to 05 PM
                         </span>
                       </Text>
                     </div>
                   </div>
-                  <div className="gap-[29px] flex flex-col items-start">
-                    <div className="flex flex-col gap-8 self-stretch">
-                      <div className="flex flex-col gap-8">
-                        <div className="gap-[26px] flex md:flex-col">
+                  <form
+                    onSubmit={formik.handleSubmit}
+                    className="flex flex-col gap-[43px] self-stretch"
+                  >
+                    <div className="gap-[29px] flex flex-col items-start">
+                      <div className="flex flex-row gap-[26px] self-stretch">
+                        <div className="flex-1">
                           <Input
-                            color="blue_gray_100"
                             size="md"
+                            type="name"
+                            name="name"
+                            placeholder="Tên của bạn"
+                            onChange={(value) =>
+                              formik.setFieldValue("name", value)
+                            }
+                            onBlur={formik.handleBlur}
+                            value={formik.values.name}
+                            shape="round"
                             variant="outline"
-                            name="one_one"
-                            placeholder={`Tên của bạn`}
-                            className="w-full rounded-sm"
+                            color={
+                              formik.touched.name && formik.errors.name
+                                ? "gray_500_01"
+                                : "blue_gray_100"
+                            }
+                            className={`self-stretch ${
+                              formik.touched.name && formik.errors.name
+                                ? "border-red-500"
+                                : "border-black-900"
+                            }`}
                           />
+                          {formik.touched.name && formik.errors.name && (
+                            <div className="mt-1 text-red-500 text-xm">
+                              {formik.errors.name}
+                            </div>
+                          )}
+                        </div>
+                        <div className="flex-1">
                           <Input
-                            color="blue_gray_100"
                             size="md"
-                            variant="outline"
                             type="email"
                             name="email"
-                            placeholder={`Email`}
-                            className="w-full rounded-sm"
-                          />
-                        </div>
-                        <div className="gap-[26px] flex md:flex-col">
-                          <Input
-                            color="blue_gray_100"
-                            size="md"
+                            placeholder="Email của bạn"
+                            onChange={(value) =>
+                              formik.setFieldValue("email", value)
+                            }
+                            onBlur={formik.handleBlur}
+                            value={formik.values.email}
+                            shape="round"
                             variant="outline"
-                            name="one_three"
-                            placeholder={`Dịch vụ bạn muốn làm?`}
-                            className="w-full"
+                            color={
+                              formik.touched.email && formik.errors.email
+                                ? "gray_500_01"
+                                : "blue_gray_100"
+                            }
+                            className={`self-stretch ${
+                              formik.touched.email && formik.errors.email
+                                ? "border-red-500"
+                                : "border-black-900"
+                            }`}
                           />
-                          <Input
-                            color="blue_gray_100"
-                            size="md"
-                            variant="outline"
-                            name="two_one"
-                            placeholder={`Số điện thoại`}
-                            className="w-full"
-                          />
+                          {formik.touched.email && formik.errors.email && (
+                            <div className="mt-1 text-red-500 text-xm">
+                              {formik.errors.email}
+                            </div>
+                          )}
                         </div>
                       </div>
+                      <div className="flex flex-row gap-[26px] self-stretch">
+                        <div className="flex-1">
+                          <Input
+                            size="md"
+                            type="text"
+                            name="service"
+                            placeholder="Dịch vụ quan tâm"
+                            onChange={(value) =>
+                              formik.setFieldValue("service", value)
+                            }
+                            onBlur={formik.handleBlur}
+                            value={formik.values.service}
+                            shape="round"
+                            variant="outline"
+                            color={
+                              formik.touched.service && formik.errors.service
+                                ? "gray_500_01"
+                                : "blue_gray_100"
+                            }
+                            className={`self-stretch ${
+                              formik.touched.service && formik.errors.service
+                                ? "border-red-500"
+                                : "border-black-900"
+                            }`}
+                          />
+                          {formik.touched.service && formik.errors.service && (
+                            <div className="mt-1 text-red-500 text-xm">
+                              {formik.errors.service}
+                            </div>
+                          )}
+                        </div>
+                        <div className="flex-1">
+                          <Input
+                            size="md"
+                            type="text"
+                            name="phone"
+                            placeholder="Số điện thoại của bạn"
+                            onChange={(value) =>
+                              formik.setFieldValue("phone", value)
+                            }
+                            onBlur={formik.handleBlur}
+                            value={formik.values.phone}
+                            shape="round"
+                            variant="outline"
+                            color={
+                              formik.touched.phone && formik.errors.phone
+                                ? "gray_500_01"
+                                : "blue_gray_100"
+                            }
+                            className={`self-stretch ${
+                              formik.touched.phone && formik.errors.phone
+                                ? "border-red-500"
+                                : "border-black-900"
+                            }`}
+                          />
+                          {formik.touched.phone && formik.errors.phone && (
+                            <div className="mt-1 text-red-500 text-xm">
+                              {formik.errors.phone}
+                            </div>
+                          )}
+                        </div>
+                      </div>
+
                       <TextArea
-                        shape="round"
-                        name="button_one"
-                        placeholder={`Nội dung`}
-                        className="!border-blue_gray-100 font-montserrat6 font-medium text-gray-700 sm:py-5 sm:pr-5"
+                        name="message"
+                        placeholder="Nội dung tin nhắn"
+                        onChange={(value) =>
+                          formik.setFieldValue("message", value)
+                        }
+                        onBlur={formik.handleBlur}
+                        value={formik.values.message}
+                        className={`self-stretch rounded-[40px] border-2 border-solid border-blue_gray-100 outline-none p-[15px] ${
+                          formik.touched.message && formik.errors.message
+                            ? "border-red-500"
+                            : "border-black-900"
+                        }`}
                       />
+                      {formik.touched.message && formik.errors.message && (
+                        <div className="mt-1 text-red-500 text-xm">
+                          {formik.errors.message}
+                        </div>
+                      )}
                     </div>
                     <Button
+                      type="submit"
                       size="8xl"
                       shape="round"
-                      className="min-w-[200px] !rounded-sm border-gray-900_06 font-montserrat6 font-semibold sm:px-5"
+                      className="min-w-[200px] border-gray-900_06 font-montserrat6 font-semibold sm:px-5 rounded-[40px]"
                     >
-                      Send
+                      Gửi
                     </Button>
-                  </div>
+                  </form>
                 </div>
               </div>
             </div>
