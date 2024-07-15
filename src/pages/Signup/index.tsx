@@ -43,7 +43,7 @@ export default function SignUpPage() {
         if (result && result.data.status === 409) {
           toast.error("Email đã bị trùng. Vui lòng sử dụng email khác.");
         } else {
-          alert("An error occurred while creating the account");
+          toast.error("Email đã bị trùng. Vui lòng sử dụng email khác.");
         }
       }
     },
