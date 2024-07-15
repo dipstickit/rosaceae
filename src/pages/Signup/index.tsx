@@ -7,6 +7,7 @@ import { registerValidateSchema } from "../../validates/ValidateSchema";
 import { userHandler } from "../../usecases/HandleLogin";
 import { useNavigate } from "react-router-dom";
 import { FaRegEyeSlash, FaRegEye } from "react-icons/fa";
+import { toast } from "react-toastify";
 
 export default function SignUpPage() {
   const [showPassword, setShowPassword] = useState(false);
@@ -39,7 +40,11 @@ export default function SignUpPage() {
         alert(result.data.msg);
         navigate("/login");
       } else {
-        alert("An error occurred while creating the account");
+        if (result && result.data.status === 409) {
+          toast.error("Email đã bị trùng. Vui lòng sử dụng email khác.");
+        } else {
+          toast.error("Email đã bị trùng. Vui lòng sử dụng email khác.");
+        }
       }
     },
   });
