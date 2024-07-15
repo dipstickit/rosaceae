@@ -33,14 +33,17 @@ export const userHandler = {
     if (numberOfError !== 0) {
       return undefined;
     }
-
     try {
       console.log(`${data.email} ${data.password}`);
       const res = await UserApi.Register(data);
       console.log(res.data);
       return res;
-    } catch (e) {
-      toast.error("Đã xảy ra lỗi trong quá trình đăng ký. Vui lòng thử lại.");
+    } catch (e: any) {
+      if (e.response && e.response.status === 409) {
+        toast.error("Email đã tồn tại. Vui lòng sử dụng email khác.");
+      } else {
+        toast.error("Đã xảy ra lỗi trong quá trình đăng ký. Vui lòng thử lại.");
+      }
       return null;
     }
   },
