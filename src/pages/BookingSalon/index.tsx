@@ -8,12 +8,12 @@ import {
   CardMedia,
   Card,
   CardContent,
-  CircularProgress,
 } from "@mui/material";
 import { Footer, Header } from "../../components";
 import spaService from "../../api/booking.api";
 import { SpaLocation } from "../../types/spaLocation.type";
 import { useNavigate } from "react-router-dom";
+import CustomLoading from "../../components/CustomLoading";
 
 export default function BookingSalon({ onSelectSpa }: any) {
   const [searchTerm, setSearchTerm] = useState<string>("");
@@ -100,9 +100,6 @@ export default function BookingSalon({ onSelectSpa }: any) {
   const handleSelectSpa = (spa: SpaLocation) => {
     console.log("Selected spa:", spa);
     navigate(`/booking?spa=${spa.accountName}&sid=${spa.usersID}`);
-    // if (onSelectSpa) {
-    //   onSelectSpa(spa);
-    // }
   };
 
   const handleFindNearbySpas = async (
@@ -114,20 +111,16 @@ export default function BookingSalon({ onSelectSpa }: any) {
   };
 
   if (loading) {
-    return (
-      <Container className="flex items-center justify-center min-h-screen">
-        <CircularProgress />
-      </Container>
-    );
+    return <CustomLoading />;
   }
 
   return (
     <div className="flex flex-col min-h-screen">
       <Header />
-      <Container className="flex-grow flex items-center justify-center">
-        <Box className="bg-white p-8 rounded-lg shadow-lg">
+      <Container className="flex-grow flex flex-col items-center">
+        <Box className="bg-white p-8 rounded-lg shadow-lg mb-8 w-full">
           <Typography variant="h4" className="mb-9 font-bold text-center">
-            Chọn spa
+            Chọn Spa
           </Typography>
           <Box className="mb-4">
             <TextField
@@ -142,7 +135,7 @@ export default function BookingSalon({ onSelectSpa }: any) {
               }}
             />
           </Box>
-          <Box className="mb-4 flex space-x-4">
+          <Box className="mb-4 flex space-x-4 justify-center">
             <Button
               onClick={handleFindNearbySpas}
               variant="contained"
@@ -160,46 +153,61 @@ export default function BookingSalon({ onSelectSpa }: any) {
         </Box>
 
         {showSpas && (
-          <Box className="mt-6 flex flex-wrap justify-start gap-4">
-            {filteredSpas.slice(0, 5).map((spa) => (
+          <Box
+            className="grid gap-4 w-full"
+            sx={{
+              display: "grid",
+              gridTemplateColumns: "repeat(4, 1fr)",
+              gap: 4,
+              justifyItems: "center",
+            }}
+          >
+            {filteredSpas.slice(0, 40).map((spa) => (
               <Card
                 key={spa.locationID}
-                className="overflow-hidden max-w-xs mb-4"
+                className="overflow-hidden flex flex-col justify-between"
+                sx={{ width: "100%", maxWidth: "260px", minHeight: "350px" }}
               >
                 <CardMedia
                   component="img"
-                  height="140"
+                  height="160"
                   image={spa.coverImages}
                   alt={spa.accountName}
                   onClick={() => handleSelectSpa(spa)}
                   style={{ cursor: "pointer" }}
                 />
-                <CardContent className="p-2 flex flex-col justify-start items-start">
-                  <Typography gutterBottom variant="h5" component="div">
-                    {spa.accountName}
-                  </Typography>
-                  <Typography
-                    variant="body2"
-                    color="textSecondary"
-                    component="p"
-                    className="truncate-2-lines"
-                  >
-                    {spa.address}
-                  </Typography>
-                  <Typography
-                    variant="body2"
-                    color="textSecondary"
-                    component="p"
-                    className="mt-1"
-                  >
-                    {spa.phone}
-                  </Typography>
+                <CardContent
+                  className="p-2 flex-grow flex flex-col justify-between"
+                  sx={{ flexGrow: 1, display: "flex", flexDirection: "column" }}
+                >
+                  <Box>
+                    <Typography gutterBottom variant="h6" component="div">
+                      {spa.accountName}
+                    </Typography>
+                    <Typography
+                      variant="body2"
+                      color="textSecondary"
+                      component="p"
+                      className="truncate-2-lines"
+                    >
+                      {spa.address}
+                    </Typography>
+                    <Typography
+                      variant="body2"
+                      color="textSecondary"
+                      component="p"
+                      className="mt-1"
+                    >
+                      {spa.phone}
+                    </Typography>
+                  </Box>
                   <Button
                     variant="contained"
                     color="primary"
                     href={spa.locationUrl}
                     target="_blank"
                     className="mt-2"
+                    sx={{ alignSelf: "flex-start" }}
                   >
                     Xem trên bản đồ
                   </Button>
