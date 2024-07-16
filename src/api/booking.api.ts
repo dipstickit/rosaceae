@@ -10,7 +10,7 @@ const getLocationNearBy = (
   latitude: number,
   longitude: number
 ): Promise<AxiosResponse<SpaLocation>> => {
-  const url = `location/nearby-spa?latitude=${latitude}&longitude=${longitude}&radiusKm=10`;
+  const url = `location/nearby-spa?latitude=${latitude}&longitude=${longitude}&radiusKm=50`;
   return instance.get(url);
 };
 
