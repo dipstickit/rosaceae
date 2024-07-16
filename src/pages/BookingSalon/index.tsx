@@ -30,7 +30,9 @@ export default function BookingSalon({ onSelectSpa }: any) {
         if (response && response.data) {
           const data: any = response.data;
           setSpas(data);
+          setFilteredSpas(data);
           setLoading(false);
+          setShowSpas(true);
         } else {
           console.error("Failed to fetch spas data");
           setLoading(false);
